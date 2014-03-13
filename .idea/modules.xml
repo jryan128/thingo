@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bazingo.iml" filepath="$PROJECT_DIR$/bazingo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parse-csv/parse-csv.iml" filepath="$PROJECT_DIR$/parse-csv/parse-csv.iml" />
+    </modules>
+  </component>
+</project>
+

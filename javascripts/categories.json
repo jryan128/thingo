@@ -1,0 +1,12 @@
+{
+    "categories": [
+        {
+            "name" : "Romantic Comedy",
+            "json" : "romantic-comedy"
+        },
+        {
+            "name" : "Horror",
+            "json" : "horror"
+        }
+    ]
+}
