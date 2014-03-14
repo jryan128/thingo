@@ -1,11 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bazingo!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
-</body>
+<div data-role="page" id="homePage">
+    <div data-role="header">
+        <h1>Bazingo!</h1>
+    </div>
+
+    <div data-role="content">
+        <a href="#menuPage" class="ui-btn">Play</a>
+        <a href="#" class="ui-btn">Social</a>
+        <section class="learn">
+            <h3>Learn to play!</h3>
+
+            <p><img src="http://placehold.it/100x100">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. </p>
+
+            <p><img src="http://placehold.it/100x100">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. </p>
+        </section>
+    </div>
+
+    <div data-role="footer">
+        <h4>&#169; 2014 Joy Signal Games LLC</h4>
+    </div>
+</div>
+
+<div data-role="page" id="menuPage">
+    <div data-role="header">
+        <!--<a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"-->
+           <!--data-direction="reverse">&nbsp;</a>-->
+
+        <h1>Bazingo!</h1>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#categoryPage">Random</a></li>
+            <!--<li><a href="#categoryPage">Guided</a></li>-->
+            <!--<li><a href="#">Custom</a></li>-->
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h4>&#169; 2014 Joy Signal Games LLC</h4>
+    </div>
+</div>
+
+<div data-role="page" id="categoryPage">
+    <div data-role="header">
+        <!--<a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"-->
+           <!--data-direction="reverse">&nbsp;</a>-->
+
+        <h1>Bazingo!</h1>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview"
+            id="category-list"
+            data-filter="true"
+            data-filter-placeholder="Search Genres..."
+            data-inset="true">
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h4>&#169; 2014 Joy Signal Games LLC</h4>
+    </div>
+</div>
+
 <script src="javascripts/jquery-2.1.0.js"></script>
-<script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.js"></script>
+<script>
+    $(document).on('pageinit', '#categoryPage', function(event){
+        $.ajax('javascripts/phrases/categories.txt')
+                .fail(function() {
+                    // TODO: error handling
+                }).done(function(data) {
+                    $(data.split('\n')).each(function(){
+                        $('#category-list').append('<li><a data-ajax="false" href="board.html?category=' + this + '">' + this + '</a></li>').listview('refresh');
+                    });
+                });
+    });
+</script>
+<script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
+</body>
 </html>
