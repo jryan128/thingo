@@ -4,7 +4,7 @@ import groovy.json.JsonBuilder
 // puts the generated files directly into the Bazingo project
 new File('category-csv').eachFileMatch(~/.*\.csv/) { inputFile ->
     println "Converting $inputFile to json..."
-    def data = inputFile.text.split('\n').collect { it.split(',')}
+    def data = inputFile.text.split('\n').collect { it.split('\t')}
     def builder = new JsonBuilder()
     builder {
         freeCell {

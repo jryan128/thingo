@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bazingo.iml" filepath="$PROJECT_DIR$/bazingo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/parse-csv/parse-csv.iml" filepath="$PROJECT_DIR$/parse-csv/parse-csv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parse-tsv/parse-tsv.iml" filepath="$PROJECT_DIR$/parse-tsv/parse-tsv.iml" />
     </modules>
   </component>
 </project>
