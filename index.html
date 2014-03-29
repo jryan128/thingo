@@ -95,9 +95,11 @@
                 .fail(function() {
                     // TODO: error handling
                 }).done(function(data) {
+                    var $category = $('#category-list');
                     $(data.split('\n')).each(function(){
-                        $('#category-list').append('<li><a data-ajax="false" href="board.html?category=' + this + '">' + this + '</a></li>').listview('refresh');
+                        $category.append('<li><a data-ajax="false" href="board.html?category=' + this + '">' + this + '</a></li>');
                     });
+                    $category.listview('refresh');
                 });
     });
 </script>
