@@ -6,70 +6,37 @@
     <!-- TODO description metadata <meta name="description" content=""> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bazingo!</title>
+    <title>BAZINGO!</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div data-role="page" id="homePage">
     <div data-role="header">
-        <h1>Bazingo!</h1>
+        <h1>BAZINGO!</h1>
     </div>
 
     <div data-role="content">
-        <a href="#menuPage" class="ui-btn">Play</a>
-        <a href="#" class="ui-btn">Social</a>
-        <section class="learn">
-            <h3>Learn to play!</h3>
-
-            <p><img src="http://placehold.it/100x100">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. </p>
-
-            <p class="clear"><img src="http://placehold.it/100x100">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. </p>
-        </section>
+        <h3>Bazingo is a bingo game for clich&egrave; movies and TV shows!</h3>
+        <p>You pick a clich&egrave; movie to watch, and we create a bingo board with clich&egrave; actions and phrases on it. As you watch the movie, check off your squares as they occur!</p>
+        <p>Also, the game is <i>way</i> more fun with a group of people.</p>
+        <a href="#categoryPage" class="ui-btn">Play</a>
     </div>
 
     <div data-role="footer">
         <h4>&nbsp;</h4>
     </div>
 </div>
-
-<div data-role="page" id="menuPage">
-    <div data-role="header">
-        <!--<a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"-->
-           <!--data-direction="reverse">&nbsp;</a>-->
-
-        <h1>Bazingo!</h1>
-    </div>
-
-    <div data-role="content">
-        <ul data-role="listview" data-inset="true">
-            <li><a href="#categoryPage">Random</a></li>
-            <!--<li><a href="#categoryPage">Guided</a></li>-->
-            <!--<li><a href="#">Custom</a></li>-->
-        </ul>
-    </div>
-
-    <div data-role="footer">
-        <h4>&nbsp;</h4>
-    </div>
-</div>
-
 <div data-role="page" id="categoryPage">
     <div data-role="header">
-        <!--<a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"-->
-           <!--data-direction="reverse">&nbsp;</a>-->
-
-        <h1>Bazingo!</h1>
+        <h1>BAZINGO!</h1>
     </div>
 
     <div data-role="content">
+        <p><b>Step 1</b>: Get a movie ready to watch.</p><p><b>Step 2</b>:  Figure out its genre and click it below.</p>
+        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, figure out its genre and click on it below.</p>
+        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, click on its genre below.</p>
+        <p><b>Step 1</b>: Click on the genre of the movie you're watching below.</p>
+        <p><b>Step 1</b>: What's the genre of the movie your watching?</p>
         <ul data-role="listview"
             id="category-list"
             data-filter="true"
@@ -82,17 +49,81 @@
         <h4>&nbsp;</h4>
     </div>
 </div>
+<div data-role="page" id="menuPage">
+    <div data-role="header">
+        <h1>BAZINGO!</h1>
+    </div>
+
+    <div data-role="content">
+        <p><b>Step 2</b>: Click on the way you'd like to create your board.</p>
+        <p><b>Step 2</b>: How would you like to create your board?</p>
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <a id="randomButton" data-ajax="false">
+                    <h2>Random</h2>
+                    <p>Create a board using random phrases from the CATEGORY.</p>
+                </a>
+            <li>
+                <a id="guidedButton" href="#guidedPage">
+                    <h2>Guided</h2>
+                    <p>Pick phrases to use on your board. You may pick as many or as little to use as you like.</p>
+                </a>
+            </li>
+            <li>
+                <a id="guidedButton" href="#guidedPage">
+                    <h2>Custom</h2>
+                    <p>Start off with an empty board and fill in all the boxes yourself.</p>
+                </a>
+            </li>
+            <!--<li><a href="#">Custom</a></li>-->
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h4>&nbsp;</h4>
+    </div>
+</div>
+<div data-role="page" id="guidedPage">
+    <div data-role="header">
+        <h1>BAZINGO!</h1>
+        <a href="#homePage" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
+    </div>
+
+    <div data-role="content">
+        <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the <i>Done</i> button above.</p>
+        <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished, click the <i>Done</i> button above.</p>
+        <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you like. If you don't choose enough we'll choose the rest for you. When you're finished, click the <i>Done</i> button above.</p>
+        <p><b>Step 3</b>: Which phrases would you like on your board?</p>
+        <form>
+            <fieldset data-role="controlgroup"data-filter="true"
+                      data-filter-placeholder="Search Phrases...">
+                <input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
+                <label for="checkbox-h-6a">One</label>
+                <input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">
+                <label for="checkbox-h-6b">Two</label>
+                <input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
+                <label for="checkbox-h-6c">Three</label>
+            </fieldset>
+        </form>
+    </div>
+
+    <div data-role="footer">
+    </div>
+</div>
 
 <script src="javascripts/jquery-2.1.0.js"></script>
 <script>
-    $(document).on('pageinit', '#categoryPage', function(event){
+    $(document).on('pageinit', '#categoryPage', function () {
         $.ajax('javascripts/phrases/categories.txt')
-                .fail(function() {
+                .fail(function () {
                     // TODO: error handling
-                }).done(function(data) {
+                }).done(function (data) {
                     var $category = $('#category-list');
-                    $(data.split('\n')).each(function(){
-                        $category.append('<li><a data-ajax="false" href="board.html?category=' + this + '">' + this + '</a></li>');
+                    $(data.split('\n')).each(function () {
+                        var categoryName = this;
+                        $('<li><a href="#menuPage">' + categoryName + '</a></li>').appendTo($category).click(function () {
+                            $('#randomButton').prop('href', 'board.html?category=' + categoryName);
+                        });
                     });
                     $category.listview('refresh');
                 });
