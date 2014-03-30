@@ -17,7 +17,7 @@ $(function () {
     // set document title
     var categoryName = getParameterByName("category");
     // TODO: throw error for no category param
-    document.title = "Bazingo! - " + categoryName + " Board";
+    document.title = "BAZINGO! - " + categoryName + " Board";
 
     $.ajax('javascripts/phrases/' + categoryName + '.tsv'
         ).fail(function () {
