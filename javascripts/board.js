@@ -9,8 +9,8 @@ $(function () {
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
@@ -23,70 +23,65 @@ $(function () {
         ).fail(function () {
             // TODO: handle error case
         }
-    ).done(function (data) {
-            simpleTsvHandler(data);
-        }
-    );
+    ).done(function simpleTsvHandler(data) {
+            // the board format is assumed to be flat.
+            // no hierarchy of cell placement like in the design document
 
-    function simpleTsvHandler(data) {
-        // the board format is assumed to be flat.
-        // no hierarchy of cell placement like in the design document
+            // TSV format: Text \t Description
+            // - The first row is the free cell.
+            // - There are no header rows.
 
-        // TSV format: Text \t Description
-        // - The first row is the free cell.
-        // - There are no header rows.
+            // return a list of randomly selected celles
+            function pickRandomCells(cells, numberOfCells) {
+                if (cells.length < numberOfCells) {
+                    // TODO: handle error case
+                }
 
-        // return a list of randomly selected celles
-        function pickRandomCells(cells, numberOfCells) {
-            if (cells.length < numberOfCells) {
-                // TODO: handle error case
+                // bucket of numbers to avoid copying a bunch of objects
+                var bucket = [];
+                var cellLength = cells.length;
+                for (var i = 0; i < cellLength; i++) {
+                    bucket.push(i);
+                }
+
+                // pick a random phrase from the bucket without replacement
+                function pickRandomCell() {
+                    var randomIndex = Math.floor(Math.random() * bucket.length);
+                    var index = bucket.splice(randomIndex, 1)[0];
+                    return cells[index];
+                }
+
+                var ret = [];
+                for (var j = 0; j < numberOfCells; j++) {
+                    ret.push(pickRandomCell());
+                }
+                return ret;
             }
 
-            // bucket of numbers to avoid copying a bunch of objects
-            var bucket = [];
-            var cellLength = cells.length;
-            for (var i = 0; i < cellLength; i++) {
-                bucket.push(i);
-            }
+            // cells looks like: [ [TEXT, DESCRIPTION], [TEXT, DESCRIPTION] ...]
+            var cells = $.tsv.parseRows(data);
+            var TEXT = 0;
+            var DESCRIPTION = 1;
 
-            // pick a random phrase from the bucket without replacement
-            function pickRandomCell() {
-                var randomIndex = Math.floor(Math.random() * bucket.length);
-                var index = bucket.splice(randomIndex, 1)[0];
-                return cells[index];
-            }
+            // the free cell is the first row in the tsv
+            var freeCell = cells[0];
 
-            var ret = [];
-            for (var j = 0; j < numberOfCells; j++) {
-                ret.push(pickRandomCell());
-            }
-            return ret;
-        }
+            // we need at least 24 random cells to fill a board, the 25th is the "Free" cell
+            var minimumCells = 24;
+            var randomlyPickedCells = pickRandomCells(cells, minimumCells);
 
-        // cells looks like: [ [TEXT, DESCRIPTION], [TEXT, DESCRIPTION] ...]
-        var cells = $.tsv.parseRows(data);
-        var TEXT = 0;
-        var DESCRIPTION = 1;
+            var $cells = $('.board td');
+            var $cellsSansFreeCell = $cells.not('#freeCell');
+            $cellsSansFreeCell.each(function () {
+                $(this).text(randomlyPickedCells.pop()[TEXT]);
+            });
 
-        // the free cell is the first row in the tsv
-        var freeCell = cells[0];
+            $('#freeCell').first().text(freeCell[TEXT]);
 
-        // we need at least 24 random cells to fill a board, the 25th is the "Free" cell
-        var minimumCells = 24;
-        var randomlyPickedCells = pickRandomCells(cells, minimumCells);
-
-        var $cells = $('.board td');
-        var $cellsSansFreeCell = $cells.not('#freeCell');
-        $cellsSansFreeCell.each(function () {
-            $(this).text(randomlyPickedCells.pop()[TEXT]);
+            $cells.click(function enableCell() {
+                $(this).toggleClass('enabled');
+            });
         });
-
-        $('#freeCell').first().text(freeCell[TEXT]);
-
-        $cells.click(function () {
-            $(this).toggleClass('enabled');
-        });
-    }
 
 // TODO: implement and use as the default
 //    function frequencyBasedJsonHandler(data) {
