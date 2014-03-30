@@ -121,7 +121,7 @@
         $.ajax('javascripts/phrases/categories.txt')
                 .fail(function () {
                     // TODO: error handling
-                }).done(function (data) {
+                }).done(function(data) {
                     var $category = $('#category-list');
                     $(data.split('\n')).each(function () {
                         var categoryName = this;
