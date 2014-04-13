@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- FIXME: chosen slogan goes here -->
+    <!-- FIXME: switch to multi page template if possible, should load faster -->
     <!-- TODO: always caps for bazingo or not? -->
     <title>BAZINGO! - Bingo for bad movies.</title>
     <link rel="stylesheet" href="css/style.css">
@@ -18,10 +19,16 @@
 
     <div data-role="content">
         <h1>BAZINGO!</h1>
+
         <h2>Bingo for bad movies.</h2>
+
         <h2>Bazingo is a bingo game for clich&egrave; movies and TV shows.</h2>
+
         <h2>A bingo game for clich&egrave; movies and TV shows.</h2>
-        <p>You pick a clich&egrave; movie to watch, and we create a bingo board with clich&egrave; actions and phrases on it. As you watch the movie, check off your squares as they occur!</p>
+
+        <p>You pick a clich&egrave; movie to watch, and we create a bingo board with clich&egrave; actions and phrases
+            on it. As you watch the movie, check off your squares as they occur!</p>
+
         <p>Also, the game is <i>way</i> more fun with a group of people.</p>
         <a href="#categoryPage" class="ui-btn ui-shadow">Play</a>
     </div>
@@ -35,10 +42,17 @@
     </div>
 
     <div data-role="content">
-        <p><b>Step 1</b>: Get a movie ready to watch.</p><p><b>Step 2</b>:  Figure out its genre and click it below.</p>
-        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, figure out its genre and click on it below.</p>
+        <p><b>Step 1</b>: Get a movie ready to watch.</p>
+
+        <p><b>Step 2</b>: Figure out its genre and click it below.</p>
+
+        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, figure out its genre and click on it
+            below.</p>
+
         <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, click on its genre below.</p>
+
         <p><b>Step 1</b>: Click on the genre of the movie you're watching below.</p>
+
         <p><b>Step 1</b>: What's the genre of the movie your watching?</p>
         <ul data-role="listview"
             id="category-list"
@@ -59,16 +73,19 @@
 
     <div data-role="content">
         <p><b>Step 2</b>: Click on the way you'd like to create your board.</p>
+
         <p><b>Step 2</b>: How would you like to create your board?</p>
         <ul data-role="listview" data-inset="true">
             <li>
-                <a id="randomButton" data-ajax="false">
+                <a id="randomButton" href="#board">
                     <h2>Random</h2>
-                    <p>Create a board using random phrases from the CATEGORY.</p>
+
+                    <p>Create a board using random phrases from the category.</p>
                 </a>
             <li>
                 <a id="guidedButton" href="#guidedPage">
                     <h2>Guided</h2>
+
                     <p>Pick phrases to use on your board. You may pick as many or as little to use as you like.</p>
                 </a>
             </li>
@@ -76,6 +93,7 @@
                 <!-- FIXME: hook up to a customizable board page -->
                 <a id="customButton" href="#customPage">
                     <h2>Custom</h2>
+
                     <p>Start off with an empty board and fill in all the boxes yourself.</p>
                 </a>
             </li>
@@ -90,23 +108,26 @@
 <div data-role="page" id="guidedPage">
     <div data-role="header">
         <h1>BAZINGO!</h1>
-        <a href="#homePage" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
+        <a href="#homePage"
+           class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
     </div>
 
     <div data-role="content">
-        <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the <i>Done</i> button above.</p>
-        <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished, click the <i>Done</i> button above.</p>
-        <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you like. If you don't choose enough we'll choose the rest for you. When you're finished, click the <i>Done</i> button above.</p>
+        <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the <i>Done</i>
+            button above.</p>
+
+        <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished, click
+            the <i>Done</i> button above.</p>
+
+        <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you
+            like. If you don't choose enough we'll choose the rest for you. When you're finished, click the <i>Done</i>
+            button above.</p>
+
         <p><b>Step 3</b>: Which phrases would you like on your board?</p>
+
         <form>
-            <fieldset data-role="controlgroup"data-filter="true"
-                      data-filter-placeholder="Search Phrases...">
-                <input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
-                <label for="checkbox-h-6a">One</label>
-                <input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">
-                <label for="checkbox-h-6b">Two</label>
-                <input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
-                <label for="checkbox-h-6c">Three</label>
+            <fieldset data-role="controlgroup" data-filter="true"
+                      data-filter-placeholder="Search Phrases..." id="guidedFieldSet">
             </fieldset>
         </form>
     </div>
@@ -114,24 +135,250 @@
     <div data-role="footer">
     </div>
 </div>
+<div data-role="page" class="board" id="board">
+    <div data-role="content" class="board">
+        <table class="board">
+            <tbody>
+            <tr>
+                <td class="three"></td>
+                <td class="one"></td>
+                <td class="two"></td>
+                <td class="one"></td>
+                <td class="three"></td>
+            </tr>
+            <tr>
+                <td class="one"></td>
+                <td class="three"></td>
+                <td class="two"></td>
+                <td class="three"></td>
+                <td class="one"></td>
+            </tr>
+            <tr>
+                <td class="two"></td>
+                <td class="two"></td>
+                <td id="freeCell"></td>
+                <td class="two"></td>
+                <td class="two"></td>
+            </tr>
+            <tr>
+                <td class="one"></td>
+                <td class="three"></td>
+                <td class="two"></td>
+                <td class="three"></td>
+                <td class="one"></td>
+            </tr>
+            <tr>
+                <td class="three"></td>
+                <td class="one"></td>
+                <td class="two"></td>
+                <td class="one"></td>
+                <td class="three"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script src="javascripts/jquery-2.1.0.js"></script>
+<script src="javascripts/jquery.tsv-0.957.js" type="text/javascript"></script>
 <script>
-    $(document).on('pageinit', '#categoryPage', function () {
-        $.ajax('javascripts/phrases/categories.txt')
-                .fail(function () {
-                    // TODO: error handling
-                }).done(function(data) {
-                    var $category = $('#category-list');
-                    $(data.split('\n')).each(function () {
-                        var categoryName = this;
-                        $('<li><a href="#menuPage">' + categoryName + '</a></li>').appendTo($category).click(function () {
-                            $('#randomButton').prop('href', 'board.html?category=' + categoryName);
+    var BAZINGO = (function () {
+        var that = {
+            model: {
+                categoryName: 'No Category'
+            }
+        };
+
+        function getCategory(categoryTsvText) {
+            return {
+                TEXT: 0,
+                DESCRIPTION: 1,
+                cells: $.tsv.parseRows(categoryTsvText)
+            }
+        }
+
+        that.setupCategoryPage = function () {
+            $.ajax('javascripts/phrases/categories.txt')
+                    .fail(function () {
+                        // TODO: error handling
+                    }).done(function (data) {
+                        var $category = $('#category-list');
+                        $(data.split('\n')).each(function () {
+                            var categoryName = this;
+                            $('<li><a href="#menuPage">' + categoryName + '</a></li>').appendTo($category).click(function () {
+                                that.model.categoryName = categoryName;
+                            });
+                        });
+                        $category.listview('refresh');
+                    });
+        };
+        that.setupBoard = function () {
+            // FIXME: on back button re-enable selects
+            document.onselectstart = function () {
+                return false;
+            };
+            document.onmousedown = function () {
+                return false;
+            };
+
+            // set document title
+            var categoryName = that.model.categoryName;
+            // TODO: throw error for no category param?
+            document.title = "BAZINGO! - " + categoryName + " Board";
+
+            $.ajax('javascripts/phrases/' + categoryName + '.tsv'
+            ).fail(function () {
+                        // TODO: handle error case
+                    }
+            ).done(function simpleTsvHandler(data) {
+                        // the board format is assumed to be flat.
+                        // no hierarchy of cell placement like in the design document
+
+                        // TSV format: Text \t Description
+                        // - The first row is the free cell.
+                        // - There are no header rows.
+
+                        // return a list of randomly selected celles
+                        function pickRandomCells(cells, numberOfCells) {
+                            if (cells.length < numberOfCells) {
+                                // TODO: handle error case
+                            }
+
+                            // bucket of numbers to avoid copying a bunch of objects
+                            var bucket = [];
+                            var cellLength = cells.length;
+                            for (var i = 0; i < cellLength; i++) {
+                                bucket.push(i);
+                            }
+
+                            // pick a random phrase from the bucket without replacement
+                            function pickRandomCell() {
+                                var randomIndex = Math.floor(Math.random() * bucket.length);
+                                var index = bucket.splice(randomIndex, 1)[0];
+                                return cells[index];
+                            }
+
+                            var ret = [];
+                            for (var j = 0; j < numberOfCells; j++) {
+                                ret.push(pickRandomCell());
+                            }
+                            return ret;
+                        }
+
+                        // cells looks like: [ [TEXT, DESCRIPTION], [TEXT, DESCRIPTION] ...]
+                        var category = getCategory(data);
+
+                        // the free cell is the first row in the tsv
+                        var freeCell = category.cells[0];
+
+                        // we need at least 24 random cells to fill a board, the 25th is the "Free" cell
+                        var minimumCells = 24;
+                        var randomlyPickedCells = pickRandomCells(category.cells, minimumCells);
+
+                        var $cells = $('.board td');
+                        var $cellsSansFreeCell = $cells.not('#freeCell');
+                        $cellsSansFreeCell.each(function () {
+                            $(this).text(randomlyPickedCells.pop()[category.TEXT]);
+                        });
+
+                        $('#freeCell').first().text(freeCell[category.TEXT]);
+
+                        $cells.click(function enableCell() {
+                            $(this).toggleClass('enabled');
                         });
                     });
-                    $category.listview('refresh');
-                });
-    });
+        };
+
+        that.setupGuided = function() {
+            $.ajax('javascripts/phrases/' + that.model.categoryName + '.tsv')
+                    .fail(function (){
+                        // TODO: error handling
+                    })
+                    .done(function(data){
+                        var $fieldSet = $('#guidedFieldSet').controlgroup('container');
+                        var category = getCategory(data);
+                        for (var i=0; i < category.cells.length; i++) {
+                            $('<label><input type="checkbox" name="b" id="b"/>' + category.cells[i][category.TEXT] + '</label>').appendTo($fieldSet);
+                        }
+                        $('#guidedFieldSet').enhanceWithin().controlgroup('refresh');
+                    });
+        };
+        return that;
+    })();
+    $(document).on('pageinit', '#categoryPage', BAZINGO.setupCategoryPage);
+    $(document).on('pageinit', '#board', BAZINGO.setupBoard);
+    $(document).on('pageinit', '#guidedPage', BAZINGO.setupGuided);
+
+
+    // TODO: implement and use as the default
+    //    function frequencyBasedJsonHandler(data) {
+    //        // see https://docs.google.com/document/d/13KzkFXrJMa007kJnSrzNyDvolV5pMrv9Jmh4u1pYH8I/edit#heading=h.uyopupdsl3wv
+    //        // for board design specs
+    //
+    //        // for each category of frequency, there needs to be
+    //        // at least 8 cells to choose from
+    //        var minimumCells = 8;
+    //
+    //        // populate the array with random phrases
+    //        function pickPhrases(phrases) {
+    //            if (phrases.length < minimumCells) {
+    //                // TODO: handle error case
+    //            }
+    //
+    //            // bucket of numbers to avoid copying a bunch of objects
+    //            var bucket = [];
+    //            var phrasesLength = phrases.length;
+    //            for (var i = 0; i < phrasesLength; i++) {
+    //                bucket.push(i);
+    //            }
+    //
+    //            // pick a random phrase from the bucket without replacement
+    //            function getRandomPhrase() {
+    //                var randomIndex = Math.floor(Math.random() * bucket.length);
+    //                var index = bucket.splice(randomIndex, 1)[0];
+    //                // TODO: check for undefined
+    //                return phrases[index];
+    //            }
+    //
+    //            var ret = [];
+    //            for (var j = 0; j < minimumCells; j++) {
+    //                ret.push(getRandomPhrase());
+    //            }
+    //            return ret;
+    //        }
+    //
+    //        // TODO: validate the json format? one, two and three might not exist?
+    //        var cells = {
+    //            "one": pickPhrases(data.one),
+    //            "two": pickPhrases(data.two),
+    //            "three": pickPhrases(data.three)
+    //        };
+    //
+    //        // give normal cells their text
+    //        $.each(cells, function (key, value) {
+    //            // TODO: picker selector
+    //            $('.' + key).each(function () {
+    //                var p = value.pop();
+    //                if (typeof p !== 'undefined') {
+    //                    Notanos$(this).text(p.text);
+    //                } else {
+    //                    // TODO: report error?
+    //                }
+    //            });
+    //        });
+    //
+    //        // TODO: assert only one freeCell?
+    //        // TODO: assert freeCell exists, if not set to Free, or report error?
+    //        // give the "free cell" its text
+    //        $('#freeCell').first().text(data.freeCell.text);
+    //        // board cell clicking event
+    //
+    //        // attach click event handlers to all but the free cells
+    //        // TODO: possibly cache selector
+    //        $('.board td').not('#freeCell').click(function () {
+    //            $(this).toggleClass('enabled');
+    //        });
+    //    }
 </script>
 <script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
 </body>
