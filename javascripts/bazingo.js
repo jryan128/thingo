@@ -1,17 +1,37 @@
 var BAZINGO = (function () {
+    var BoardGeneration =  {
+        RANDOM: 0,
+        GUIDED: 1,
+        CUSTOM: 2
+    };
+
     var that = {
         model: {
-            categoryName: 'No Category'
+            categoryName: 'No Category',
+            boardGeneration: BoardGeneration.RANDOM
         }
     };
 
-    function getCategory(categoryTsvText) {
-        return {
-            TEXT: 0,
-            DESCRIPTION: 1,
-            cells: $.tsv.parseRows(categoryTsvText)
-        }
+    function Category(categoryTsvText) {
+        this.TEXT = 0;
+        this.DESCRIPTION = 1;
+        this.cells = $.tsv.parseRows(categoryTsvText);
+
+        // the free cell is the first row in the tsv
+        this.freeCell = this.cells[0];
     }
+
+    that.setupMenuPage = function() {
+        $('#randomButton').click(function() {
+            that.model.boardGeneration = BoardGeneration.RANDOM;
+        });
+        $('#guidedButton').click(function() {
+            that.model.boardGeneration = BoardGeneration.GUIDED;
+        });
+        $('#customButton').click(function() {
+            that.model.boardGeneration = BoardGeneration.CUSTOM;
+        });
+    };
 
     that.setupCategoryPage = function () {
         $.ajax('javascripts/phrases/categories.txt')
@@ -28,6 +48,21 @@ var BAZINGO = (function () {
                 $category.listview('refresh');
             });
     };
+
+    function populateBoard(cells, category) {
+        var $cells = $('.board td');
+        var $cellsSansFreeCell = $cells.not('#freeCell');
+        $cellsSansFreeCell.each(function () {
+            $(this).text(cells.pop()[category.TEXT]);
+        });
+
+        $('#freeCell').first().text(category.freeCell[category.TEXT]);
+
+        $cells.click(function enableCell() {
+            $(this).toggleClass('enabled');
+        });
+    }
+
     that.setupBoard = function () {
         // FIXME: on back button re-enable selects
         document.onselectstart = function () {
@@ -42,67 +77,66 @@ var BAZINGO = (function () {
         // TODO: throw error for no category param?
         document.title = "BAZINGO! - " + categoryName + " Board";
 
-        $.ajax('javascripts/phrases/' + categoryName + '.tsv'
-        ).fail(function () {
-                // TODO: handle error case
-            }
-        ).done(function simpleTsvHandler(data) {
-                // the board format is assumed to be flat.
-                // no hierarchy of cell placement like in the design document
-
-                // TSV format: Text \t Description
-                // - The first row is the free cell.
-                // - There are no header rows.
-
-                // return a list of randomly selected celles
-                function pickRandomCells(cells, numberOfCells) {
-                    if (cells.length < numberOfCells) {
-                        // TODO: handle error case
-                    }
-
-                    // bucket of numbers to avoid copying a bunch of objects
-                    var bucket = [];
-                    var cellLength = cells.length;
-                    for (var i = 0; i < cellLength; i++) {
-                        bucket.push(i);
-                    }
-
-                    // pick a random phrase from the bucket without replacement
-                    function pickRandomCell() {
-                        var randomIndex = Math.floor(Math.random() * bucket.length);
-                        var index = bucket.splice(randomIndex, 1)[0];
-                        return cells[index];
-                    }
-
-                    var ret = [];
-                    for (var j = 0; j < numberOfCells; j++) {
-                        ret.push(pickRandomCell());
-                    }
-                    return ret;
+        if (that.model.boardGeneration === BoardGeneration.RANDOM) {
+            $.ajax('javascripts/phrases/' + categoryName + '.tsv'
+            ).fail(function () {
+                    // TODO: handle error case
                 }
+            ).done(function simpleTsvHandler(data) {
+                    // the board format is assumed to be flat.
+                    // no hierarchy of cell placement like in the design document
 
-                // cells looks like: [ [TEXT, DESCRIPTION], [TEXT, DESCRIPTION] ...]
-                var category = getCategory(data);
+                    // TSV format: Text \t Description
+                    // - The first row is the free cell.
+                    // - There are no header rows.
 
-                // the free cell is the first row in the tsv
-                var freeCell = category.cells[0];
+                    // return a list of randomly selected celles
+                    function pickRandomCells(cells, numberOfCells) {
+                        if (cells.length < numberOfCells) {
+                            // TODO: handle error case
+                        }
 
-                // we need at least 24 random cells to fill a board, the 25th is the "Free" cell
-                var minimumCells = 24;
-                var randomlyPickedCells = pickRandomCells(category.cells, minimumCells);
+                        // bucket of numbers to avoid copying a bunch of objects
+                        var bucket = [];
+                        var cellLength = cells.length;
+                        for (var i = 0; i < cellLength; i++) {
+                            bucket.push(i);
+                        }
 
-                var $cells = $('.board td');
-                var $cellsSansFreeCell = $cells.not('#freeCell');
-                $cellsSansFreeCell.each(function () {
-                    $(this).text(randomlyPickedCells.pop()[category.TEXT]);
+                        // pick a random phrase from the bucket without replacement
+                        function pickRandomCell() {
+                            var randomIndex = Math.floor(Math.random() * bucket.length);
+                            var index = bucket.splice(randomIndex, 1)[0];
+                            return cells[index];
+                        }
+
+                        var ret = [];
+                        for (var j = 0; j < numberOfCells; j++) {
+                            ret.push(pickRandomCell());
+                        }
+                        return ret;
+                    }
+
+                    // cells looks like: [ [TEXT, DESCRIPTION], [TEXT, DESCRIPTION] ...]
+                    var category = new Category(data);
+
+                    // we need at least 24 random cells to fill a board, the 25th is the "Free" cell
+                    var minimumCells = 24;
+                    var randomlyPickedCells = pickRandomCells(category.cells, minimumCells);
+
+                    populateBoard(randomlyPickedCells, category);
                 });
+        } else if (that.model.boardGeneration === BoardGeneration.GUIDED) {
+            var status = $('input[type="checkbox"]:checked').map(function(){
+                return $(this).parent();
+            }).get();
+            console.log(status);
 
-                $('#freeCell').first().text(freeCell[category.TEXT]);
+        } else if (that.model.boardGeneration === BoardGeneration.CUSTOM) {
 
-                $cells.click(function enableCell() {
-                    $(this).toggleClass('enabled');
-                });
-            });
+        } else {
+            // TODO: error handling
+        }
     };
 
     that.setupGuided = function () {
@@ -112,8 +146,9 @@ var BAZINGO = (function () {
             })
             .done(function (data) {
                 var $fieldSet = $('#guidedFieldSet').controlgroup('container');
-                var category = getCategory(data);
-                for (var i = 0; i < category.cells.length; i++) {
+                var category = new Category(data);
+                // starts at 1 to skip the freeCell
+                for (var i = 1; i < category.cells.length; i++) {
                     $('<label><input type="checkbox" name="b" id="b"/>' + category.cells[i][category.TEXT] + '</label>').appendTo($fieldSet);
                 }
                 $('#guidedFieldSet').enhanceWithin().controlgroup('refresh');

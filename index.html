@@ -108,7 +108,7 @@
 <div data-role="page" id="guidedPage">
     <div data-role="header">
         <h1>BAZINGO!</h1>
-        <a href="#homePage"
+        <a href="#board"
            class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
     </div>
 
@@ -184,6 +184,7 @@
 <script src="javascripts/bazingo.js"></script>
 <script>
     $(document).on('pageinit', '#categoryPage', BAZINGO.setupCategoryPage);
+    $(document).on('pageinit', '#menuPage', BAZINGO.setupMenuPage);
     $(document).on('pageinit', '#board', BAZINGO.setupBoard);
     $(document).on('pageinit', '#guidedPage', BAZINGO.setupGuided);
 </script>
