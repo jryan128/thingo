@@ -1,15 +1,8 @@
 var BAZINGO = (function () {
-    var BoardGeneration =  {
+    var BoardGeneration = {
         RANDOM: 0,
         GUIDED: 1,
         CUSTOM: 2
-    };
-
-    var that = {
-        model: {
-            categoryName: 'No Category',
-            boardGeneration: BoardGeneration.RANDOM
-        }
     };
 
     function Category(categoryTsvText) {
@@ -21,19 +14,25 @@ var BAZINGO = (function () {
         this.freeCell = this.cells[0];
     }
 
-    that.setupMenuPage = function() {
-        $('#randomButton').click(function() {
-            that.model.boardGeneration = BoardGeneration.RANDOM;
+    var my = {};
+    var model = {
+        categoryName: 'No Category',
+        boardGeneration: BoardGeneration.RANDOM
+    };
+
+    my.setupMenuPage = function () {
+        $('#randomButton').click(function () {
+            model.boardGeneration = BoardGeneration.RANDOM;
         });
-        $('#guidedButton').click(function() {
-            that.model.boardGeneration = BoardGeneration.GUIDED;
+        $('#guidedButton').click(function () {
+            model.boardGeneration = BoardGeneration.GUIDED;
         });
-        $('#customButton').click(function() {
-            that.model.boardGeneration = BoardGeneration.CUSTOM;
+        $('#customButton').click(function () {
+            model.boardGeneration = BoardGeneration.CUSTOM;
         });
     };
 
-    that.setupCategoryPage = function () {
+    my.setupCategoryPage = function () {
         $.ajax('javascripts/phrases/categories.txt')
             .fail(function () {
                 // TODO: error handling
@@ -41,8 +40,8 @@ var BAZINGO = (function () {
                 var $category = $('#category-list');
                 $(data.split('\n')).each(function () {
                     var categoryName = this;
-                    $('<li><a href="#menuPage">' + categoryName + '</a></li>').appendTo($category).click(function () {
-                        that.model.categoryName = categoryName;
+                    $('<li><a href="menuPage.html">' + categoryName + '</a></li>').appendTo($category).click(function () {
+                        model.categoryName = categoryName;
                     });
                 });
                 $category.listview('refresh');
@@ -63,7 +62,7 @@ var BAZINGO = (function () {
         });
     }
 
-    that.setupBoard = function () {
+    my.setupBoard = function () {
         // FIXME: on back button re-enable selects
         document.onselectstart = function () {
             return false;
@@ -73,11 +72,11 @@ var BAZINGO = (function () {
         };
 
         // set document title
-        var categoryName = that.model.categoryName;
+        var categoryName = model.categoryName;
         // TODO: throw error for no category param?
         document.title = "BAZINGO! - " + categoryName + " Board";
 
-        if (that.model.boardGeneration === BoardGeneration.RANDOM) {
+        if (model.boardGeneration === BoardGeneration.RANDOM) {
             $.ajax('javascripts/phrases/' + categoryName + '.tsv'
             ).fail(function () {
                     // TODO: handle error case
@@ -126,21 +125,21 @@ var BAZINGO = (function () {
 
                     populateBoard(randomlyPickedCells, category);
                 });
-        } else if (that.model.boardGeneration === BoardGeneration.GUIDED) {
-            var status = $('input[type="checkbox"]:checked').map(function(){
+        } else if (model.boardGeneration === BoardGeneration.GUIDED) {
+            var status = $('input[type="checkbox"]:checked').map(function () {
                 return $(this).parent();
             }).get();
             console.log(status);
 
-        } else if (that.model.boardGeneration === BoardGeneration.CUSTOM) {
+        } else if (model.boardGeneration === BoardGeneration.CUSTOM) {
 
         } else {
             // TODO: error handling
         }
     };
 
-    that.setupGuided = function () {
-        $.ajax('javascripts/phrases/' + that.model.categoryName + '.tsv')
+    my.setupGuided = function () {
+        $.ajax('javascripts/phrases/' + model.categoryName + '.tsv')
             .fail(function () {
                 // TODO: error handling
             })
@@ -154,7 +153,7 @@ var BAZINGO = (function () {
                 $('#guidedFieldSet').enhanceWithin().controlgroup('refresh');
             });
     };
-    return that;
+    return my;
 })();
 
 // TODO: implement and use as the default
