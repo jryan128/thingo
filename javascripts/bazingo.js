@@ -40,7 +40,7 @@ var BAZINGO = (function () {
                 var $category = $('#category-list');
                 $(data.split('\n')).each(function () {
                     var categoryName = this;
-                    $('<li><a href="menuPage.html">' + categoryName + '</a></li>').appendTo($category).click(function () {
+                    $('<li><a href="#menuPage">' + categoryName + '</a></li>').appendTo($category).click(function () {
                         model.categoryName = categoryName;
                     });
                 });
