@@ -1,27 +1,62 @@
-var express = require('express');
-
-var sv = require('sv');
-var parser = new sv.Parser();
-var romCom = [];
-parser.on('data', function(obj) {
-//    console.log('sprinter ->', obj);
-    romCom.push(obj);
-});
-parser.on('finish', function(){
-    console.log(romCom);
-});
+var path = require('path');
 var fs = require('fs');
-var sprints = fs.createReadStream('phrases/Romantic Comedy.tsv', {encoding: 'utf8'});
-sprints.pipe(parser);
+var async = require('async');
 
-var app = express();
-var router = express.Router();
-app.use(express.static(__dirname + '/public'));
+function initializeServer(initializeFinished) {
+    console.log('Initializing server...');
+
+    function makeCategory(tsvPath, finished) {
+        var category = {
+            name: path.basename(tsvPath, '.tsv'),
+            phrases: []
+        };
+
+        var sv = require('sv');
+        var parser = new sv.Parser()
+            .on('data', function (obj) {
+                category.phrases.push(obj);
+            }).
+            on('finish', function () {
+                finished(null, category);
+            });
+
+        var sprints = fs.createReadStream(tsvPath, {encoding: 'utf8'});
+        sprints.pipe(parser);
+    }
+
+    var basePath = 'phrases';
+    fs.readdir(basePath, function (err, files) {
+        files = files.map(function(item) { return basePath + '/' + item; });
+        async.map(files, makeCategory, function (err, results) {
+            // FIXME: error checking
+            if (err) {
+                console.log(err);
+                console.log('Shutting down server due to error...');
+            } else {
+                var categories = results.reduce(function (obj, next) {
+                    obj[next.name] = next.phrases;
+                    return obj;
+                }, {});
+                initializeFinished(categories);
+            }
+        });
+    });
+}
+
+function runServer(categories) {
+    var express = require('express');
+    var app = express();
+    var router = express.Router();
+    app.use(express.static(__dirname + '/public'));
 
 //app.get('/', function(req, res){
 //   res.send('Hello world!');
 //});
+    console.log('Categories loaded: ' + Object.keys(categories).join(','));
 
-// parse tsv into object
-app.listen(3000);
-console.log('Bazingo server started.');
+    var port = 3000;
+    app.listen(port);
+    console.log('Bazingo server started on port ' + port);
+}
+
+initializeServer(runServer);
