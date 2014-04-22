@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- TODO description metadata <meta name="description" content=""> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FIXME: chosen slogan goes here -->
+    <!-- FIXME: switch to multi page template if possible, should load faster -->
+    <!-- TODO: always caps for bazingo or not? -->
+    <title>BAZINGO! - Bingo for bad movies.</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div data-role="page" id="categoryPage">
+    <div data-role="header">
+        <h1>BAZINGO!</h1>
+    </div>
+
+    <div data-role="content">
+        <p><b>Step 1</b>: Get a movie ready to watch.</p>
+
+        <p><b>Step 2</b>: Figure out its genre and click it below.</p>
+
+        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, figure out its genre and click on it
+            below.</p>
+
+        <p><b>Step 1</b>: Get a movie ready to watch. After you have the movie, click on its genre below.</p>
+
+        <p><b>Step 1</b>: Click on the genre of the movie you're watching below.</p>
+
+        <p><b>Step 1</b>: What's the genre of the movie your watching?</p>
+        <ul data-role="listview"
+            id="category-list"
+            data-filter="true"
+            data-filter-placeholder="Search Genres..."
+            data-inset="true">
+            <% Object.keys(locals.categories).forEach(function(i){ %>
+            <li><a href="#menuPage"><%= i%></a></li>
+            <% }); %>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h4>&nbsp;</h4>
+    </div>
+</div>
+</body>
+<script src="javascripts/jquery-2.1.0.js"></script>
+<script src="javascripts/jquery.tsv-0.957.js" type="text/javascript"></script>
+<script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
+</html>

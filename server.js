@@ -2,6 +2,8 @@ var path = require('path');
 var fs = require('fs');
 var async = require('async');
 
+var port = 3000;
+
 function initializeServer(initializeFinished) {
     console.log('Initializing server...');
 
@@ -43,20 +45,24 @@ function initializeServer(initializeFinished) {
     });
 }
 
-function runServer(categories) {
-    var express = require('express');
-    var app = express();
-    var router = express.Router();
+var express = require('express');
+var app = express();
+
+function loadTemplate(categories) {
+    app.render('categoryList.ejs', {categories: categories},
+        function(err, html){
+            runServer(categories, html);
+        });
+}
+function runServer(categories, categoryPage) {
+    app.get('/', function(req, res){
+        res.send(categoryPage);
+    });
     app.use(express.static(__dirname + '/public'));
 
-//app.get('/', function(req, res){
-//   res.send('Hello world!');
-//});
     console.log('Categories loaded: ' + Object.keys(categories).join(','));
-
-    var port = 3000;
     app.listen(port);
     console.log('Bazingo server started on port ' + port);
 }
 
-initializeServer(runServer);
+initializeServer(loadTemplate);
