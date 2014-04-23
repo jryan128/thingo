@@ -61,14 +61,7 @@ function loadTemplate(categories) {
 }
 
 function getRandomBoardPhrases(phrases) {
-    // the board format is assumed to be flat.
-    // no hierarchy of cell placement like in the design document
-
-    // TSV format: Text \t Description
-    // - The first row is the free cell.
-    // - There are no header rows.
-
-    // return a list of randomly selected celles
+    // return a list of randomly selected cells
     function pickRandomCells(cells, numberOfCells) {
         if (cells.length < numberOfCells) {
             // TODO: handle error case
@@ -110,6 +103,9 @@ function runServer(categories, categoryPage) {
     });
     app.get('/menuPage', function(req, res){
         res.render('menuPage.ejs', {category: req.query.category});
+    });
+    app.get('/guidedPage', function(req, res){
+        res.render('guidedPage.ejs', {category: req.query.category});
     });
     app.get('/randomBoard', function(req, res){
         var category = categories[req.query.category];
