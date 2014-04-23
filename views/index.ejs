@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<%- include head.ejs %>
+<body>
+<div data-role="page" id="homePage">
+    <div data-role="header">
+    </div>
+
+    <div data-role="content">
+        <h1>BAZINGO!</h1>
+
+        <h2>Bingo for bad movies.</h2>
+
+        <h2>Bazingo is a bingo game for clich&egrave; movies and TV shows.</h2>
+
+        <h2>A bingo game for clich&egrave; movies and TV shows.</h2>
+
+        <p>You pick a clich&egrave; movie to watch, and we create a bingo board with clich&egrave; actions and phrases
+            on it. As you watch the movie, check off your squares as they occur!</p>
+
+        <p>Also, the game is <i>way</i> more fun with a group of people.</p>
+        <a href="categoryPage" class="ui-btn ui-shadow">Play</a>
+    </div>
+
+    <div data-role="footer">
+    </div>
+</div>
+<div data-role="page" id="guidedPage">
+    <div data-role="header">
+        <h1>BAZINGO!</h1>
+        <a href="#board"
+           class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
+    </div>
+
+    <div data-role="content">
+        <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the <i>Done</i>
+            button above.</p>
+
+        <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished, click
+            the <i>Done</i> button above.</p>
+
+        <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you
+            like. If you don't choose enough we'll choose the rest for you. When you're finished, click the <i>Done</i>
+            button above.</p>
+
+        <p><b>Step 3</b>: Which phrases would you like on your board?</p>
+
+        <form>
+            <fieldset data-role="controlgroup" data-filter="true"
+                      data-filter-placeholder="Search Phrases..." id="guidedFieldSet">
+            </fieldset>
+        </form>
+    </div>
+
+    <div data-role="footer">
+    </div>
+</div>
+
+<script src="javascripts/jquery-2.1.0.js"></script>
+<script src="javascripts/jquery.tsv-0.957.js" type="text/javascript"></script>
+<!--<script src="javascripts/bazingo.js"></script>-->
+<script>
+//    $(document).on('pageinit', '#categoryPage', BAZINGO.setupCategoryPage);
+//    $(document).on('pageinit', '#menuPage', BAZINGO.setupMenuPage);
+//    $(document).on('pageinit', '#board', BAZINGO.setupBoard);
+//    $(document).on('pageinit', '#guidedPage', BAZINGO.setupGuided);
+</script>
+<script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
+</body>
+</html>

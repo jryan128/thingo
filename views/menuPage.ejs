@@ -1,0 +1,39 @@
+<div data-role="page" id="menuPage">
+    <div data-role="header">
+        <h1>BAZINGO!</h1>
+    </div>
+
+    <div data-role="content">
+        <p><b>Step 2</b>: Click on the way you'd like to create your board.</p>
+
+        <p><b>Step 2</b>: How would you like to create your board?</p>
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <a id="randomButton" href="randomBoard?category=<%= locals.category%>">
+                    <h2>Random</h2>
+
+                    <p>Create a board using random phrases from the category.</p>
+                </a>
+            <li>
+                <a id="guidedButton" href="#guidedPage">
+                    <h2>Guided</h2>
+
+                    <p>Pick phrases to use on your board. You may pick as many or as little to use as you like.</p>
+                </a>
+            </li>
+            <li>
+                <!-- FIXME: hook up to a customizable board page -->
+                <a id="customButton" href="#customPage">
+                    <h2>Custom</h2>
+
+                    <p>Start off with an empty board and fill in all the boxes yourself.</p>
+                </a>
+            </li>
+            <!--<li><a href="#">Custom</a></li>-->
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <h4>&nbsp;</h4>
+    </div>
+</div>

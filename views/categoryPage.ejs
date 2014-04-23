@@ -37,7 +37,7 @@
             data-filter-placeholder="Search Genres..."
             data-inset="true">
             <% Object.keys(locals.categories).forEach(function(i){ %>
-            <li><a href="#menuPage"><%= i%></a></li>
+            <li><a href="menuPage?category=<%= i%>"><%= i%></a></li>
             <% }); %>
         </ul>
     </div>
