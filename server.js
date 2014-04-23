@@ -15,13 +15,18 @@ function setupRoutes(app, categories) {
         res.render('menuPage.ejs', {category: req.query.category});
     });
     app.get('/guidedPage', function(req, res){
-        res.render('guidedPage.ejs', {category: req.query.category});
+        var category = categories[req.query.category];
+        res.render('guidedPage.ejs', {phrases: category.phrases});
     });
     app.get('/randomBoard', function(req, res){
         var category = categories[req.query.category];
         var phrases = board.getRandomBoardPhrases(category.phrases);
-        var freeCell = category.freeCell;
-        res.render('randomBoard.ejs', {phrases: phrases, freeCell: freeCell});
+        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
+    });
+    app.post('/guidedBoard', function(req, res){
+        var category = categories[req.query.category];
+        console.log(req);
+//        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use(express.static(__dirname + '/public'));
 }

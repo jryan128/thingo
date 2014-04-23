@@ -3,34 +3,39 @@
 <%- include head.ejs %>
 <body>
 <div data-role="page" id="guidedPage">
-    <div data-role="header">
-        <h1>BAZINGO!</h1>
-        <a href="#board"
-           class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Done</a>
-    </div>
+    <form action="guidedBoard" method="POST" data-ajax="false">
+        <div data-role="header">
+            <h1>BAZINGO!</h1>
+        </div>
 
-    <div data-role="content">
-        <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the <i>Done</i>
-            button above.</p>
+        <div data-role="content">
+            <p><b>Step 3</b>: Choose phrases you'd like to see on your board. When you're finished, click the
+                <i>Done</i>
+                button above.</p>
 
-        <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished, click
-            the <i>Done</i> button above.</p>
+            <p><b>Step 3</b>: Choose as many phrases as you'd like to have on your board below. When you're finished,
+                click
+                the <i>Done</i> button above.</p>
 
-        <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you
-            like. If you don't choose enough we'll choose the rest for you. When you're finished, click the <i>Done</i>
-            button above.</p>
+            <p><b>Step 3</b>: Choose which phrases you'd like to have on your board. Choose as many or as little as you
+                like. If you don't choose enough we'll choose the rest for you. When you're finished, click the
+                <i>Done</i>
+                button above.</p>
 
-        <p><b>Step 3</b>: Which phrases would you like on your board?</p>
+            <p><b>Step 3</b>: Which phrases would you like on your board?</p>
 
-        <form>
             <fieldset data-role="controlgroup" data-filter="true"
                       data-filter-placeholder="Search Phrases..." id="guidedFieldSet">
+                <input type="submit" value="Done"/>
+                <% locals.phrases.forEach(function(phrase) { %>
+                <label><input type="checkbox" name="<%=phrase.phrase%>"/><%= phrase.phrase %></label>
+                <% }); %>
             </fieldset>
-        </form>
-    </div>
+        </div>
 
-    <div data-role="footer">
-    </div>
+        <div data-role="footer">
+        </div>
+    </form>
 </div>
 <%- include postBody.ejs %>
 </body>
