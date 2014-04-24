@@ -3,7 +3,7 @@
 <%- include head.ejs %>
 <body>
 <div data-role="page" id="guidedPage">
-    <form action="guidedBoard" method="POST" data-ajax="false">
+    <form action="guidedBoard?category=<%= locals.category %>" method="POST" data-ajax="false">
         <div data-role="header">
             <h1>BAZINGO!</h1>
         </div>

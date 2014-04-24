@@ -16,7 +16,7 @@ function setupRoutes(app, categories) {
     });
     app.get('/guidedPage', function(req, res){
         var category = categories[req.query.category];
-        res.render('guidedPage.ejs', {phrases: category.phrases});
+        res.render('guidedPage.ejs', {category: req.query.category, phrases: category.phrases});
     });
     app.get('/randomBoard', function(req, res){
         var category = categories[req.query.category];
