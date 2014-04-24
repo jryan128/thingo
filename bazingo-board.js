@@ -12,14 +12,14 @@ function makeBucket(bucketSize) {
 }
 
 /**
- * Return an Array of 24 phrases to fill a board with.
+ * Return an Array of phrases to fill a board with.
  * @param {Array} phrases to choose from
+ * @param numberOfPhrases
  * @returns {Array} an Array of phrases
  */
-exports.getRandomBoardPhrases = function getRandomBoardPhrases(phrases) {
-    var numberOfCells = 24;
+function getRandomPhrases(phrases, numberOfPhrases) {
     phrases = Object.keys(phrases);
-    if (phrases.length < numberOfCells) {
+    if (phrases.length < numberOfPhrases) {
         // FIXME: handle error case
     }
 
@@ -27,11 +27,17 @@ exports.getRandomBoardPhrases = function getRandomBoardPhrases(phrases) {
     var bucket = makeBucket(phrases.length);
 
     var ret = [];
-    for (var i = 0; i < numberOfCells; i++) {
+    for (var i = 0; i < numberOfPhrases; i++) {
         var randomIndex = Math.floor(Math.random() * bucket.length);
         var index = bucket.splice(randomIndex, 1)[0];
         ret.push(phrases[index]);
     }
 
     return ret;
+}
+
+exports.getRandomBoardPhrases = function getRandomBoardPhrases(phrases) {
+    return getRandomPhrases(phrases, 24);
 };
+
+exports.getRandomPhrases = getRandomPhrases;
