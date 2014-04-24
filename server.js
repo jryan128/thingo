@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
+var connect = require('connect');
 var categories = require('./bazingo-category');
 var board = require('./bazingo-board');
 
@@ -23,9 +24,11 @@ function setupRoutes(app, categories) {
         var phrases = board.getRandomBoardPhrases(category.phrases);
         res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
+    app.use('/guidedBoard', connect.urlencoded());
     app.post('/guidedBoard', function(req, res){
         var category = categories[req.query.category];
-        console.log(req);
+        var phrases = Object.keys(req.body);
+        console.log(category);
 //        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use(express.static(__dirname + '/public'));
