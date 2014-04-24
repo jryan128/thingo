@@ -4,4 +4,5 @@ bazingo
 Setup
 -----
 1. Install NodeJs
-2. Install http-server: sudo npm -g http-server
+2. Run: npm install
+3. Run: nodejs server.js
