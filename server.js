@@ -13,19 +13,24 @@ function setupRoutes(app, categories) {
         res.render('categoryPage.ejs', {categories: categories});
     });
     app.get('/menuPage', function(req, res){
+        // FIXME: category error checking...
         res.render('menuPage.ejs', {category: req.query.category});
     });
     app.get('/guidedPage', function(req, res){
+        // FIXME: error checking, what if bad category? THIS IS USER INPUT
+        // FIXME: move category into class with proper error checking and handling
         var category = categories[req.query.category];
         res.render('guidedPage.ejs', {category: category.name, phrases: Object.keys(category.phrases)});
     });
     app.get('/randomBoard', function(req, res){
+        // FIXME: error checking, what if bad category?
         var category = categories[req.query.category];
         var phrases = board.getRandomBoardPhrases(category.phrases);
         res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use('/guidedBoard', connect.urlencoded());
     app.post('/guidedBoard', function(req, res){
+        // FIXME: error checking, what if bad category?
         var category = categories[req.query.category];
         var phrases = Object.keys(req.body);
 //        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
