@@ -28,7 +28,7 @@
                       data-filter-placeholder="Search Phrases..." id="guidedFieldSet">
                 <input type="submit" value="Done"/>
                 <% locals.phrases.forEach(function(phrase) { %>
-                <label><input type="checkbox" name="<%=phrase.phrase%>"/><%= phrase.phrase %></label>
+                <label><input type="checkbox" name="<%=phrase%>"/><%= phrase %></label>
                 <% }); %>
             </fieldset>
         </div>

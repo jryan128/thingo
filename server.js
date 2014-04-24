@@ -17,7 +17,7 @@ function setupRoutes(app, categories) {
     });
     app.get('/guidedPage', function(req, res){
         var category = categories[req.query.category];
-        res.render('guidedPage.ejs', {category: req.query.category, phrases: category.phrases});
+        res.render('guidedPage.ejs', {category: category.name, phrases: Object.keys(category.phrases)});
     });
     app.get('/randomBoard', function(req, res){
         var category = categories[req.query.category];
@@ -28,7 +28,6 @@ function setupRoutes(app, categories) {
     app.post('/guidedBoard', function(req, res){
         var category = categories[req.query.category];
         var phrases = Object.keys(req.body);
-        console.log(category);
 //        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use(express.static(__dirname + '/public'));

@@ -13,20 +13,35 @@ function isError(err) {
     }
 }
 
+// TODO: create unit tests for Category
+function Category(name) {
+    this.phrases = {};
+    this.name = name;
+    this.freeCell = null;
+}
+
+/**
+ * Add a phrase to the phrase list.
+ * @param {Object} phrasePair
+ */
+Category.prototype.addPhrase = function (phrasePair) {
+    if (this.phrases.hasOwnProperty(phrasePair.phrase)) {
+        // FIXME: add error checking
+    }
+    this.phrases[phrasePair.phrase]= phrasePair.description;
+};
+
+// TODO: create integration tests for TSV to Category
 function makeCategory(tsvPath, callback) {
     // FIXME: error handling? is it needed here?
-    var category = {
-        name: path.basename(tsvPath, '.tsv'),
-        phrases: [],
-        freeCell: null
-    };
+    var category = new Category(path.basename(tsvPath, '.tsv'));
 
     var parser = new sv.Parser()
         .on('data', function (obj) {
             if (!category.freeCell) {
                 category.freeCell = obj;
             } else {
-                category.phrases.push(obj);
+                category.addPhrase(obj);
             }
         })
         .on('finish', function () {
@@ -46,9 +61,10 @@ function makeCategory(tsvPath, callback) {
 /**
  * Passes loaded categories into callback.
  * @param {categoryLoadFinishedCallback} callback
+ * @param {String} [basePath]
  */
-exports.createCategories = function createCategories(callback) {
-    var basePath = 'phrases';
+exports.createCategories = function createCategories(callback, basePath) {
+    basePath = typeof basePath !== 'undefined' ? basePath : 'phrases';
     fs.readdir(basePath, function processFiles(err, files) {
         // FIXME: proper error handling
         if (isError(err)) {

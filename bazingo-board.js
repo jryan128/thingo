@@ -18,6 +18,7 @@ function makeBucket(bucketSize) {
  */
 exports.getRandomBoardPhrases = function getRandomBoardPhrases(phrases) {
     var numberOfCells = 24;
+    phrases = Object.keys(phrases);
     if (phrases.length < numberOfCells) {
         // FIXME: handle error case
     }
