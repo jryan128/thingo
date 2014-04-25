@@ -47,14 +47,13 @@
 - Should a popup (or header or footer) tell you how many you have selected so far?
 - Should Done be called Play or Next or Finish?
 *** Custom
-**** TODO List Or Direct
+**** TODO List Or Direct?
 Should we have the user enter the entires in a list or have them edit the board directly?
 The decision is based on whether or not we want the placement to be random or not
 ** TODO Finalize the text we're going to use on the interface
 - [ ] Remove all unused text
 - [ ] Proofread left over text
 * Programming
-** TODO Think about using a template compiler or something
 ** Board
 *** Make it look as good as we can
 **** TODO Popup to make people rotate phone?
@@ -70,6 +69,8 @@ The decision is based on whether or not we want the placement to be random or no
 - https://www.ibm.com/developerworks/mobile/library/mo-jquery-responsive-design/
 ** Checklist
 At the end of development iteration. And before playtest.
+*** Security
+**** Look at all points of possible user input into the system and harden it.
 *** Validation
 *** Lint Check
 *** Complete Code Path Test
