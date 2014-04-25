@@ -22,6 +22,11 @@
 - In text?
 - Titles?
 - Etc.
+* Sprint 2
+** TODO Go through all outstanding TODOs
+** TODO Come up with next set of features
+- [ ] Add to the design document
+** Programming
 * Interface
 ** General
 *** TODO Should the interface
@@ -39,7 +44,7 @@
 **** Allow the user to
 - Pick phrases from a list
   - As many or little as they want
-- Add ones to the list
+- Add ones to the list?
 - Put the descriptions of the phrases in the list
 **** TODO Put descriptions in the guide menu, maybe show when they click.
 **** TODO Should the page
@@ -54,6 +59,10 @@ The decision is based on whether or not we want the placement to be random or no
 - [ ] Remove all unused text
 - [ ] Proofread left over text
 * Programming
+** Requirements
+*** The application works with direct page links.
+*** Works on a good amount of current/recent mobile devices.
+*** Works and look good on desktop.
 ** Board
 *** Make it look as good as we can
 **** TODO Popup to make people rotate phone?
@@ -67,6 +76,7 @@ The decision is based on whether or not we want the placement to be random or no
 *** Buttons not width of screen
 - http://demos.jquerymobile.com/1.4.2/rwd/
 - https://www.ibm.com/developerworks/mobile/library/mo-jquery-responsive-design/
+** TODO Fix guidedBoard?... redirect to home page or guidedPage
 ** Checklist
 At the end of development iteration. And before playtest.
 *** Security
@@ -80,3 +90,37 @@ At the end of development iteration. And before playtest.
 * Legal
 ** Trademarks
 ** LLC
+* Money!
+** Adversiting
+*** Affilate Advertsing
+**** RiffTrax
+**** NetFlix
+**** Amazon Streaming
+**** Other Streaming Services
+*** Adsense-esqe
+*** A movie suggestion page with streaming or something?
+** Freemium
+*** Make it vaulable some how
+*** Do it like Chess.com where you give them access for a few da
+** How Do We Increase Traffic?
+*** Affilate with Rifftrax?
+*** Facebook wall posts
+*** Twitter posts?
+*** Snapchat or whatever the kids are using these days posts?
+*** Adversiting on other websites, Rifftrax, Facebook, etc...
+*** Word of Mouth
+*** Grassroots
+** Market Research
+*** Audience
+**** Start out with the nerdy/rifftrax niche
+- Start out with this crowd, don't put ads on it at first so we get that strong base.
+  - Think if the freemium parts are useful at this point.
+  - When it starts getting ground, move the features into paid.
+  - Also allow people to remove ads for money too, which is dumb cause ad block plus but yeah...
+    - Maybe make it as a Reddit Gold idea ish.
+- Then slowly start add ads, but only cool ads at first like Rifftrax or reddit or something nerdy.
+- Then expand and start targeting a larger audience, and start integrating more things.
+  - Like the amazon streaming affiation and netflix.
+
+** Research
+- http://blog.codinghorror.com/how-to-advertise-on-your-blog-without-completely-selling-out/
