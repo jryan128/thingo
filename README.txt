@@ -3,6 +3,9 @@ bazingo
 
 Setup
 -----
-1. Install NodeJs
-2. Run: npm install
-3. Run: node server.js
+1. Install NodeJs (http://nodejs.org/download/)
+2. Run (in a command prompt or shell): npm install
+
+Running/Testing
+---------------
+1. Run (in a command prompt or shell): node server.js
