@@ -1,0 +1,81 @@
+#+STARTUP: indent
+* PhoneGap
+- [[http://stackoverflow.com/questions/6750657/android-webview-doesnt-load-jquery][Android webview doesnt load jQuery? - Stack Overflow]]
+- [[https://www.google.com/search?q=setWebChromeClient&oq=setWebChromeClient&aqs=chrome..69i57&sourceid=chrome&espv=2&es_sm=106&ie=UTF-8#q=jquery+mobile+android+webview][jquery mobile android webview - Google Search]]
+- [[http://demos.jquerymobile.com/1.2.0/docs/pages/phonegap.html][jQuery Mobile Docs - Phonegap]]
+- [[http://stackoverflow.com/questions/19379392/jquery-mobile-not-working-in-webview-when-loading-from-local-assets][android - jQuery Mobile not working in WebView when loading from local assets - Stack Overflow]]
+- [[http://en.wikipedia.org/wiki/PhoneGap][PhoneGap - Wikipedia, the free encyclopedia]]
+- [[http://docs.phonegap.com/en/edge/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide][PhoneGap API Documentation]]
+- [[http://www.macbreaker.com/2013/01/iatkos-ml2-mountain-lion-virtualbox.html][How to install OS X Mountain Lion in Virtualbox with iAtkos]]
+- [[https://www.google.com/search?q=phonegap+performance&oq=phonegap+performance&aqs=chrome..69i57j0l5.3416j0j7&sourceid=chrome&espv=2&es_sm=106&ie=UTF-8][phonegap performance - Google Search]]
+- [[http://coenraets.org/keypoint/phonegap-performance/#28][Keypoint: PhoneGap + Backbone]]
+- [[https://github.com/ftlabs/fastclick][ftlabs/fastclick]]
+- [[http://stackoverflow.com/questions/19260541/jquery-mobile-and-phonegap-performance-problems][cordova - jQuery Mobile and PhoneGap Performance problems - Stack Overflow]]
+- [[http://coenraets.org/blog/2013/03/hardware-accelerated-page-transitions-for-mobile-web-apps-phonegap-apps/][Hardware-Accelerated Page Transitions for Mobile Web Apps / PhoneGap Apps | Christophe Coenraets]]
+- [[http://stackoverflow.com/questions/19849637/how-to-use-fastclick-js-with-phonegap-and-jqm][jquery - How to use FastClick.js with Phonegap and JQM? - Stack Overflow]]
+* Slogans
+- Bingo for bad movies.
+- Bazingo is a bingo game for clichè movies and TV shows!
+- Bazingo is a bingo game for clich&egrave; movies and TV shows!
+** TODO When should Bazingo be all caps?
+- Title bar?
+- In text?
+- Titles?
+- Etc.
+* Interface
+** General
+*** TODO Should the interface
+- Bazingo all caps or not?
+- Have just Bazingo! or Bazingo! and the page function
+- Instructions on the page be a question? Or more or a direct "click this"
+- Are Step headings good?
+- Have the slogan in the title bar, footer, header?
+- Have a landing page? Should we merge the first and second page together?
+** Category Selection
+*** TODO Should we put popular movies in the list?
+*** TODO Allow the search to find genres based on Movie title?
+** Board Generation
+*** Guided
+**** Allow the user to
+- Pick phrases from a list
+  - As many or little as they want
+- Add ones to the list
+- Put the descriptions of the phrases in the list
+**** TODO Put descriptions in the guide menu, maybe show when they click.
+**** TODO Should the page
+- Have the Done button in the header or footer or inline?
+- Should a popup (or header or footer) tell you how many you have selected so far?
+- Should Done be called Play or Next or Finish?
+*** Custom
+**** TODO List Or Direct
+Should we have the user enter the entires in a list or have them edit the board directly?
+The decision is based on whether or not we want the placement to be random or not
+** TODO Finalize the text we're going to use on the interface
+- [ ] Remove all unused text
+- [ ] Proofread left over text
+* Programming
+** TODO Think about using a template compiler or something
+** Board
+*** Make it look as good as we can
+**** TODO Popup to make people rotate phone?
+**** TODO Make page hide toolbar
+**** TODO Add more viewport and meta tags to help this out
+**** TODO Answer questions about how the board reacts
+***** Keep the table aspect ratio?
+***** Responsive text sizing?
+***** Responsive table sizing?
+** TODO Make desktop look good
+*** Buttons not width of screen
+- http://demos.jquerymobile.com/1.4.2/rwd/
+- https://www.ibm.com/developerworks/mobile/library/mo-jquery-responsive-design/
+** Checklist
+At the end of development iteration. And before playtest.
+*** Validation
+*** Lint Check
+*** Complete Code Path Test
+*** Random Input Test
+*** Read ALL THE SENTENCES
+*** Many platforms test
+* Legal
+** Trademarks
+** LLC
