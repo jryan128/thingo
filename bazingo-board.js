@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Creates a bucket of numbers up to bucketSize
  * @param bucketSize

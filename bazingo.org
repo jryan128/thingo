@@ -31,6 +31,7 @@
 ** General
 *** TODO Should the interface
 - Bazingo all caps or not?
+  - Tile yes, in text no.
 - Have just Bazingo! or Bazingo! and the page function
 - Instructions on the page be a question? Or more or a direct "click this"
 - Are Step headings good?
@@ -83,6 +84,13 @@ At the end of development iteration. And before playtest.
 **** Look at all points of possible user input into the system and harden it.
 *** Validation
 *** Lint Check
+*** Optimize Code
+**** Client Side
+***** Minifiy everything
+***** Turn on compression
+**** Server Side
+***** Caching
+***** Possibly use CDN's for libraries
 *** Complete Code Path Test
 *** Random Input Test
 *** Read ALL THE SENTENCES
