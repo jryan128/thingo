@@ -9,3 +9,4 @@ Setup
 Running/Testing
 ---------------
 1. Run (in a command prompt or shell): node server.js
+2. Navigate your web browser to: http://localhost:3000
