@@ -14,11 +14,10 @@ function makeBucket(bucketSize) {
 /**
  * Return an Array of phrases to fill a board with.
  * @param {Array} phrases to choose from
- * @param numberOfPhrases
+ * @param {Number} numberOfPhrases
  * @returns {Array} an Array of phrases
  */
 function getRandomPhrases(phrases, numberOfPhrases) {
-    phrases = Object.keys(phrases);
     if (phrases.length < numberOfPhrases) {
         // FIXME: handle error case
     }
@@ -40,4 +39,36 @@ exports.getRandomBoardPhrases = function getRandomBoardPhrases(phrases) {
     return getRandomPhrases(phrases, 24);
 };
 
-exports.getRandomPhrases = getRandomPhrases;
+/**
+ *
+ * @param {Array} alreadySelected
+ * @param {Array} phrases
+ * @returns {Array}
+ */
+exports.getGuidedBoardPhrases = function getGuidedBoardPhrases(alreadySelected, phrases) {
+    var totalNeeded = 24;
+    var numberNeeded = totalNeeded - alreadySelected.length;
+
+    if (numberNeeded <= 0) {
+        return getRandomPhrases(alreadySelected, totalNeeded);
+    }
+
+    // FIXME: this function is not efficient in the slightest, it's so slow OMG
+    var shuffledCategoryPhrases = getRandomPhrases(phrases, phrases.length);
+    var ret = [];
+    ret = ret.concat(alreadySelected);
+    var len = shuffledCategoryPhrases.length;
+    // FIXME: change to while with numberNeeded, but make it safe if category doesn't have enough crap in it?
+    for (var i=0; i < len; i++) {
+        var p = shuffledCategoryPhrases[i];
+        if (!(p in alreadySelected)) {
+            ret.push(p);
+            numberNeeded -= 1;
+        }
+
+        if (numberNeeded === 0) {
+            break;
+        }
+    }
+    return getRandomPhrases(ret, ret.length);
+};
