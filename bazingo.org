@@ -24,8 +24,8 @@
 - Etc.
 * Sprint 2
 ** TODO Go through all outstanding TODOs
-** TODO Come up with next set of features
-- [ ] Add to the design document
+** TODO Come up with next set of features, specifically the board
+- [ ] Add to the design document?
 ** Programming
 * Interface
 ** General

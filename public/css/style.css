@@ -12,12 +12,19 @@ Test them out on all the devices first. Might not really be useful on mobile.
 @import 'type.css';
 @import 'misc.css';
 
-/*html, body {*/
+html, body {
     /*width: 100%;*/
     /*height: 100%;*/
     /*margin: 0;*/
     /*padding: 0;*/
-/*}*/
+}
+
+.board {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 
 table.board {
     border-collapse: collapse;
@@ -31,6 +38,7 @@ table.board tbody td {
     text-align: center;
     font-size: 14px;
     cursor: pointer;
+    padding: 2px;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -43,11 +51,3 @@ table.board tbody td {
 table.board .enabled {
     background-color: #945792;
 }
-
-.board {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-}
-

@@ -2,8 +2,34 @@
 <script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
 <script>
     $(document).on('pageinit', '#board', function setupBoardPage() {
+        var width = $(window).width(), height = $(window).height();
         $('.board td').click(function enableCell() {
             $(this).toggleClass('enabled');
         });
+
+        // FIXME: toggle fullscreen on mobile?
+//        function toggleFullScreen() {
+//            var doc = window.document;
+//            var docEl = doc.documentElement;
+//
+//            var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+//            var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+//
+//            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+//                requestFullScreen.call(docEl);
+//            }
+//            else {
+//                cancelFullScreen.call(doc);
+//            }
+//        }
+
+        // FIXME: some ways to get the android chrome address bar problem fixed:
+//        var val = $('html').css('height');
+//        $('html').css('height', val);
+//        $(window).resize(function() {
+//            $('html').css('height', height);
+//            $('table').focus();
+//            alert('ha!');
+//        });
     });
 </script>
