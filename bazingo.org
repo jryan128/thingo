@@ -96,7 +96,10 @@ At the end of development iteration. And before playtest.
 *** Read ALL THE SENTENCES
 *** Many platforms test
 * Legal
-** Trademarks
+** TODO Trademarks
+- Looks like we need a new name.
+*** TODO Come up with a new name
+- https://docs.google.com/spreadsheets/d/1qswpN0cBrVvnaBNK6R62BIB-iHhn0QSy7ZcWO9DH-z0/edit#gid=0
 ** LLC
 * Money!
 ** Adversiting
