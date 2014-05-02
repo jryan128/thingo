@@ -15,32 +15,10 @@ function setupRoutes(app, categories) {
     app.get('/categoryPage', function(req, res){
         res.render('categoryPage.ejs', {categories: categories});
     });
-    app.get('/menuPage', function(req, res){
-        // FIXME: category error checking...
-        res.render('menuPage.ejs', {category: req.query.category});
-    });
-    app.get('/guidedPage', function(req, res){
-        // FIXME: error checking, what if bad category? THIS IS USER INPUT
-        // FIXME: move category into class with proper error checking and handling
-        var category = categories[req.query.category];
-        res.render('guidedPage.ejs', {category: category.name, phrases: Object.keys(category.phrases)});
-    });
-    app.get('/randomBoard', function(req, res){
+    app.get('/board', function(req, res){
         // FIXME: error checking, what if bad category?
         var category = categories[req.query.category];
         var phrases = board.getRandomBoardPhrases(Object.keys(category.phrases));
-        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
-    });
-    app.use('/guidedBoard', connect.urlencoded());
-    app.post('/guidedBoard', function(req, res){
-        // FIXME: error checking, what if bad category?
-        var category = categories[req.query.category];
-        var phrases = board.getGuidedBoardPhrases(Object.keys(req.body), Object.keys(category.phrases));
-        res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
-    });
-    app.get('/customBoard', function (req, res) {
-        var category = categories[req.query.category];
-        var phrases =  Array.apply(null, Array(24)).map(function () { return '?'; });
         res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use(express.static(__dirname + '/public'));
