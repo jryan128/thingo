@@ -64,7 +64,7 @@ Category.prototype.addPhrase = function (phrasePair) {
  * @param {String} [basePath]
  */
 exports.createCategories = function createCategories(callback, basePath) {
-    basePath = typeof basePath !== 'undefined' ? basePath : 'phrases';
+    basePath = typeof basePath !== 'undefined' ? basePath : '../phrases';
     fs.readdir(basePath, function processFiles(err, files) {
         // FIXME: proper error handling
         if (isError(err)) {
