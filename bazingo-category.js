@@ -15,7 +15,6 @@ function isError(err) {
     }
 }
 
-// TODO: create unit tests for Category
 function Category(name) {
     this.phrases = {};
     this.name = name;
@@ -33,8 +32,7 @@ Category.prototype.addPhrase = function (phrasePair) {
     this.phrases[phrasePair.phrase]= phrasePair.description;
 };
 
-// TODO: create integration tests for TSV to Category
-function makeCategory(tsvPath, callback) {
+    function makeCategory(tsvPath, callback) {
     // FIXME: error handling? is it needed here?
     var category = new Category(path.basename(tsvPath, '.tsv'));
 
