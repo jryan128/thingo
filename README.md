@@ -1,5 +1,5 @@
 bazingo-web
------------
+===========
 The JQuery Mobile, Node.js version of Bazingo.
 Targeted for mobile phones.
 We may expand this to support desktop.
