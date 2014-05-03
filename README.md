@@ -8,8 +8,8 @@ Folder Structure
  - phrases: holds TSV files which hold all the category and board information
  - web: the jquery mobile and node.js version of Bazingo
 
-Workflow
---------
+New Category Workflow
+---------------------
  - Use the [Category Template](https://docs.google.com/spreadsheets/d/1u62Q9ueQddll7_lgGMFd6FxEpJd30frjH8mAV3CdY_4/edit#gid=0) to start a new category.
  - Replace any text surrounded by < > 's.
  - Do not remove the first row, it's need by the applications.
