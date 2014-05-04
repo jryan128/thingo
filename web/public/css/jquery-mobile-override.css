@@ -19,3 +19,8 @@ html body .ui-group-theme-a .ui-bar-inherit {
     overflow: visible;
     white-space: normal;
 }
+
+/* Overriding the background ui elements */
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+	
+}

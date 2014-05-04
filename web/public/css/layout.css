@@ -1,1 +1,47 @@
 /* Layout.css */
+
+html, body {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+
+}
+
+.board {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+table.board {
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.board tbody td {
+    border: 2px rgba(243, 243, 243, 0.08) solid;
+    color: #fff;
+    text-align: center;
+    font-family: Helvetica, arial, sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px;
+    text-shadow: none;
+    background: #131313;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+table.board .enabled {
+    background-color: #435a3f;
+
+}
