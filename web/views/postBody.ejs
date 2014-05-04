@@ -2,26 +2,34 @@
 <script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
 <script>
     $(document).on('pageinit', '#board', function setupBoardPage() {
-        var width = $(window).width(), height = $(window).height();
+        // FIXME: hide things until loaded: http://stackoverflow.com/questions/9734021/jquery-hide-content-until-loaded
         $('.board td').click(function enableCell() {
             $(this).toggleClass('enabled');
         });
 
-        // FIXME: toggle fullscreen on mobile?
-//        function toggleFullScreen() {
-//            var doc = window.document;
-//            var docEl = doc.documentElement;
-//
-//            var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-//            var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-//
-//            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-//                requestFullScreen.call(docEl);
-//            }
-//            else {
-//                cancelFullScreen.call(doc);
-//            }
-//        }
+        function toggleFullScreen() {
+            var doc = window.document;
+            var docEl = doc.documentElement;
+
+            var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+            var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+                requestFullScreen.call(docEl);
+            }
+            else {
+                cancelFullScreen.call(doc);
+            }
+        }
+        $('#fullscreenButton').click(function(){
+            toggleFullScreen();
+        });
+
+        setTimeout(function(){
+            var $fullScreenDialog = $("#fullScreenDialog");
+            $fullScreenDialog.popup();
+            $fullScreenDialog.popup("open");
+        }, 100);
 
         // FIXME: some ways to get the android chrome address bar problem fixed:
 //        var val = $('html').css('height');
