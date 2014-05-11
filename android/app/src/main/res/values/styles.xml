@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="boardSquareStyle">@style/BoardSquare</item>
+    </style>
+
+    <style name="BoardSquare">
+        <item name="android:background">@drawable/board_square_background</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+</resources>
