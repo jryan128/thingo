@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="BoardSquare">
+    <declare-styleable name="BoardSquareButton">
         <attr name="boardSquareStyle" format="reference" />
     </declare-styleable>
 </resources>

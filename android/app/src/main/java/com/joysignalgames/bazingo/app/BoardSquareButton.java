@@ -4,19 +4,18 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class BoardSquare extends CompoundButton {
+public class BoardSquareButton extends CompoundButton {
 
-    public BoardSquare(Context context) {
+    public BoardSquareButton(Context context) {
         this(context, null);
     }
 
-    public BoardSquare(Context context, AttributeSet attrs){
+    public BoardSquareButton(Context context, AttributeSet attrs){
         this(context,attrs,R.attr.boardSquareStyle);
     }
-    public BoardSquare(Context context, AttributeSet attrs, int defStyle){
+    public BoardSquareButton(Context context, AttributeSet attrs, int defStyle){
         super(context,attrs,defStyle);
     }
 
@@ -29,13 +28,13 @@ public class BoardSquare extends CompoundButton {
     @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
-        event.setClassName(BoardSquare.class.getName());
+        event.setClassName(BoardSquareButton.class.getName());
     }
 
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
-        info.setClassName(BoardSquare.class.getName());
+        info.setClassName(BoardSquareButton.class.getName());
     }
 
 }

@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class board extends ActionBarActivity {
+public class BoardActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +101,7 @@ public class board extends ActionBarActivity {
 
             if(convertView==null){
                 convertView  = getLayoutInflater().inflate(R.layout.board_square,null);
-                ((BoardSquare)convertView).setText((String) getItem(position));
+                ((BoardSquareButton)convertView).setText((String) getItem(position));
              }
 
             return convertView;

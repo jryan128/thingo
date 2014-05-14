@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 
-public class categoryPage extends ActionBarActivity {
+public class CategoryActivity extends ActionBarActivity {
 
 
     @Override
@@ -65,7 +65,7 @@ public class categoryPage extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
-                Intent intent = new Intent(getBaseContext(), board.class);
+                Intent intent = new Intent(getBaseContext(), BoardActivity.class);
                 intent.putExtra("genre",((TextView)view).getText().toString() );
                 startActivity(intent);
             }
