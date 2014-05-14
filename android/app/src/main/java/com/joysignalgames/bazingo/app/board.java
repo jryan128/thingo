@@ -32,6 +32,7 @@ public class board extends ActionBarActivity {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("phrases/" + genre)));
 
             ArrayList<String[]> phraseDescription = new ArrayList<String[]>();
+            //noinspection UnusedAssignment
             String line = reader.readLine(); //right now just the column headers
 
             while ((line = reader.readLine()) != null) {
