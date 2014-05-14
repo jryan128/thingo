@@ -19,55 +19,50 @@ public class CategoryActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_page);
 
-        String[] phrases = null; //maybe initialize with default list
         try {
-            phrases = getStringArray();
+            String[] phrases = getStringArray();
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, phrases);
+
+            EditText editText = (EditText) findViewById(R.id.search_genres);
+            editText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                    adapter.getFilter().filter(arg0);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                              int arg3) {
+                    // empty
+                }
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // empty
+                }
+            });
+
+            ListView listView = (ListView) findViewById(R.id.genres);
+            listView.setAdapter(adapter);
+            listView.setTextFilterEnabled(true);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+
+                    Intent intent = new Intent(getBaseContext(), BoardActivity.class);
+                    intent.putExtra("genre", ((TextView) view).getText().toString());
+                    startActivity(intent);
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, phrases);
-
-        EditText editText = (EditText) findViewById(R.id.search_genres);
-        editText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                // TODO Auto-generated method stub
-                adapter.getFilter().filter(arg0);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
-        ListView listView = (ListView) findViewById(R.id.genres);
-        listView.setAdapter(adapter);
-        listView.setTextFilterEnabled(true);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-
-                Intent intent = new Intent(getBaseContext(), BoardActivity.class);
-                intent.putExtra("genre", ((TextView) view).getText().toString());
-                startActivity(intent);
-            }
-        });
-
     }
 
-    //getting the array adapter this way since the phrases are all in .tsv files in our repository so
-    //it will be easier for now to just copy those files and parse them here as opposed to making separate .xml files
+    // getting the array adapter this way since the phrases are all in .tsv files in our repository so
+    // it will be easier for now to just copy those files and parse them here as opposed to making separate .xml files
     String[] getStringArray() throws IOException {
         return getAssets().list("phrases");
     }
