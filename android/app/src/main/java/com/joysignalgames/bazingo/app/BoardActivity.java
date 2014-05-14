@@ -1,7 +1,7 @@
 package com.joysignalgames.bazingo.app;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class BoardActivity extends ActionBarActivity {
 
     @Override
@@ -23,7 +22,7 @@ public class BoardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
 
-        //probably check to make sure there is an extra called genre
+        // probably check to make sure there is an extra called genre
         String genre = getIntent().getStringExtra("genre");
 
         try {
@@ -38,10 +37,10 @@ public class BoardActivity extends ActionBarActivity {
                 phraseDescription.add(row);
             }
 
-            //choose random phrases to fill up 25 square board
-            //probably less optimal than generating random indices (without repeats) but for now, less code
+            // choose random phrases to fill up 25 square board
+            // probably less optimal than generating random indices (without repeats) but for now, less code
             Collections.shuffle(phraseDescription);
-            phraseDescription = new ArrayList<String[]>(phraseDescription.subList(0,25));
+            phraseDescription = new ArrayList<String[]>(phraseDescription.subList(0, 25));
 
             GridView boardView = (GridView) findViewById(R.id.board);
             boardView.setAdapter(new BoardAdapter(phraseDescription));
@@ -51,10 +50,8 @@ public class BoardActivity extends ActionBarActivity {
         }
     }
 
-
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.game_board, menu);
         return true;
@@ -76,8 +73,7 @@ public class BoardActivity extends ActionBarActivity {
 
         ArrayList<String[]> mPhraseDescription;
 
-        // Constructor
-        public BoardAdapter( ArrayList<String[]> phraseDescription){
+        public BoardAdapter(ArrayList<String[]> phraseDescription) {
             mPhraseDescription = phraseDescription;
         }
 
@@ -98,15 +94,11 @@ public class BoardActivity extends ActionBarActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
-            if(convertView==null){
-                convertView  = getLayoutInflater().inflate(R.layout.board_square,null);
-                ((BoardSquareButton)convertView).setText((String) getItem(position));
-             }
-
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.board_square, null);
+                ((BoardSquareButton) convertView).setText((String) getItem(position));
+            }
             return convertView;
-
         }
-
     }
 }
