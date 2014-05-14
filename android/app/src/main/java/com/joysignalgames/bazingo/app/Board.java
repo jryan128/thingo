@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Category {
+public class Board {
     private final List<String[]> phraseData;
-    private final String[] freeSpaceData;
 
-    private Category(List<String[]> phraseData) {
+    private Board(List<String[]> phraseData) {
+        String[] freeSpaceData = phraseData.get(0);
+        Collections.shuffle(phraseData);
         this.phraseData = new ArrayList<String[]>(phraseData.subList(0, 24));
-        this.freeSpaceData = phraseData.get(25);
+        this.phraseData.add(12, freeSpaceData);
     }
 
-    public static Category loadCategory(String category, Activity activity) throws IOException {
+    public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category)));
 
         List<String[]> phraseData = new ArrayList<String[]>();
@@ -34,8 +35,7 @@ public class Category {
 
         // choose random phrases to fill up 25 square board
         // probably less optimal than generating random indices (without repeats) but for now, less code
-        Collections.shuffle(phraseData);
-        return new Category(phraseData);
+        return new Board(phraseData);
     }
 
     public List<String[]> getPhrases() {
@@ -44,17 +44,5 @@ public class Category {
 
     public String getPhrase(int position) {
         return phraseData.get(position)[0];
-    }
-
-    public String getPhraseDescription(int position) {
-        return phraseData.get(position)[1];
-    }
-
-    public String getFreeSpace() {
-        return freeSpaceData[0];
-    }
-
-    public String getFreeSpaceDescription() {
-        return freeSpaceData[1];
     }
 }

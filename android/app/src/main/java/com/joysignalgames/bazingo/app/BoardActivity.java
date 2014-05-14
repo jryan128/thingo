@@ -9,11 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class BoardActivity extends ActionBarActivity {
 
@@ -25,10 +21,10 @@ public class BoardActivity extends ActionBarActivity {
         try {
             // probably check to make sure there is an extra called genre
             String genre = getIntent().getStringExtra("genre");
-            Category category = Category.loadCategory(genre, this);
+            Board board = Board.loadRandomBoardFromCategory(genre, this);
 
             GridView boardView = (GridView) findViewById(R.id.board);
-            boardView.setAdapter(new BoardAdapter(category));
+            boardView.setAdapter(new BoardAdapter(board));
         } catch (IOException e) {
             // TODO: better error handling
             e.printStackTrace();
@@ -53,20 +49,20 @@ public class BoardActivity extends ActionBarActivity {
 
     public class BoardAdapter extends BaseAdapter {
 
-        private final Category category;
+        private final Board board;
 
-        private BoardAdapter(Category category) {
-            this.category = category;
+        private BoardAdapter(Board board) {
+            this.board = board;
         }
 
         @Override
         public int getCount() {
-            return category.getPhrases().size();
+            return board.getPhrases().size();
         }
 
         @Override
         public Object getItem(int position) {
-            return category.getPhrase(position);
+            return board.getPhrase(position);
         }
 
         @Override
