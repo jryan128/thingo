@@ -1,28 +1,21 @@
 package com.joysignalgames.bazingo.app;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.io.IOException;
 
-
 public class CategoryActivity extends ActionBarActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_page);
 
@@ -66,7 +59,7 @@ public class CategoryActivity extends ActionBarActivity {
                                     long id) {
 
                 Intent intent = new Intent(getBaseContext(), BoardActivity.class);
-                intent.putExtra("genre",((TextView)view).getText().toString() );
+                intent.putExtra("genre", ((TextView) view).getText().toString());
                 startActivity(intent);
             }
         });
@@ -76,11 +69,8 @@ public class CategoryActivity extends ActionBarActivity {
     //getting the array adapter this way since the phrases are all in .tsv files in our repository so
     //it will be easier for now to just copy those files and parse them here as opposed to making separate .xml files
     String[] getStringArray() throws IOException {
-       return getAssets().list("phrases");
+        return getAssets().list("phrases");
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
