@@ -12,16 +12,18 @@ public class BoardSquareButton extends CompoundButton {
         this(context, null);
     }
 
-    public BoardSquareButton(Context context, AttributeSet attrs){
-        this(context,attrs,R.attr.boardSquareStyle);
-    }
-    public BoardSquareButton(Context context, AttributeSet attrs, int defStyle){
-        super(context,attrs,defStyle);
+    public BoardSquareButton(Context context, AttributeSet attrs) {
+        this(context, attrs, R.attr.boardSquareStyle);
     }
 
-    //make the height equal the width so it's square!!
+    public BoardSquareButton(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
+
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        // make the height equal the width so it's square!!
+        //noinspection SuspiciousNameCombination
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
@@ -36,5 +38,4 @@ public class BoardSquareButton extends CompoundButton {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(BoardSquareButton.class.getName());
     }
-
 }
