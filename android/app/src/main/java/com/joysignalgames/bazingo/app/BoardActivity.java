@@ -22,30 +22,15 @@ public class BoardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
 
-        // probably check to make sure there is an extra called genre
-        String genre = getIntent().getStringExtra("genre");
-
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("phrases/" + genre)));
-
-            ArrayList<String[]> phraseDescription = new ArrayList<String[]>();
-            //noinspection UnusedAssignment
-            String line = reader.readLine(); //right now just the column headers
-
-            while ((line = reader.readLine()) != null) {
-                String[] row = line.split("\t");
-                phraseDescription.add(row);
-            }
-
-            // choose random phrases to fill up 25 square board
-            // probably less optimal than generating random indices (without repeats) but for now, less code
-            Collections.shuffle(phraseDescription);
-            phraseDescription = new ArrayList<String[]>(phraseDescription.subList(0, 25));
+            // probably check to make sure there is an extra called genre
+            String genre = getIntent().getStringExtra("genre");
+            Category category = Category.loadCategory(genre, this);
 
             GridView boardView = (GridView) findViewById(R.id.board);
-            boardView.setAdapter(new BoardAdapter(phraseDescription));
-
+            boardView.setAdapter(new BoardAdapter(category));
         } catch (IOException e) {
+            // TODO: better error handling
             e.printStackTrace();
         }
     }
@@ -68,20 +53,20 @@ public class BoardActivity extends ActionBarActivity {
 
     public class BoardAdapter extends BaseAdapter {
 
-        ArrayList<String[]> mPhraseDescription;
+        private final Category category;
 
-        public BoardAdapter(ArrayList<String[]> phraseDescription) {
-            mPhraseDescription = phraseDescription;
+        private BoardAdapter(Category category) {
+            this.category = category;
         }
 
         @Override
         public int getCount() {
-            return mPhraseDescription.size();
+            return category.getPhrases().size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mPhraseDescription.get(position)[0];
+            return category.getPhrase(position);
         }
 
         @Override
