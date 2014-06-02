@@ -3,17 +3,19 @@
 <%- include head.ejs %>
 <!-- TODO: what should the title look like? -->
 <body>
-<div data-role="popup" id="fullScreenDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
-    <div data-role="header" data-theme="a">
-        <center><h1>Fullscreen!</h1></center>
-    </div>
-    <div role="main" class="ui-content">
-        <h3 class="ui-title">Bazingo works best in fullscreen mode. Would you like to go fullscreen?</h3>
-        <a href="#" id="fullscreenButton" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Go Fullscreen</a>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">No, thanks</a>
-    </div>
-</div>
+
 <div data-role="page" class="board" id="board">
+    <div data-role="popup" id="fullScreenDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 600px;">
+        <div data-role="header" data-theme="b" role="banner">
+            <h1 class="ui-title" role="heading" aria-level="1">Fullscreen!</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <h3 class="ui-title">Bazingo works best in fullscreen mode. Would you like to go fullscreen?</h3>
+            <a href="#" id="fullscreenButton" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Go Fullscreen</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">No, thanks</a>
+        </div>
+    </div>
+
     <div data-role="content" class="board fs-container">
         <table class="board">
             <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->

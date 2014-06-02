@@ -2,6 +2,25 @@
 <script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
 <script>
     $(document).on('pageinit', '#board', function setupBoardPage() {
+//        $( "#fullScreenDialog" ).on( "popupafterclose", function( event, ui ) {
+//            setTimeout(function() {
+//                $('#fullScreenDialog').popup('open');
+//            }, 100);
+//        });
+        $(":mobile-pagecontainer" ).on( "pagecontainershow", function(event, ui) {
+            console.log('show');
+            setTimeout(function () {
+                $('#fullScreenDialog').popup('open');
+            }, 100);
+        });
+
+        $(document).on('pagecontainershow', '#board', function setupBoardPage() {
+            console.log('pageshow board');
+            $(document).on('pagechange', '#board', function (event) {
+                console.log('test');
+            });
+        });
+
         // FIXME: hide things until loaded: http://stackoverflow.com/questions/9734021/jquery-hide-content-until-loaded
         $('.board td').click(function enableCell() {
             $(this).toggleClass('enabled');
@@ -22,14 +41,11 @@
             }
         }
         $('#fullscreenButton').click(function(){
-            toggleFullScreen();
+            setTimeout(function(){
+                toggleFullScreen();
+            }, 100);
         });
 
-        setTimeout(function(){
-            var $fullScreenDialog = $("#fullScreenDialog");
-            $fullScreenDialog.popup();
-            $fullScreenDialog.popup("open");
-        }, 100);
 
         // FIXME: some ways to get the android chrome address bar problem fixed:
 //        var val = $('html').css('height');
