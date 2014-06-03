@@ -1,36 +1,24 @@
 <script src="javascripts/jquery-2.1.0.js"></script>
-<script src="javascripts/jquery-mobile/jquery.mobile-1.4.2.min.js"></script>
 <script>
-    $(document).on('pageinit', '#board', function setupBoardPage() {
-//        $( "#fullScreenDialog" ).on( "popupafterclose", function( event, ui ) {
-//            setTimeout(function() {
-//                $('#fullScreenDialog').popup('open');
-//            }, 100);
-//        });
-        $(":mobile-pagecontainer" ).on( "pagecontainershow", function(event, ui) {
-            console.log('show');
-            setTimeout(function () {
-                $('#fullScreenDialog').popup('open');
-            }, 100);
-        });
-
-        $(document).on('pagecontainershow', '#board', function setupBoardPage() {
-            console.log('pageshow board');
-            $(document).on('pagechange', '#board', function (event) {
-                console.log('test');
-            });
-        });
-
+    // FIXME: disable scrolling of HTML page, but allow for scrolling of overflow:
+    // http://stackoverflow.com/questions/9183381/how-to-have-click-event-only-fire-on-parent-div-not-children
+    //    $('table').bind('touchmove', function (e) {
+    //        if (e.target === this) {
+    //            e.preventDefault();
+    //        }
+    //    });
+    $(function () {
         // FIXME: hide things until loaded: http://stackoverflow.com/questions/9734021/jquery-hide-content-until-loaded
         $('.board td').click(function enableCell() {
             var $td = $(this);
             $td.toggleClass('enabled');
             function checkForBingo($td) {
-                var rowEnabledCount= $td.closest('tr').find('.enabled').length;
+                var rowEnabledCount = $td.closest('tr').find('.enabled').length;
                 var columnEnabledCount = $('td.enabled:nth-child(' + ($td.index() + 1) + ')').length;
                 var rightDiagEnabledCount = $('td.diagRight.enabled').length;
                 var leftDiagEnabledCount = $('td.diagLeft.enabled').length;
             }
+
             checkForBingo($td);
         });
 
@@ -41,27 +29,12 @@
             var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
             var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
-            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
                 requestFullScreen.call(docEl);
             }
             else {
                 cancelFullScreen.call(doc);
             }
         }
-        $('#fullscreenButton').click(function(){
-            setTimeout(function(){
-                toggleFullScreen();
-            }, 100);
-        });
-
-
-        // FIXME: some ways to get the android chrome address bar problem fixed:
-//        var val = $('html').css('height');
-//        $('html').css('height', val);
-//        $(window).resize(function() {
-//            $('html').css('height', height);
-//            $('table').focus();
-//            alert('ha!');
-//        });
     });
 </script>

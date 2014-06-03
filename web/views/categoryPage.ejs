@@ -2,28 +2,19 @@
 <html>
 <%- include head.ejs %>
 <body>
-<div data-role="page" id="categoryPage">
-    <div data-role="header">
-        <h1>BAZINGO!</h1>
-    </div>
+<h1>BAZINGO!</h1>
 
-    <div data-role="content">
-        <p><b>Step 1</b>: What's the genre of the movie you're watching?</p>
-        <ul data-role="listview"
-            id="category-list"
-            data-filter="true"
-            data-filter-placeholder="Search Genres..."
-            data-inset="true">
-            <% Object.keys(locals.categories).forEach(function(i){ %>
-            <li><a href="board?category=<%= i%>"><%= i%></a></li>
-            <% }); %>
-        </ul>
-    </div>
+<p><b>Step 1</b>: What's the genre of the movie you're watching?</p>
+<ul data-role="listview"
+    id="category-list"
+    data-filter="true"
+    data-filter-placeholder="Search Genres..."
+    data-inset="true">
+    <% Object.keys(locals.categories).forEach(function(i){ %>
+    <li><a href="board?category=<%= i %>"><%= i %></a></li>
+    <% }); %>
+</ul>
 
-    <div data-role="footer">
-        <h4>&nbsp;</h4>
-    </div>
-</div>
 </body>
 <%- include postBody.ejs %>
 </html>

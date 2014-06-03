@@ -1,11 +1,11 @@
 /* Layout.css */
 
 html, body {
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .board {
@@ -18,8 +18,8 @@ html, body {
 table.board {
     border-collapse: collapse;
     table-layout: fixed;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
+    padding: 0;
 }
 
 table.board tbody td {
@@ -39,6 +39,10 @@ table.board tbody td {
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+}
+
+table.board tbody tr td div {
+    overflow: auto;
 }
 
 table.board .enabled {

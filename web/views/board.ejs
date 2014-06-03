@@ -3,29 +3,26 @@
 <%- include head.ejs %>
 <!-- TODO: what should the title look like? -->
 <body>
+<!--<div id="fullScreenDialog">-->
+    <!--<h1 class="ui-title" >Fullscreen!</h1>-->
+    <!--<div role="main">-->
+        <!--<h3>Bazingo works best in fullscreen mode. Would you like to go fullscreen?</h3>-->
+        <!--<a href="#" id="fullscreenButton">Go Fullscreen</a>-->
+        <!--<a href="#">No, thanks</a>-->
+    <!--</div>-->
+<!--</div>-->
 
-<div data-role="page" class="board" id="board">
-    <div data-role="popup" id="fullScreenDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width: 600px;">
-        <div data-role="header" data-theme="b" role="banner">
-            <h1 class="ui-title" role="heading" aria-level="1">Fullscreen!</h1>
-        </div>
-        <div role="main" class="ui-content">
-            <h3 class="ui-title">Bazingo works best in fullscreen mode. Would you like to go fullscreen?</h3>
-            <a href="#" id="fullscreenButton" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Go Fullscreen</a>
-            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">No, thanks</a>
-        </div>
-    </div>
-
-    <div data-role="content" class="board fs-container">
+<div class="board" id="board">
+    <div class="board">
         <table class="board" id="boardTable">
             <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
             <tbody>
             <tr>
-                <td class="diagLeft"><%= locals.phrases.pop() %></td>
-                <td><%= locals.phrases.pop() %></td>
-                <td><%= locals.phrases.pop() %></td>
-                <td><%= locals.phrases.pop() %></td>
-                <td class="diagRight"><%= locals.phrases.pop() %></td>
+                <td class="diagLeft"><div><%= locals.phrases.pop() %></div></td>
+                <td><div><%= locals.phrases.pop() %></div></td>
+                <td><div><%= locals.phrases.pop() %></div></td>
+                <td><div><%= locals.phrases.pop() %></div></td>
+                <td class="diagRight"><div><%= locals.phrases.pop() %></div></td>
             </tr>
             <tr>
                 <td><%= locals.phrases.pop() %></td>
