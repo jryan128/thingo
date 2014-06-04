@@ -43,6 +43,7 @@ table.board tbody td {
 
 table.board tbody tr td div {
     overflow: auto;
+    height: inherit;
 }
 
 table.board .enabled {
