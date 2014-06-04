@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html>
 <%- include head.ejs %>
-<!-- TODO: what should the title look like? -->
 <body>
-<!--<div id="fullScreenDialog">-->
-    <!--<h1 class="ui-title" >Fullscreen!</h1>-->
-    <!--<div role="main">-->
-        <!--<h3>Bazingo works best in fullscreen mode. Would you like to go fullscreen?</h3>-->
-        <!--<a href="#" id="fullscreenButton">Go Fullscreen</a>-->
-        <!--<a href="#">No, thanks</a>-->
-    <!--</div>-->
-<!--</div>-->
-
 <div class="board" id="board">
     <div class="board">
         <table class="board" id="boardTable">
@@ -57,5 +47,21 @@
     </div>
 </div>
 </body>
-<%- include postBody.ejs %>
+<script src="javascripts/jquery-2.1.0.js"></script>
+<script>
+    $(function () {
+        $('.board td').click(function enableCell() {
+            var $td = $(this);
+            $td.toggleClass('enabled');
+            function checkForBingo($td) {
+                var rowEnabledCount = $td.closest('tr').find('.enabled').length;
+                var columnEnabledCount = $('td.enabled:nth-child(' + ($td.index() + 1) + ')').length;
+                var rightDiagEnabledCount = $('td.diagRight.enabled').length;
+                var leftDiagEnabledCount = $('td.diagLeft.enabled').length;
+            }
+
+            checkForBingo($td);
+        });
+    });
+</script>
 </html>
