@@ -7,40 +7,41 @@
         <table class="board" id="boardTable">
             <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
             <tbody>
+            <!-- unselectable disables selection in opera -->
             <tr>
-                <td class="diagLeft"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagRight"><div><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
             </tr>
             <tr>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagLeft"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagRight"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
             </tr>
             <tr>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagLeft diagRight" id="freeCell"><div><%= locals.freeCell.phrase %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagLeft diagRight" id="freeCell"><div unselectable="on"><%= locals.freeCell.phrase %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
             </tr>
             <tr>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagRight"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagLeft"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
             </tr>
             <tr>
-                <td class="diagRight"><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td><div><%= locals.phrases.pop() %></div></td>
-                <td class="diagLeft"><div><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
             </tr>
             </tbody>
         </table>
