@@ -21,18 +21,18 @@ table.board {
 }
 
 table.board tbody td {
-    border: 2px rgba(243, 243, 243, 0.08) solid;
-    color: #fff;
+    border: 2px #94949e solid;
+    color: #A26BB4;
     text-align: center;
     font-family: Helvetica, arial, sans-serif;
-    font-weight: 100;
+    font-weight: bold;
     font-size: 14px;
     cursor: pointer;
     padding: 2px;
     height:20%;
     width:20%
     text-shadow: none;
-    background: #131313;
+    background: #F0EFFF;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -46,6 +46,6 @@ table.board tbody tr td div {
 }
 
 table.board .enabled {
-    background-color: #492659;
+    background-color: #C2C3E6;
 
 }
