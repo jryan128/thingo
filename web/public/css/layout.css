@@ -10,23 +10,21 @@ html, body {
     height: 100%;
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
-    /*border-spacing: 2px;*/
 }
 
 .boardTable tbody td {
     border: 2px rgba(211, 211, 221, 255) solid;
+    padding: 4px;
+    height: 20%;
+    width: 20%;
+    background: #F0EFFF;
     color: #A26BB4;
     text-align: center;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: sans-serif;
     font-weight: bold;
     font-size: 12px;
     cursor: pointer;
-    padding: 2px;
-    height:20%;
-    width:20%;
-    text-shadow: none;
-    background: #F0EFFF;
+
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -41,5 +39,4 @@ html, body {
 
 .boardTable .enabled {
     background-color: #C2C3E6;
-
 }
