@@ -10,6 +10,7 @@ html, body {
     height: 100%;
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .boardTable tbody td {
