@@ -2,56 +2,53 @@
 <html>
 <%- include head.ejs %>
 <body>
-<div class="board" id="board">
-    <div class="board">
-        <table class="board" id="boardTable">
-            <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
-            <tbody>
-            <!-- unselectable disables selection in opera -->
-            <tr>
-                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-            </tr>
-            <tr>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-            </tr>
-            <tr>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagLeft diagRight" id="freeCell"><div unselectable="on"><%= locals.freeCell.phrase %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-            </tr>
-            <tr>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-            </tr>
-            <tr>
-                <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-                <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+
+<table class="boardTable">
+    <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
+    <tbody>
+    <!-- unselectable disables selection in opera -->
+    <tr>
+        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+    </tr>
+    <tr>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+    </tr>
+    <tr>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagLeft diagRight" id="freeCell"><div unselectable="on"><%= locals.freeCell.phrase %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+    </tr>
+    <tr>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+    </tr>
+    <tr>
+        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 <script src="javascripts/jquery-2.1.0.js"></script>
 <script>
     $(function () {
-        $('.board td').click(function enableCell() {
+        $('.boardTable td').click(function enableCell() {
             var $td = $(this);
             $td.toggleClass('enabled');
             function checkForBingo($td) {
