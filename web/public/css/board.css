@@ -41,3 +41,7 @@ html, body {
 .boardTable .enabled {
     background-color: #C2C3E6;
 }
+
+.boardTable td[class*="win"] {
+    background-color: #e673e3;
+}

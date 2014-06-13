@@ -51,16 +51,40 @@
 <script>
     $(function () {
         $('.boardTable td').click(function enableCell() {
+            $(this).toggleClass('enabled');
             var $td = $(this);
-            $td.toggleClass('enabled');
-            function checkForBingo($td) {
-                var rowEnabledCount = $td.closest('tr').find('.enabled').length;
-                var columnEnabledCount = $('td.enabled:nth-child(' + ($td.index() + 1) + ')').length;
-                var rightDiagEnabledCount = $('td.diagRight.enabled').length;
-                var leftDiagEnabledCount = $('td.diagLeft.enabled').length;
+
+            function handleFiveInARow(i, selection) {
+                var $s = selection.$s;
+                var winClass = 'win' + selection.name + selection.index;
+                if ($s.length >= 5) {
+                    $s.addClass(winClass);
+                    $s.one('click', function disable() {
+                       $s.removeClass(winClass);
+                    });
+                }
             }
 
-            checkForBingo($td);
+            var rowEnabled = (function() {
+                var closestTr = $td.closest('tr');
+                return {
+                    name: "row", $s: closestTr.find('.enabled'),
+                    index: closestTr.index()
+                };
+            })();
+            var columnEnabled = {
+                name: "column", $s: $('td.enabled:nth-child(' + ($td.index() + 1) + ')'),
+                index: $td.index()
+            };
+            var rightDiagEnabled = {
+                name: "rightDiag", $s: $('td.diagRight.enabled'),
+                index: 0
+            };
+            var leftDiagEnabled = {
+                name: "leftDiag", $s: $('td.diagLeft.enabled'),
+                index: 0
+            };
+            $.each([rowEnabled, columnEnabled, rightDiagEnabled, leftDiagEnabled], handleFiveInARow);
         });
     });
 </script>
