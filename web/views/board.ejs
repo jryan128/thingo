@@ -5,6 +5,18 @@
 <link rel="stylesheet" href="css/board.css">
 </head>
 <body>
+<div class="toHide">
+    <h1>Tips</h1>
+    <ul>
+        <li>BAZINGO! works best in landscape mode!</li>
+        <li>If the text gets cut off in a square, you can scroll the text with your finger!</li>
+    </ul>
+    <label>
+        <input type="checkbox" id="dont-show">
+        Don't show this again
+    </label>
+    <p><a href="javascript:;" id="okay">Okay, let's play!</a></p>
+</div>
 <table class="boardTable">
     <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
     <tbody>
@@ -48,12 +60,28 @@
 </table>
 </body>
 <script src="javascripts/jquery.js"></script>
+<script src="javascripts/jquery.cookie.js"></script>
 <script>
-    $(function () {
+    $(function() {
+        (function setupTips() {
+            function startGame() {
+                $('.toHide').hide();
+                $('.boardTable').show();
+            }
 
-        // detect orientation change
-        // create pop up that tells user to change
-        // remove popup on orientation change
+            const tipDontShowCookie = 'tipDontShow';
+            if ($.cookie(tipDontShowCookie) === "1") {
+                startGame();
+            } else {
+                $('#okay').click(function() {
+                    if ($('#dont-show').is(':checked')) {
+                        $.cookie(tipDontShowCookie, 1);
+                    }
+                    startGame();
+                });
+                $('.toHide').show();
+            }
+        }());
 
         $('.boardTable td').click(function enableCell() {
             $(this).toggleClass('enabled');

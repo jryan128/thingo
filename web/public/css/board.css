@@ -7,6 +7,7 @@ html, body {
 }
 
 .boardTable {
+    display: none;
     height: 100%;
     width: 100%;
     border-collapse: collapse;
@@ -44,4 +45,9 @@ html, body {
 
 .boardTable td[class*="win"] {
     background-color: #e673e3;
+}
+
+.toHide {
+    display: none;
+    margin: 10px;
 }
