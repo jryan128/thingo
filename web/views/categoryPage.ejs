@@ -6,11 +6,7 @@
 <body>
 <h1>BAZINGO!</h1>
 <p>What genre would you like to watch?</p>
-<ul data-role="listview"
-    id="category-list"
-    data-filter="true"
-    data-filter-placeholder="Search Genres..."
-    data-inset="true">
+<ul id="category-list">
     <% Object.keys(locals.categories).forEach(function(i){ %>
     <li><a href="board?category=<%= i %>"><%= i %></a></li>
     <% }); %>
