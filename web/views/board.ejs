@@ -50,6 +50,11 @@
 <script src="javascripts/jquery-2.1.0.js"></script>
 <script>
     $(function () {
+
+        // detect orientation change
+        // create pop up that tells user to change
+        // remove popup on orientation change
+
         $('.boardTable td').click(function enableCell() {
             $(this).toggleClass('enabled');
             var $td = $(this);
@@ -65,6 +70,8 @@
                 }
             }
 
+            // TODO: this all could be made more efficient by saving the count and not selecting each time
+            // this way is more sure however that the count won't get off :)
             var rowEnabled = (function() {
                 var closestTr = $td.closest('tr');
                 return {

@@ -1,0 +1,15 @@
+{
+  "name": "bazingo",
+  "version": "0.0.2",
+  "authors": [
+    "Jonathan Ryan <jryan@curious-computing.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
