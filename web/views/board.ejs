@@ -5,10 +5,20 @@
 <link rel="stylesheet" href="css/board.css">
 </head>
 <body>
+<div class="description-box outer">
+    <div class="middle">
+        <div class="inner">
+            <h2 class="description-heading">Phrase Description</h2>
+            <p class="description-p">This is a sample description of text!</p>
+            <p><a href="javascript:;" class="close-box">Close</a></p>
+        </div>
+    </div>
+</div>
 <div class="toHide">
     <h1>Tips</h1>
     <ul>
         <li>BAZINGO! works best in landscape mode!</li>
+        <li>If you hold a square, it'll tell you its description!</li>
         <li>If the text gets cut off in a square, you can scroll the text with your finger!</li>
     </ul>
     <label>
@@ -17,44 +27,45 @@
     </label>
     <p><a href="javascript:;" id="okay">Okay, let's play!</a></p>
 </div>
+
 <table class="boardTable">
     <!-- FIXME: make not such an ugly mess (all the duplication and ugly) -->
     <tbody>
     <!-- unselectable disables selection in opera -->
     <tr>
-        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
     </tr>
     <tr>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
     </tr>
     <tr>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagLeft diagRight" id="freeCell"><div unselectable="on"><%= locals.freeCell.phrase %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.freeCell.description %>" unselectable="on" class="diagLeft diagRight" id="freeCell"><div unselectable="on"><%= locals.freeCell.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
     </tr>
     <tr>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-    </tr>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+    </tr> 
     <tr>
-        <td unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
-        <td unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.pop() %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagRight"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
+        <td data-desc="<%= locals.phrases.next().description %>" unselectable="on" class="diagLeft"><div unselectable="on"><%= locals.phrases.last.phrase %></div></td>
     </tr>
     </tbody>
 </table>
@@ -63,6 +74,27 @@
 <script src="javascripts/jquery.cookie.js"></script>
 <script>
     $(function() {
+        (function setupDescription() {
+            var pressTimer;
+            $('.close-box').click(function(){
+               $('.description-box').hide();
+            });
+
+            // FIXME: if you drag away from the cell while holding the popup will still go off
+            $('.boardTable td').mouseup(function() {
+                clearTimeout(pressTimer);
+                return false;
+            }).mousedown(function() {
+                var that = this;
+                pressTimer = window.setTimeout(function() {
+                    $('.description-p').text($(that).data('desc'));
+                    $('.description-heading').text($(that).text());
+                    $('.description-box').show();
+                },300);
+                return false;
+            });
+            $('.description-box').hide();
+        }());
         (function setupTips() {
             function startGame() {
                 $('.toHide').hide();

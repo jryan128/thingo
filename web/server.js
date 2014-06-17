@@ -17,7 +17,11 @@ function setupRoutes(app, categories) {
     app.get('/board', function(req, res){
         // FIXME: error checking, what if bad category?
         var category = categories[req.query.category];
-        var phrases = board.getRandomBoardPhrases(Object.keys(category.phrases));
+        var phrases = board.getRandomBoardPhrases(category.phrasesAsArray);
+        // TODO: break out into class
+        phrases.next = function() {
+            return (phrases.last = phrases.pop());
+        };
         res.render('board.ejs', {phrases: phrases, freeCell: category.freeCell});
     });
     app.use(express.static(__dirname + '/public'));

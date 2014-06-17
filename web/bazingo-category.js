@@ -17,6 +17,7 @@ function isError(err) {
 
 function Category(name) {
     this.phrases = {};
+    this.phrasesAsArray = [];
     this.name = name;
     this.freeCell = null;
 }
@@ -29,10 +30,11 @@ Category.prototype.addPhrase = function (phrasePair) {
     if (this.phrases.hasOwnProperty(phrasePair.phrase)) {
         // FIXME: add error checking
     }
-    this.phrases[phrasePair.phrase]= phrasePair.description;
+    this.phrases[phrasePair.phrase] = phrasePair.description;
+    this.phrasesAsArray.push({ phrase: phrasePair.phrase, description: phrasePair.description });
 };
 
-    function makeCategory(tsvPath, callback) {
+function makeCategory(tsvPath, callback) {
     // FIXME: error handling? is it needed here?
     var category = new Category(path.basename(tsvPath, '.tsv'));
 
