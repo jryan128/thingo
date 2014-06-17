@@ -70,7 +70,7 @@
             }
 
             $('.boardTable').hide();
-            const tipDontShowCookie = 'tipDontShow';
+            var tipDontShowCookie = 'tipDontShow';
             if ($.cookie(tipDontShowCookie) === "1") {
                 startGame();
             } else {
