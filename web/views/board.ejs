@@ -74,27 +74,31 @@
 <script src="javascripts/jquery.cookie.js"></script>
 <script>
     $(function() {
-        (function setupDescription() {
+        (function setupDescriptionPopup() {
             var pressTimer;
             $('.close-box').click(function(){
                $('.description-box').hide();
             });
 
-            // FIXME: if you drag away from the cell while holding the popup will still go off
-            $('.boardTable td').mouseup(function() {
+            $('.boardTable td').bind('mouseup mouseleave', function() {
                 clearTimeout(pressTimer);
                 return false;
             }).mousedown(function() {
                 var that = this;
                 pressTimer = window.setTimeout(function() {
-                    $('.description-p').text($(that).data('desc'));
+                    var desc = $(that).data('desc');
+                    if (!desc) {
+                        desc = "No description."
+                    }
+                    $('.description-p').text(desc);
                     $('.description-heading').text($(that).text());
                     $('.description-box').show();
-                },300);
+                }, 400);
                 return false;
             });
             $('.description-box').hide();
         }());
+
         (function setupTips() {
             function startGame() {
                 $('.toHide').hide();
