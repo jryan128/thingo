@@ -81,10 +81,11 @@
                $('.description-box').hide();
             });
 
-            $('.boardTable td').bind('mouseup mouseleave', function() {
+            $('.boardTable td').bind('mouseup mouseleave touchend', function() {
+                console.log('leave up');
                 clearTimeout(pressTimer);
                 return false;
-            }).mousedown(function() {
+            }).bind('mousedown touchstart', function() {
                 var that = this;
                 pressTimer = window.setTimeout(function() {
                     var desc = $(that).data('desc');
