@@ -82,22 +82,14 @@
                $('.description-box').hide();
             });
 
-            $('.boardTable td').bind('mouseup mouseleave touchend', function() {
-                console.log('leave up');
-                clearTimeout(pressTimer);
-                return false;
-            }).bind('mousedown touchstart', function() {
-                var that = this;
-                pressTimer = window.setTimeout(function() {
-                    var desc = $(that).data('desc');
-                    if (!desc) {
-                        desc = "No description."
-                    }
-                    $('.description-p').text(desc);
-                    $('.description-heading').text($(that).text());
-                    $('.description-box').show();
-                }, 400);
-                return false;
+            $('.boardTable td').on('taphold', function() {
+                var desc = $(this).data('desc');
+                if (!desc) {
+                    desc = "No description."
+                }
+                $('.description-p').text(desc);
+                $('.description-heading').text($(this).text());
+                $('.description-box').show();
             });
             $('.description-box').hide();
         }());
