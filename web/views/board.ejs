@@ -5,15 +5,6 @@
 <link rel="stylesheet" href="css/board.css">
 </head>
 <body>
-<div class="description-box outer">
-    <div class="middle">
-        <div class="inner">
-            <h2 class="description-heading">Phrase Description</h2>
-            <p class="description-p">This is a sample description of text!</p>
-            <p><a href="javascript:;" class="close-box">Close</a></p>
-        </div>
-    </div>
-</div>
 <div class="toHide">
     <h1>Tips</h1>
     <ul>
@@ -74,33 +65,6 @@
 <script src="javascripts/jquery.cookie.js"></script>
 <script>
     $(function() {
-        // FIXME: this doesn't work on Android Browser
-        (function setupDescriptionPopup() {
-            var pressTimer;
-            $('.close-box').click(function(){
-               $('.description-box').hide();
-            });
-
-            $('.boardTable td').bind('mouseup mouseleave touchend', function() {
-                console.log('leave up');
-                clearTimeout(pressTimer);
-                return false;
-            }).bind('mousedown touchstart', function() {
-                var that = this;
-                pressTimer = window.setTimeout(function() {
-                    var desc = $(that).data('desc');
-                    if (!desc) {
-                        desc = "No description."
-                    }
-                    $('.description-p').text(desc);
-                    $('.description-heading').text($(that).text());
-                    $('.description-box').show();
-                }, 400);
-                return false;
-            });
-            $('.description-box').hide();
-        }());
-
         (function setupTips() {
             function startGame() {
                 $('.toHide').hide();
