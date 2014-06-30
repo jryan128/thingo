@@ -93,8 +93,8 @@ public class BoardActivity extends ActionBarActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.board_square, null);
-                ((BoardSquareButton) convertView).setText((String) getItem(position));
             }
+            ((BoardSquareButton) convertView).setText((String) getItem(position));
             return convertView;
         }
     }
