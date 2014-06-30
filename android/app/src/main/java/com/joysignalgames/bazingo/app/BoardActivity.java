@@ -1,6 +1,7 @@
 package com.joysignalgames.bazingo.app;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,14 +18,13 @@ public class BoardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+        setupBoardGridView(savedInstanceState);
+    }
 
+    private void setupBoardGridView(Bundle savedInstanceState) {
         try {
-            // probably check to make sure there is an extra called genre
-            String genre = getIntent().getStringExtra("genre");
-            Board board = Board.loadRandomBoardFromCategory(genre, this);
-
             GridView boardView = (GridView) findViewById(R.id.board);
-            boardView.setAdapter(new BoardAdapter(board));
+            boardView.setAdapter(new BoardAdapter(savedInstanceState));
         } catch (IOException e) {
             // TODO: better error handling
             e.printStackTrace();
@@ -47,12 +47,31 @@ public class BoardActivity extends ActionBarActivity {
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        GridView boardView = (GridView) findViewById(R.id.board);
+        outState.putParcelable("board", ((BoardAdapter) boardView.getAdapter()).board);
+    }
+
     public class BoardAdapter extends BaseAdapter {
 
         private final Board board;
 
-        private BoardAdapter(Board board) {
-            this.board = board;
+        private BoardAdapter(Bundle bundle) throws IOException {
+            this.board = setupBoard(bundle);
+        }
+
+        private Board setupBoard(Bundle bundle) throws IOException {
+            // if board was saved, get that board, otherwise create new random board
+            if (bundle != null) {
+                Parcelable savedBoard = bundle.getParcelable("board");
+                if (savedBoard != null) {
+                    return (Board) savedBoard;
+                }
+            }
+            String genre = getIntent().getStringExtra("genre");
+            return Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
         }
 
         @Override
