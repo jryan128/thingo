@@ -15,7 +15,7 @@ public class Board implements Parcelable {
     private List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
-        String[] freeSpaceData = phraseData.get(0);
+        String[] freeSpaceData = phraseData.remove(0);
         Collections.shuffle(phraseData);
         this.phraseData = new ArrayList<String[]>(phraseData.subList(0, 24));
         this.phraseData.add(12, freeSpaceData);
