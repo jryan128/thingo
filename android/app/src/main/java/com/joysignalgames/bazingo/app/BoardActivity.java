@@ -7,10 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BoardActivity extends ActionBarActivity {
 
@@ -18,16 +18,25 @@ public class BoardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
-        setupBoardGridView(savedInstanceState);
-    }
 
-    private void setupBoardGridView(Bundle savedInstanceState) {
-        try {
-            GridView boardView = (GridView) findViewById(R.id.board);
-            boardView.setAdapter(new BoardAdapter(savedInstanceState));
-        } catch (IOException e) {
-            // TODO: better error handling
-            e.printStackTrace();
+        if (savedInstanceState == null) {
+            String genre = getIntent().getStringExtra("genre");
+            try {
+                Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
+                TableLayout tableLayout = (TableLayout) findViewById(R.id.board);
+                // FIXME: remove hard code 5
+                for (int i = 0; i < 5; i++) {
+                    TableRow row = (TableRow) tableLayout.getChildAt(i);
+                    // FIXME: remove hard code 5
+                    for (int j = 0; j < 5; j++) {
+                        Button square = (Button) row.getChildAt(j);
+                        square.setText(board.getPhrase((i * 5) + j));
+                    }
+                }
+            } catch (IOException e) {
+                // TODO: better error handling
+                e.printStackTrace();
+            }
         }
     }
 
@@ -45,57 +54,5 @@ public class BoardActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        GridView boardView = (GridView) findViewById(R.id.board);
-        outState.putParcelable("board", ((BoardAdapter) boardView.getAdapter()).board);
-    }
-
-    public class BoardAdapter extends BaseAdapter {
-
-        private final Board board;
-
-        private BoardAdapter(Bundle bundle) throws IOException {
-            this.board = setupBoard(bundle);
-        }
-
-        private Board setupBoard(Bundle bundle) throws IOException {
-            // if board was saved, get that board, otherwise create new random board
-            if (bundle != null) {
-                Parcelable savedBoard = bundle.getParcelable("board");
-                if (savedBoard != null) {
-                    return (Board) savedBoard;
-                }
-            }
-            String genre = getIntent().getStringExtra("genre");
-            return Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
-        }
-
-        @Override
-        public int getCount() {
-            return board.getPhrases().size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return board.getPhrase(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.board_square, null);
-            }
-            ((BoardSquareButton) convertView).setText((String) getItem(position));
-            return convertView;
-        }
     }
 }

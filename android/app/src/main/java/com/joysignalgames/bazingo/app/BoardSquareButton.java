@@ -21,13 +21,6 @@ public class BoardSquareButton extends CompoundButton {
     }
 
     @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // make the height equal the width so it's square!!
-        //noinspection SuspiciousNameCombination
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
-    }
-
-    @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(BoardSquareButton.class.getName());
