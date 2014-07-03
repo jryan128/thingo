@@ -35,7 +35,7 @@ public class Board implements Parcelable {
 
         List<String[]> phraseData = new ArrayList<String[]>();
         //noinspection UnusedAssignment
-        String line = reader.readLine(); //right now just the column headers
+        String line = reader.readLine();
 
         while ((line = reader.readLine()) != null) {
             String[] row = line.split("\t");
@@ -43,9 +43,6 @@ public class Board implements Parcelable {
         }
 
         // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-
-        // choose random phrases to fill up 25 square board
-        // probably less optimal than generating random indices (without repeats) but for now, less code
         return new Board(phraseData);
     }
 
