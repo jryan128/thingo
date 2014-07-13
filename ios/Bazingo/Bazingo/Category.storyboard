@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fb1-I8-NAc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fb1-I8-NAc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -21,7 +21,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="eRW-b2-KzF" kind="modal" id="ZXJ-ZL-dmc"/>
+                                    <segue destination="eRW-b2-KzF" kind="modal" identifier="showBoard" id="ZXJ-ZL-dmc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -33,12 +33,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7wt-yp-ivr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="257" y="-378"/>
+            <point key="canvasLocation" x="783" y="-378"/>
         </scene>
-        <!--View Controller-->
+        <!--Board View Controller-->
         <scene sceneID="OtV-L6-Ogq">
             <objects>
-                <viewController id="eRW-b2-KzF" sceneMemberID="viewController">
+                <viewController id="eRW-b2-KzF" customClass="JBZBoardViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q3U-YB-BAg"/>
                         <viewControllerLayoutGuide type="bottom" id="nS8-Jw-76X"/>
@@ -51,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDl-UO-uOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="673" y="-378"/>
+            <point key="canvasLocation" x="1199" y="-378"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

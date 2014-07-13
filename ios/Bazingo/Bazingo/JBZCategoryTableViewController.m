@@ -7,8 +7,7 @@
 //
 
 #import "JBZCategoryTableViewController.h"
-#import "JBZCategoryItem.h"
-#import "JBZSquare.h"
+#import "JBZBoardViewController.h"
 
 @interface JBZCategoryTableViewController ()
 
@@ -29,31 +28,32 @@
 {
     NSString *phrasesPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/phrases"];
     NSArray *filePaths = [NSBundle pathsForResourcesOfType:@"tsv" inDirectory:phrasesPath];
-    NSMutableArray *squares = [[NSMutableArray alloc] init];
     
     for (NSString* f in filePaths) {
         NSString *categoryName = [[f lastPathComponent] stringByDeletingPathExtension];
-        JBZCategoryItem *newItem = [[JBZCategoryItem alloc] init];
-        newItem.categoryName = categoryName;
-        [self.categoryItems addObject: newItem];
+//        NSMutableArray *squares = [[NSMutableArray alloc] init];
+        [self.categoryNames addObject: categoryName];
         
-        NSError *error;
-        NSString *fileContents = [NSString stringWithContentsOfFile:f encoding:NSUTF8StringEncoding
-                                                              error:&error];
-        if (error) {
-            // FIXME: error handling
-        }
-        
-        NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
-        for (int i=1; i < [lines count]; ++i) {
-            NSArray *phraseAndDesc = [[lines objectAtIndex:i] componentsSeparatedByString:@"\t"];
-            JBZSquare *square = [[JBZSquare alloc] init];
-            square.phrase = [phraseAndDesc objectAtIndex:0];
-            if ([phraseAndDesc count] > 1) {
-                square.description = [phraseAndDesc objectAtIndex:1];
-            }
-            [squares addObject:square];
-        }
+//        NSError *error;
+//        NSString *fileContents = [NSString stringWithContentsOfFile:f encoding:NSUTF8StringEncoding
+//                                                              error:&error];
+//        if (error) {
+//            // FIXME: error handling
+//        }
+//        
+//        NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
+//        for (int i=1; i < [lines count]; ++i) {
+//            NSArray *phraseAndDesc = [[lines objectAtIndex:i] componentsSeparatedByString:@"\t"];
+//            JBZSquare *square = [[JBZSquare alloc] init];
+//            if ([phraseAndDesc count] > 0) {
+//                square.phrase = [phraseAndDesc objectAtIndex:0];
+//            }
+//            if ([phraseAndDesc count] > 1) {
+//                square.description = [phraseAndDesc objectAtIndex:1];
+//            }
+//            [squares addObject:square];
+//        }
+//        newItem.squares = squares;
     }
 }
 
@@ -67,7 +67,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.categoryItems = [[NSMutableArray alloc] init ];
+    self.categoryNames = [[NSMutableArray alloc] init ];
     
     [self populateCategoryItems];
 }
@@ -87,15 +87,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.categoryItems count];
+    return [self.categoryNames count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryListPrototypeCell" forIndexPath:indexPath];
     
-    JBZCategoryItem *item = [self.categoryItems objectAtIndex:indexPath.row];
-    cell.textLabel.text = item.categoryName;
+    NSString *categoryName = [self.categoryNames objectAtIndex:indexPath.row];
+    cell.textLabel.text = categoryName;
     
     return cell;
 }
@@ -138,7 +138,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -146,7 +145,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier]isEqualToString:@"showBoard"]) {
+        UITableViewCell *cell = sender;
+        JBZBoardViewController *view = [segue destinationViewController];
+        view.categoryName = cell.textLabel.text;
+        NSLog(@"%@", cell.textLabel.text);
+    }
 }
-*/
 
 @end

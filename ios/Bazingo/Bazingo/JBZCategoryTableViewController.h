@@ -10,6 +10,6 @@
 
 @interface JBZCategoryTableViewController : UITableViewController
 
-@property NSMutableArray *categoryItems;
+@property NSMutableArray *categoryNames;
 
 @end

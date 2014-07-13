@@ -21,7 +21,7 @@
 		9B2F528A19718BD200B160B4 /* BazingoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F528919718BD200B160B4 /* BazingoTests.m */; };
 		9B2F529419718D7500B160B4 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F529319718D7500B160B4 /* Category.storyboard */; };
 		9BCAE30519732BA30094BCA4 /* JBZSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAE30419732BA30094BCA4 /* JBZSquare.m */; };
-		9BD45ADB19720BE700180962 /* JBZCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45ADA19720BE700180962 /* JBZCategoryItem.m */; };
+		9BCAE30B19733AD30094BCA4 /* JBZBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAE30A19733AD30094BCA4 /* JBZBoardViewController.m */; };
 		9BD45AE119720D7A00180962 /* JBZCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */; };
 		9BEAF27B1972E2C900480912 /* phrases in Resources */ = {isa = PBXBuildFile; fileRef = 9BD45AF1197215BE00180962 /* phrases */; };
 		9BEAF2841972F43A00480912 /* JBZBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEAF2831972F43A00480912 /* JBZBoard.m */; };
@@ -57,8 +57,8 @@
 		9B2F529319718D7500B160B4 /* Category.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
 		9BCAE30319732BA30094BCA4 /* JBZSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBZSquare.h; sourceTree = "<group>"; };
 		9BCAE30419732BA30094BCA4 /* JBZSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBZSquare.m; sourceTree = "<group>"; };
-		9BD45AD919720BE700180962 /* JBZCategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBZCategoryItem.h; sourceTree = "<group>"; };
-		9BD45ADA19720BE700180962 /* JBZCategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBZCategoryItem.m; sourceTree = "<group>"; };
+		9BCAE30919733AD30094BCA4 /* JBZBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JBZBoardViewController.h; path = ../JBZBoardViewController.h; sourceTree = "<group>"; };
+		9BCAE30A19733AD30094BCA4 /* JBZBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBZBoardViewController.m; path = ../JBZBoardViewController.m; sourceTree = "<group>"; };
 		9BD45ADF19720D7A00180962 /* JBZCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBZCategoryTableViewController.h; sourceTree = "<group>"; };
 		9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBZCategoryTableViewController.m; sourceTree = "<group>"; };
 		9BD45AF1197215BE00180962 /* phrases */ = {isa = PBXFileReference; lastKnownFileType = folder; name = phrases; path = ../../../phrases; sourceTree = "<group>"; };
@@ -123,14 +123,14 @@
 		9B2F526A19718BD200B160B4 /* Bazingo */ = {
 			isa = PBXGroup;
 			children = (
+				9BCAE30919733AD30094BCA4 /* JBZBoardViewController.h */,
+				9BCAE30A19733AD30094BCA4 /* JBZBoardViewController.m */,
 				9BEAF2821972F43A00480912 /* JBZBoard.h */,
 				9BEAF2831972F43A00480912 /* JBZBoard.m */,
 				9BD45AF1197215BE00180962 /* phrases */,
 				9B2F527319718BD200B160B4 /* JBZAppDelegate.h */,
 				9B2F527419718BD200B160B4 /* JBZAppDelegate.m */,
 				9B2F529319718D7500B160B4 /* Category.storyboard */,
-				9BD45AD919720BE700180962 /* JBZCategoryItem.h */,
-				9BD45ADA19720BE700180962 /* JBZCategoryItem.m */,
 				9BD45ADF19720D7A00180962 /* JBZCategoryTableViewController.h */,
 				9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */,
 				9BCAE30319732BA30094BCA4 /* JBZSquare.h */,
@@ -271,8 +271,8 @@
 				9BD45AE119720D7A00180962 /* JBZCategoryTableViewController.m in Sources */,
 				9B2F527119718BD200B160B4 /* main.m in Sources */,
 				9B2F527519718BD200B160B4 /* JBZAppDelegate.m in Sources */,
+				9BCAE30B19733AD30094BCA4 /* JBZBoardViewController.m in Sources */,
 				9BCAE30519732BA30094BCA4 /* JBZSquare.m in Sources */,
-				9BD45ADB19720BE700180962 /* JBZCategoryItem.m in Sources */,
 				9BEAF2841972F43A00480912 /* JBZBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
