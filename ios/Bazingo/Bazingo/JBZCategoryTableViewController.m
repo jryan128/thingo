@@ -149,7 +149,6 @@
         UITableViewCell *cell = sender;
         JBZBoardViewController *view = [segue destinationViewController];
         view.categoryName = cell.textLabel.text;
-        NSLog(@"%@", cell.textLabel.text);
     }
 }
 
