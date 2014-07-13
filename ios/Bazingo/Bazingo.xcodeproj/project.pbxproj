@@ -20,6 +20,9 @@
 		9B2F528819718BD200B160B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F528619718BD200B160B4 /* InfoPlist.strings */; };
 		9B2F528A19718BD200B160B4 /* BazingoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F528919718BD200B160B4 /* BazingoTests.m */; };
 		9B2F529419718D7500B160B4 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F529319718D7500B160B4 /* Category.storyboard */; };
+		9BD45ADB19720BE700180962 /* JBZCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45ADA19720BE700180962 /* JBZCategoryItem.m */; };
+		9BD45AE119720D7A00180962 /* JBZCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */; };
+		9BD45AF2197215BE00180962 /* phrases in Resources */ = {isa = PBXBuildFile; fileRef = 9BD45AF1197215BE00180962 /* phrases */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,11 @@
 		9B2F528719718BD200B160B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B2F528919718BD200B160B4 /* BazingoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BazingoTests.m; sourceTree = "<group>"; };
 		9B2F529319718D7500B160B4 /* Category.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
+		9BD45AD919720BE700180962 /* JBZCategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBZCategoryItem.h; sourceTree = "<group>"; };
+		9BD45ADA19720BE700180962 /* JBZCategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBZCategoryItem.m; sourceTree = "<group>"; };
+		9BD45ADF19720D7A00180962 /* JBZCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBZCategoryTableViewController.h; sourceTree = "<group>"; };
+		9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBZCategoryTableViewController.m; sourceTree = "<group>"; };
+		9BD45AF1197215BE00180962 /* phrases */ = {isa = PBXFileReference; lastKnownFileType = folder; name = phrases; path = ../../../phrases; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +117,14 @@
 		9B2F526A19718BD200B160B4 /* Bazingo */ = {
 			isa = PBXGroup;
 			children = (
+				9BD45AF1197215BE00180962 /* phrases */,
 				9B2F527319718BD200B160B4 /* JBZAppDelegate.h */,
 				9B2F527419718BD200B160B4 /* JBZAppDelegate.m */,
 				9B2F529319718D7500B160B4 /* Category.storyboard */,
+				9BD45AD919720BE700180962 /* JBZCategoryItem.h */,
+				9BD45ADA19720BE700180962 /* JBZCategoryItem.m */,
+				9BD45ADF19720D7A00180962 /* JBZCategoryTableViewController.h */,
+				9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */,
 				9B2F527619718BD200B160B4 /* Images.xcassets */,
 				9B2F526B19718BD200B160B4 /* Supporting Files */,
 			);
@@ -224,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B2F529419718D7500B160B4 /* Category.storyboard in Resources */,
+				9BD45AF2197215BE00180962 /* phrases in Resources */,
 				9B2F526F19718BD200B160B4 /* InfoPlist.strings in Resources */,
 				9B2F527719718BD200B160B4 /* Images.xcassets in Resources */,
 			);
@@ -244,8 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BD45AE119720D7A00180962 /* JBZCategoryTableViewController.m in Sources */,
 				9B2F527119718BD200B160B4 /* main.m in Sources */,
 				9B2F527519718BD200B160B4 /* JBZAppDelegate.m in Sources */,
+				9BD45ADB19720BE700180962 /* JBZCategoryItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +460,7 @@
 				9B2F528F19718BD200B160B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B2F529019718BD200B160B4 /* Build configuration list for PBXNativeTarget "BazingoTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +469,7 @@
 				9B2F529219718BD200B160B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

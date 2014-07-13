@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>886D1617-00D4-4E53-B3BD-4A1A72A721FC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Bazingo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5F160DBB-9EAC-47CD-8233-D0D99A4C14E8</key>
+		<string>ssh://bitbucket.org/joysignalgames/bazingo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/Bazingo/Bazingo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5F160DBB-9EAC-47CD-8233-D0D99A4C14E8</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://bitbucket.org/joysignalgames/bazingo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5F160DBB-9EAC-47CD-8233-D0D99A4C14E8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5F160DBB-9EAC-47CD-8233-D0D99A4C14E8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bazingo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
