@@ -8,6 +8,7 @@
 
 #import "JBZCategoryTableViewController.h"
 #import "JBZCategoryItem.h"
+#import "JBZSquare.h"
 
 @interface JBZCategoryTableViewController ()
 
@@ -28,12 +29,31 @@
 {
     NSString *phrasesPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/phrases"];
     NSArray *filePaths = [NSBundle pathsForResourcesOfType:@"tsv" inDirectory:phrasesPath];
+    NSMutableArray *squares = [[NSMutableArray alloc] init];
     
     for (NSString* f in filePaths) {
         NSString *categoryName = [[f lastPathComponent] stringByDeletingPathExtension];
         JBZCategoryItem *newItem = [[JBZCategoryItem alloc] init];
         newItem.categoryName = categoryName;
         [self.categoryItems addObject: newItem];
+        
+        NSError *error;
+        NSString *fileContents = [NSString stringWithContentsOfFile:f encoding:NSUTF8StringEncoding
+                                                              error:&error];
+        if (error) {
+            // FIXME: error handling
+        }
+        
+        NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
+        for (int i=1; i < [lines count]; ++i) {
+            NSArray *phraseAndDesc = [[lines objectAtIndex:i] componentsSeparatedByString:@"\t"];
+            JBZSquare *square = [[JBZSquare alloc] init];
+            square.phrase = [phraseAndDesc objectAtIndex:0];
+            if ([phraseAndDesc count] > 1) {
+                square.description = [phraseAndDesc objectAtIndex:1];
+            }
+            [squares addObject:square];
+        }
     }
 }
 
