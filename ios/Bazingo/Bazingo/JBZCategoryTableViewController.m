@@ -7,6 +7,7 @@
 //
 
 #import "JBZCategoryTableViewController.h"
+#import "JBZCategoryItem.h"
 
 @interface JBZCategoryTableViewController ()
 
@@ -23,6 +24,19 @@
     return self;
 }
 
+- (void)populateCategoryItems
+{
+    NSString *phrasesPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/phrases"];
+    NSArray *filePaths = [NSBundle pathsForResourcesOfType:@"tsv" inDirectory:phrasesPath];
+    
+    for (NSString* f in filePaths) {
+        NSString *categoryName = [[f lastPathComponent] stringByDeletingPathExtension];
+        JBZCategoryItem *newItem = [[JBZCategoryItem alloc] init];
+        newItem.categoryName = categoryName;
+        [self.categoryItems addObject: newItem];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,11 +48,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.categoryItems = [[NSMutableArray alloc] init ];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"phrases/blah" ofType:@"tsv"];
-    NSString *testString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding
-                                                        error:nil];
-    NSLog(@"%@", testString);
     
+    [self populateCategoryItems];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,28 +62,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.categoryItems count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryListPrototypeCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    JBZCategoryItem *item = [self.categoryItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = item.categoryName;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

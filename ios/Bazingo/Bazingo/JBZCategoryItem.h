@@ -10,6 +10,6 @@
 
 @interface JBZCategoryItem : NSObject
 
-@property NSString *itemName;
+@property NSString *categoryName;
 
 @end

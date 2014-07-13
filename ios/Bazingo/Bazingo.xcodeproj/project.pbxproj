@@ -22,7 +22,7 @@
 		9B2F529419718D7500B160B4 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F529319718D7500B160B4 /* Category.storyboard */; };
 		9BD45ADB19720BE700180962 /* JBZCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45ADA19720BE700180962 /* JBZCategoryItem.m */; };
 		9BD45AE119720D7A00180962 /* JBZCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD45AE019720D7A00180962 /* JBZCategoryTableViewController.m */; };
-		9BD45AF2197215BE00180962 /* phrases in Resources */ = {isa = PBXBuildFile; fileRef = 9BD45AF1197215BE00180962 /* phrases */; };
+		9BEAF27B1972E2C900480912 /* phrases in Resources */ = {isa = PBXBuildFile; fileRef = 9BD45AF1197215BE00180962 /* phrases */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,8 +236,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BEAF27B1972E2C900480912 /* phrases in Resources */,
 				9B2F529419718D7500B160B4 /* Category.storyboard in Resources */,
-				9BD45AF2197215BE00180962 /* phrases in Resources */,
 				9B2F526F19718BD200B160B4 /* InfoPlist.strings in Resources */,
 				9B2F527719718BD200B160B4 /* Images.xcassets in Resources */,
 			);
