@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JBZBoard.h"
 
 @interface JBZBoardViewController : UIViewController
 
 @property NSString *categoryName;
+@property JBZBoard *board;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "JBZBoardViewController.h"
+#import "JBZBoard.h"
 
 @interface JBZBoardViewController ()
 
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.board = [[JBZBoard alloc] initWithCategoryName:self.categoryName];
 }
 
 - (void)didReceiveMemoryWarning

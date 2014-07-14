@@ -8,6 +8,7 @@
 
 #import "JBZCategoryTableViewController.h"
 #import "JBZBoardViewController.h"
+#import "JBZBoard.h"
 
 @interface JBZCategoryTableViewController ()
 
@@ -26,34 +27,11 @@
 
 - (void)populateCategoryItems
 {
-    NSString *phrasesPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:@"/phrases"];
-    NSArray *filePaths = [NSBundle pathsForResourcesOfType:@"tsv" inDirectory:phrasesPath];
+    NSArray *filePaths = [NSBundle pathsForResourcesOfType:@"tsv" inDirectory:[JBZBoard getPhrasesPath]];
     
     for (NSString* f in filePaths) {
         NSString *categoryName = [[f lastPathComponent] stringByDeletingPathExtension];
-//        NSMutableArray *squares = [[NSMutableArray alloc] init];
         [self.categoryNames addObject: categoryName];
-        
-//        NSError *error;
-//        NSString *fileContents = [NSString stringWithContentsOfFile:f encoding:NSUTF8StringEncoding
-//                                                              error:&error];
-//        if (error) {
-//            // FIXME: error handling
-//        }
-//        
-//        NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
-//        for (int i=1; i < [lines count]; ++i) {
-//            NSArray *phraseAndDesc = [[lines objectAtIndex:i] componentsSeparatedByString:@"\t"];
-//            JBZSquare *square = [[JBZSquare alloc] init];
-//            if ([phraseAndDesc count] > 0) {
-//                square.phrase = [phraseAndDesc objectAtIndex:0];
-//            }
-//            if ([phraseAndDesc count] > 1) {
-//                square.description = [phraseAndDesc objectAtIndex:1];
-//            }
-//            [squares addObject:square];
-//        }
-//        newItem.squares = squares;
     }
 }
 

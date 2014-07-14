@@ -14,6 +14,7 @@
 @property NSArray *squares;
 @property NSString *categoryName;
 
--(id)initWithCategorySquares:(NSArray *) categorySquares;
++(NSString *) getPhrasesPath;
+-(id)initWithCategoryName:(NSString *) categoryName;
 
 @end
