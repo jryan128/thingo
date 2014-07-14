@@ -54,17 +54,22 @@
     }
 }
 
+- (NSMutableArray *)makeSquaresArray:(NSString *)categoryName {
+    // FIXME: this is all so inefficient, so much array copying
+    NSMutableArray *squares = [[NSMutableArray alloc] initWithArray:[self getSquaresForCategory:categoryName]];
+    JBZSquare *freeSquare = [squares objectAtIndex:0];
+    squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(1, [squares count] - 1)]];
+    [self shuffleArray:squares];
+    squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(0, 24)]];
+    [squares insertObject:freeSquare atIndex:12];
+    return squares;
+}
+
 -(id)initWithCategoryName:(NSString *) categoryName {
     self = [super init];
     if (self) {
-        // FIXME: this is all so inefficient, so much array copying
-        NSMutableArray *squares = [[NSMutableArray alloc] initWithArray:[self getSquaresForCategory:categoryName]];
-        JBZSquare *freeSquare = [squares objectAtIndex:0];
-        squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(1, [squares count] - 1)]];
-        [self shuffleArray:squares];
-        squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(0, 24)]];
-        [squares insertObject:freeSquare atIndex:12];
-        self.squares = squares;
+        self.squares = [self makeSquaresArray:categoryName];
+        self.categoryName = categoryName;
     }
     return self;
 }
