@@ -44,7 +44,7 @@
     return squares;
 }
 
-- (void)shuffleArray:(NSMutableArray *)squares {
++ (void)shuffleArray:(NSMutableArray *)squares {
     // FIXME: not most efficient
     NSUInteger count = [squares count];
     for (NSUInteger i = 0; i < count; ++i) {
@@ -59,7 +59,7 @@
     NSMutableArray *squares = [[NSMutableArray alloc] initWithArray:[self getSquaresForCategory:categoryName]];
     JBZSquare *freeSquare = [squares objectAtIndex:0];
     squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(1, [squares count] - 1)]];
-    [self shuffleArray:squares];
+    [JBZBoard shuffleArray:squares];
     squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(0, 24)]];
     [squares insertObject:freeSquare atIndex:12];
     return squares;
