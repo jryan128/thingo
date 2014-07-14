@@ -19,7 +19,7 @@
     return phrasesPath;
 }
 
-- (NSArray *)getSquaresForCategory:(NSString *)categoryName {
++ (NSArray *)getSquaresForCategory:(NSString *)categoryName {
     NSError *error;
     NSString *f = [NSBundle pathForResource:categoryName ofType:@"tsv" inDirectory:[JBZBoard getPhrasesPath]];
     NSString *fileContents = [NSString stringWithContentsOfFile:f encoding:NSUTF8StringEncoding
@@ -54,9 +54,9 @@
     }
 }
 
-- (NSMutableArray *)makeSquaresArray:(NSString *)categoryName {
++ (NSMutableArray *)makeSquaresArray:(NSString *)categoryName {
     // FIXME: this is all so inefficient, so much array copying
-    NSMutableArray *squares = [[NSMutableArray alloc] initWithArray:[self getSquaresForCategory:categoryName]];
+    NSMutableArray *squares = [[NSMutableArray alloc] initWithArray:[JBZBoard getSquaresForCategory:categoryName]];
     JBZSquare *freeSquare = [squares objectAtIndex:0];
     squares = [[NSMutableArray alloc] initWithArray: [squares subarrayWithRange:NSMakeRange(1, [squares count] - 1)]];
     [JBZBoard shuffleArray:squares];
@@ -68,7 +68,7 @@
 -(id)initWithCategoryName:(NSString *) categoryName {
     self = [super init];
     if (self) {
-        self.squares = [self makeSquaresArray:categoryName];
+        self.squares = [JBZBoard makeSquaresArray:categoryName];
         self.categoryName = categoryName;
     }
     return self;
