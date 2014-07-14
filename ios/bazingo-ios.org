@@ -1,0 +1,4 @@
+#+STARTUP: indenT
+* TODO Test the randomization of the squares after views are done.
+  - I didn't test the code after I wrote it, it maybe will
+  have bad randomness, or the free cell is the wrong place.
