@@ -163,7 +163,7 @@
             android:layout_height="fill_parent"
             android:layout_column="0"
             android:layout_weight="0.2"
-            android:id="@+id/square17"/>
+            android:id="@+id/square16"/>
 
         <include
             layout="@layout/board_square"

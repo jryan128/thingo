@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Board implements Parcelable {
+public class Board {
     private List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
@@ -21,19 +21,12 @@ public class Board implements Parcelable {
         this.phraseData.add(12, freeSpaceData);
     }
 
-    private Board(Parcel parcel) {
-        this.phraseData = new ArrayList<String[]>(5);
-
-        String[] next;
-        while ((next = parcel.createStringArray()) != null) {
-            phraseData.add(next);
-        }
-    }
-
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category)));
 
         List<String[]> phraseData = new ArrayList<String[]>();
+
+        // ignore the first line
         //noinspection UnusedAssignment
         String line = reader.readLine();
 
@@ -57,28 +50,4 @@ public class Board implements Parcelable {
     public String getPhrase(int position) {
         return phraseData.get(position)[0];
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        for (String[] row : phraseData) {
-            dest.writeStringArray(row);
-        }
-    }
-
-    public static final Creator<Board> CREATOR = new Creator<Board>() {
-        @Override
-        public Board createFromParcel(Parcel source) {
-            return new Board(source);
-        }
-
-        @Override
-        public Board[] newArray(int size) {
-            return new Board[size];
-        }
-    };
 }
