@@ -12,6 +12,15 @@ html, body {
     table-layout: fixed;
 }
 
+.disableSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .boardTable tbody td {
     border: 2px rgba(211, 211, 221, 255) solid;
     padding: 4px;
