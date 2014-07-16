@@ -15,27 +15,28 @@ public class Board {
     private List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
-        String[] freeSpaceData = phraseData.remove(0);
-        Collections.shuffle(phraseData);
-        this.phraseData = new ArrayList<String[]>(phraseData.subList(0, 24));
-        this.phraseData.add(12, freeSpaceData);
+        this.phraseData = new ArrayList<String[]>(phraseData);
     }
 
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
+        // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category)));
 
-        List<String[]> phraseData = new ArrayList<String[]>();
-
         // ignore the first line
-        //noinspection UnusedAssignment
-        String line = reader.readLine();
+        reader.readLine();
 
+        List<String[]> phraseData = new ArrayList<String[]>();
+        String line;
         while ((line = reader.readLine()) != null) {
             String[] row = line.split("\t");
             phraseData.add(row);
         }
 
-        // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
+        String[] freeSpaceData = phraseData.remove(0);
+        Collections.shuffle(phraseData);
+        phraseData = new ArrayList<String[]>(phraseData.subList(0, 24));
+        phraseData.add(12, freeSpaceData);
         return new Board(phraseData);
     }
 
