@@ -15,12 +15,11 @@ public class Board {
     private List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
-        this.phraseData = new ArrayList<String[]>(phraseData);
+        this.phraseData = Collections.unmodifiableList(new ArrayList<String[]>(phraseData));
     }
 
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
         // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category)));
 
         // ignore the first line
@@ -38,14 +37,6 @@ public class Board {
         phraseData = new ArrayList<String[]>(phraseData.subList(0, 24));
         phraseData.add(12, freeSpaceData);
         return new Board(phraseData);
-    }
-
-    public List<String[]> getPhrases() {
-        return Collections.unmodifiableList(phraseData);
-    }
-
-    public void setPhrases(List<String[]> phrases) {
-        this.phraseData = phrases;
     }
 
     public String getPhrase(int position) {
