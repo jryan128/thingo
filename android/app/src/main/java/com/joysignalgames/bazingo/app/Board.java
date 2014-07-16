@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Board {
-    private List<String[]> phraseData;
+    private final List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
         this.phraseData = phraseData;
