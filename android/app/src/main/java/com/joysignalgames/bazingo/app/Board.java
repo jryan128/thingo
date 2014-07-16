@@ -15,7 +15,7 @@ public class Board {
     private List<String[]> phraseData;
 
     private Board(List<String[]> phraseData) {
-        this.phraseData = Collections.unmodifiableList(new ArrayList<String[]>(phraseData));
+        this.phraseData = phraseData;
     }
 
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
