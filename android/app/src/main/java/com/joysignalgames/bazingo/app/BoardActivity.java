@@ -89,11 +89,11 @@ public class BoardActivity extends ActionBarActivity {
 
         @Override
         protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            // TODO: could probably make more efficient
             int childCount = getChildCount();
             int n = (int) Math.floor(Math.sqrt(childCount));
             int w = getMeasuredWidth() / n;
             int h = getMeasuredHeight() / n;
-
             for (int row=0; row < n; ++row) {
                 for (int col=0; col < n; ++col) {
                     getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
