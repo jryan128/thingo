@@ -24,19 +24,24 @@ public class TestView extends ViewGroup {
     }
 
     private void init() {
+        setBackgroundColor(Color.BLACK);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         int n = getNumberOfRowsAndCols();
         if (n > 0) {
-            int w = getMeasuredWidth() / n;
-            int h = getMeasuredHeight() / n;
-            measureChildren(View.MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
+            int width = MeasureSpec.getSize(widthMeasureSpec);
+            int height = MeasureSpec.getSize(heightMeasureSpec);
+            int w = width / n;
+            int h = height / n;
+            for (int i=0; i < getChildCount(); ++i) {
+                getChildAt(i).measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
+                        MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
+            }
+            setMeasuredDimension(width, height);
         }
+
     }
 
     @Override

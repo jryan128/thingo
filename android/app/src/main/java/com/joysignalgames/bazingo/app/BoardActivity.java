@@ -3,6 +3,7 @@ package com.joysignalgames.bazingo.app;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
+import android.widget.LinearLayout;
 import com.joysignalgames.bazingo.views.TestView;
 
 import java.io.IOException;
@@ -16,7 +17,6 @@ public class BoardActivity extends ActionBarActivity {
 
         TestView testView = new TestView(this);
         setContentView(testView);
-
         if (savedInstanceState == null) {
             String genre = getIntent().getStringExtra("genre");
             try {

@@ -29,7 +29,6 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/search_genres"></ListView>t>
-
+        android:layout_below="@+id/search_genres"/>
 
 </RelativeLayout>
