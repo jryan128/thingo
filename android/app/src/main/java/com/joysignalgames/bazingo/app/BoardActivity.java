@@ -1,16 +1,11 @@
 package com.joysignalgames.bazingo.app;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
-import android.util.AttributeSet;
 import android.view.*;
-import android.widget.*;
+import com.joysignalgames.bazingo.views.TestView;
 
 import java.io.IOException;
-import java.util.List;
 
 public class BoardActivity extends ActionBarActivity {
 
@@ -21,27 +16,21 @@ public class BoardActivity extends ActionBarActivity {
 
         TestView testView = new TestView(this);
         setContentView(testView);
-//        setContentView(R.layout.board);
-//
-//        if (savedInstanceState == null) {
-//            String genre = getIntent().getStringExtra("genre");
-//            try {
-//                Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
-//                TableLayout tableLayout = (TableLayout) findViewById(R.id.board);
-//                // FIXME: remove hard code 5
-//                for (int i = 0; i < 5; i++) {
-//                    TableRow row = (TableRow) tableLayout.getChildAt(i);
-//                    // FIXME: remove hard code 5
-//                    for (int j = 0; j < 5; j++) {
-//                        Button square = (Button) row.getChildAt(j);
-//                        square.setText(board.getPhrase((i * 5) + j));
-//                    }
-//                }
-//            } catch (IOException e) {
-//                // TODO: better error handling
-//                e.printStackTrace();
-//            }
-//        }
+
+        if (savedInstanceState == null) {
+            String genre = getIntent().getStringExtra("genre");
+            try {
+                Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
+                for (int i = 0; i < 25; i++) {
+                    BoardSquareButton square = new BoardSquareButton(this);
+                    square.setText(board.getPhrase(i));
+                    testView.addView(square);
+                }
+            } catch (IOException e) {
+                // TODO: better error handling
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -60,46 +49,4 @@ public class BoardActivity extends ActionBarActivity {
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    private static class TestView extends ViewGroup {
-
-        private TestView(Context context) {
-            super(context);
-            init();
-        }
-
-        private TestView(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            init();
-        }
-
-        private TestView(Context context, AttributeSet attrs, int defStyleAttr) {
-            super(context, attrs, defStyleAttr);
-            init();
-        }
-
-        private void init() {
-            setBackgroundColor(Color.BLACK);
-            int color = 0xFF111111;
-            for (int i=0; i<25; ++i) {
-                View child = new View(getContext());
-                child.setBackgroundColor(color - i * 20000);
-                addView(child);
-            }
-        }
-
-        @Override
-        protected void onLayout(boolean changed, int l, int t, int r, int b) {
-            // TODO: could probably make more efficient
-            int childCount = getChildCount();
-            int n = (int) Math.floor(Math.sqrt(childCount));
-            int w = getMeasuredWidth() / n;
-            int h = getMeasuredHeight() / n;
-            for (int row=0; row < n; ++row) {
-                for (int col=0; col < n; ++col) {
-                    getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
-                }
-            }
-
-        }
-    }
 }
