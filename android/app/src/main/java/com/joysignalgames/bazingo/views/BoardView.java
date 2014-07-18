@@ -5,28 +5,37 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import com.joysignalgames.bazingo.app.BoardSquareButton;
 
-public class TestView extends ViewGroup {
+public class BoardView extends ViewGroup {
 
-    public TestView(Context context) {
+    public BoardView(Context context) {
         super(context);
         init();
     }
 
-    public TestView(Context context, AttributeSet attrs) {
+    public BoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public TestView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BoardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
-        setBackgroundColor(Color.BLACK);
+        setId(100);
+        createBoardSquares();
     }
 
+    private void createBoardSquares() {
+        for (int i = 0; i < 25; i++) {
+            BoardSquareButton square = new BoardSquareButton(getContext());
+            square.setId(i);
+            addView(square);
+        }
+    }
 
     /**
      * We tell every child exactly what size it needs to be.

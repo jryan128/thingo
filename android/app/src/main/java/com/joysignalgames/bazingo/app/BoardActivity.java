@@ -3,9 +3,7 @@ package com.joysignalgames.bazingo.app;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import com.joysignalgames.bazingo.views.TestView;
+import com.joysignalgames.bazingo.views.BoardView;
 
 import java.io.IOException;
 
@@ -16,30 +14,25 @@ public class BoardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        // dynamically populate the Board with squares
-        TestView testView = new TestView(this);
-        setContentView(testView);
-        testView.setId(100);
-        for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = new BoardSquareButton(this);
-            square.setId(i);
-            testView.addView(square);
-        }
+        BoardView boardView = new BoardView(this);
+        setContentView(boardView);
 
-        // if we don't have a saved state, load a board into the grid
+        // if we don't have a saved state, load the phrases into the grid
         if (savedInstanceState == null) {
-            try {
-                String genre = getIntent().getStringExtra("genre");
-                Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
-                for (int i = 0; i < 25; i++) {
-                    if (savedInstanceState == null) {
-                        ((BoardSquareButton) testView.getChildAt(i)).setText(board.getPhrase(i));
-                    }
-                }
-            } catch (IOException e) {
-                // TODO: better error handling
-                e.printStackTrace();
+            initializeBoardSquares(boardView);
+        }
+    }
+
+    private void initializeBoardSquares(BoardView boardView) {
+        try {
+            String genre = getIntent().getStringExtra("genre");
+            Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
+            for (int i = 0; i < 25; i++) {
+                ((BoardSquareButton) boardView.getChildAt(i)).setText(board.getPhrase(i));
             }
+        } catch (IOException e) {
+            // TODO: better error handling
+            e.printStackTrace();
         }
     }
 
