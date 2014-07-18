@@ -7,10 +7,8 @@
 
     <style name="BoardSquare">
         <item name="android:background">@drawable/board_square_background</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>

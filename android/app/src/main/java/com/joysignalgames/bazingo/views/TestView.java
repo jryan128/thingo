@@ -27,33 +27,38 @@ public class TestView extends ViewGroup {
         setBackgroundColor(Color.BLACK);
     }
 
+
+    /**
+     * We tell every child exactly what size it needs to be.
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int n = getNumberOfRowsAndCols();
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+
         if (n > 0) {
-            int width = MeasureSpec.getSize(widthMeasureSpec);
-            int height = MeasureSpec.getSize(heightMeasureSpec);
             int w = width / n;
             int h = height / n;
             for (int i=0; i < getChildCount(); ++i) {
+                // tell the child exactly what size it needs to be, screw you
                 getChildAt(i).measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
                         MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
             }
-            setMeasuredDimension(width, height);
         }
-
+        setMeasuredDimension(width, height);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         // TODO: could probably make more efficient
-        // FIXME: put into onMeasure
         int n = getNumberOfRowsAndCols();
         if (n > 0) {
             int w = getMeasuredWidth() / n;
             int h = getMeasuredHeight() / n;
             for (int row=0; row < n; ++row) {
                 for (int col=0; col < n; ++col) {
+                    // TODO: should use values from onMeasure, but who cares, we know what they are
                     getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
                 }
             }
@@ -63,6 +68,4 @@ public class TestView extends ViewGroup {
     private int getNumberOfRowsAndCols() {
         return (int) Math.floor(Math.sqrt(getChildCount()));
     }
-
-    // FIXME: do onSaveInstance...
 }
