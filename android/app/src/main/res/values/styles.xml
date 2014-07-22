@@ -2,11 +2,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="boardSquareStyle">@style/BoardSquare</item>
+        <item name="boardSquareEvenStyle">@style/BoardSquareEven</item>
+        <item name="boardSquareOddStyle">@style/BoardSquareOdd</item>
     </style>
 
-    <style name="BoardSquare">
-        <item name="android:background">@drawable/board_square_background</item>
+    <style name="BoardSquareEven">
+        <item name="android:background">@drawable/board_square_background_even</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="BoardSquareOdd">
+        <item name="android:background">@drawable/board_square_background_odd</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>

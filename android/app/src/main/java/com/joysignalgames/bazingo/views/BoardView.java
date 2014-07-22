@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import com.joysignalgames.bazingo.app.BoardSquareButton;
+import com.joysignalgames.bazingo.app.R;
 
 public class BoardView extends ViewGroup {
 
@@ -31,7 +32,13 @@ public class BoardView extends ViewGroup {
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = new BoardSquareButton(getContext());
+            int id;
+            if (i % 2 == 0) {
+                id = R.attr.boardSquareEvenStyle;
+            } else {
+                id = R.attr.boardSquareOddStyle;
+            }
+            BoardSquareButton square = new BoardSquareButton(getContext(), null, id);
             square.setId(i);
             addView(square);
         }

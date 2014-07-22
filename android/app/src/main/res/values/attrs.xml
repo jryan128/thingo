@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="BoardSquareButton">
-        <attr name="boardSquareStyle" format="reference" />
+        <attr name="boardSquareEvenStyle" format="reference" />
+        <attr name="boardSquareOddStyle" format="reference" />
     </declare-styleable>
 </resources>
