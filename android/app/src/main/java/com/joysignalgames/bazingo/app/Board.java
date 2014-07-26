@@ -1,15 +1,11 @@
 package com.joysignalgames.bazingo.app;
 
 import android.app.Activity;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Board {
     private final List<String[]> phraseData;
@@ -41,5 +37,78 @@ public class Board {
 
     public String getPhrase(int position) {
         return phraseData.get(position)[0];
+    }
+
+    // FIXME: javadocs, docs
+    // FIXME: make parcelable
+    private static class PatternMatcher {
+        private final Square[] squares = new Square[0];
+
+        private PatternMatcher() {
+            // FIXME: parse JSON file, and create squares
+            // this.squares = ?
+        }
+
+        private static class Square {
+            private Set<Pattern> patterns = new HashSet<Pattern>();
+
+            private Square(Set<Pattern> patterns) {
+                this.patterns = patterns;
+            }
+
+            private void select() {
+                Set<Pattern> isCompleted = new HashSet<Pattern>();
+                for (Pattern pattern : patterns) {
+                    pattern.select();
+                    if (pattern.isCompleted()) {
+                        isCompleted.add(pattern);
+                    }
+                }
+                handleCompletedPatterns(isCompleted);
+            }
+
+            private void handleCompletedPatterns(Set<Pattern> isCompleted) {
+                // FIXME: popup a gui with the completed patterns dialog
+            }
+
+            private void deselect() {
+                for (Pattern pattern : patterns) {
+                    pattern.deselect();
+                }
+            }
+        }
+
+        private static class Pattern {
+            private final String name;
+            private final int neededSelectedCount;
+            private int currentSelectedCount;
+
+            private Pattern(String name, int neededSelectedCount) {
+                this.name = name;
+                this.neededSelectedCount = neededSelectedCount;
+                assertAssumptions();
+            }
+
+            public void select() {
+                currentSelectedCount += 1;
+                assertAssumptions();
+            }
+
+            public void deselect() {
+                currentSelectedCount -= 1;
+                assertAssumptions();
+            }
+
+            public boolean isCompleted() {
+                assertAssumptions();
+                return currentSelectedCount == neededSelectedCount;
+            }
+
+            private void assertAssumptions() {
+                // FIXME: correct way to assert
+                assert currentSelectedCount <= neededSelectedCount;
+                assert currentSelectedCount >= 0;
+            }
+        }
     }
 }
