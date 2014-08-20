@@ -69,7 +69,7 @@ public class PatternFileLoader {
         return b.toString();
     }
 
-    private static class PatternFileParseException extends Exception {
+    static class PatternFileParseException extends Exception {
         PatternFileParseException(String message, Throwable cause) {
             super(message, cause);
         }

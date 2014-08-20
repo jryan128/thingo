@@ -47,11 +47,7 @@ public class Pattern {
 
     @Override
     public String toString() {
-        return "Pattern{" +
-                "name='" + name + '\'' +
-                ", squares=" + squares +
-                ", points=" + points +
-                '}';
+        return getName();
     }
 
     @Override
