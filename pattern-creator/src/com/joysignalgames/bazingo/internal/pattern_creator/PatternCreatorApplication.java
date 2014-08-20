@@ -2,10 +2,11 @@ package com.joysignalgames.bazingo.internal.pattern_creator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class PatternCreatorApplication {
     private JPanel mainContentPane;
-    private JList patternList;
+    private JList<?> patternList;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
