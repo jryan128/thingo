@@ -1,7 +1,10 @@
 package com.joysignalgames.bazingo.internal.pattern_creator;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class PatternCreatorApplication {
@@ -9,6 +12,7 @@ public class PatternCreatorApplication {
     private JList<Pattern> patternList;
     private JSpinner pointsSpinner;
     private JButton newPatternButton;
+    private JTextField nameTextField;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -30,9 +34,59 @@ public class PatternCreatorApplication {
     private void createUIComponents() {
         try {
             patternList = new PatternList();
+            pointsSpinner = new JSpinner();
+            nameTextField = new JTextField();
+            createController();
         } catch (IOException | PatternFileLoader.PatternFileParseException e) {
             throw new RuntimeException("Error loading pattern list.", e);
         }
+    }
+
+    // TODO: this is stupid and terrible, do it correctly using models and whatnots.
+    private void createController() {
+
+        patternList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if (!listSelectionEvent.getValueIsAdjusting()) {
+                    Pattern selectedValue = patternList.getSelectedValue();
+                    pointsSpinner.setValue(selectedValue.getPoints());
+                    nameTextField.setText(selectedValue.getName());
+
+                }
+            }
+        });
+
+        nameTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Pattern selectedPattern = patternList.getSelectedValue();
+                if (selectedPattern != null) {
+                    try {
+                        selectedPattern.setName(nameTextField.getText());
+                    } catch (Pattern.InvalidPatternArguments invalidPatternArguments) {
+                        invalidPatternArguments.printStackTrace();
+                        nameTextField.setText(selectedPattern.getName());
+                    }
+                }
+            }
+        });
+
+        pointsSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+                Pattern selectedPattern = patternList.getSelectedValue();
+                if (selectedPattern != null) {
+                    Integer val = (Integer) pointsSpinner.getValue();
+                    try {
+                        selectedPattern.setPoints(val);
+                    } catch (Pattern.InvalidPatternArguments invalidPatternArguments) {
+                        invalidPatternArguments.printStackTrace();
+                        pointsSpinner.setValue(selectedPattern.getPoints());
+                    }
+                }
+            }
+        });
     }
 
     {
@@ -61,7 +115,7 @@ public class PatternCreatorApplication {
         panel2.setLayout(new GridBagLayout());
         panel1.add(panel2, BorderLayout.NORTH);
         final JLabel label1 = new JLabel();
-        label1.setText("Points");
+        label1.setText("Points:");
         label1.setDisplayedMnemonic('P');
         label1.setDisplayedMnemonicIndex(0);
         GridBagConstraints gbc;
@@ -70,7 +124,6 @@ public class PatternCreatorApplication {
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
         panel2.add(label1, gbc);
-        pointsSpinner = new JSpinner();
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 1;
@@ -108,7 +161,7 @@ public class PatternCreatorApplication {
         newPatternButton.setDisplayedMnemonicIndex(0);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 3;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -116,15 +169,30 @@ public class PatternCreatorApplication {
         final JPanel spacer5 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.fill = GridBagConstraints.VERTICAL;
         panel2.add(spacer5, gbc);
         final JPanel spacer6 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.fill = GridBagConstraints.VERTICAL;
         panel2.add(spacer6, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Name:");
+        label2.setDisplayedMnemonic('A');
+        label2.setDisplayedMnemonicIndex(1);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel2.add(label2, gbc);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panel2.add(nameTextField, gbc);
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridBagLayout());
         panel1.add(panel3, BorderLayout.CENTER);
@@ -372,6 +440,7 @@ public class PatternCreatorApplication {
         gbc.fill = GridBagConstraints.VERTICAL;
         panel4.add(spacer11, gbc);
         label1.setLabelFor(pointsSpinner);
+        label2.setLabelFor(nameTextField);
     }
 
     /**
