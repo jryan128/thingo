@@ -6,6 +6,7 @@ Any new platforms should be add to sub folders.
 Folder Structure
 ----------------
  - phrases: holds TSV files which hold all the category and board information
+ - pattern-creator: holds the pattern.tsv file, and a Java swing app to edit it
  - android: the android app version of Bazingo
  - web: the jquery mobile and node.js version of Bazingo
  - ios: the ios app version of bazingo
