@@ -27,9 +27,6 @@ class PatternValidator {
         if (squares == null) {
             throw new Pattern.InvalidPatternArguments("Squares must not be null.");
         }
-        if (squares.size() == 0) {
-            throw new Pattern.InvalidPatternArguments("Must have at least 1 square for a valid pattern.");
-        }
         for (Integer square : squares) {
             if (square == null) {
                 throw new Pattern.InvalidPatternArguments("Must not have nulls in squares set.");

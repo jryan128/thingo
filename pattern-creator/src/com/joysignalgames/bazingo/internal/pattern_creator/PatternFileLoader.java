@@ -1,12 +1,16 @@
 package com.joysignalgames.bazingo.internal.pattern_creator;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+// TODO: make not static everything :/
 public class PatternFileLoader {
+    private final static String FILE = "./patterns.tsv";
+
     public static void main(String[] args) throws IOException, Pattern.InvalidPatternArguments, PatternFileParseException {
         test();
     }
@@ -22,7 +26,7 @@ public class PatternFileLoader {
     }
 
     public static List<Pattern> loadPatternsFromFile() throws IOException, PatternFileParseException {
-        List<String> lines = Files.readAllLines(Paths.get("./patterns.tsv"), StandardCharsets.UTF_8);
+        List<String> lines = Files.readAllLines(Paths.get(FILE), StandardCharsets.UTF_8);
         List<Pattern> patterns = new ArrayList<>();
         int lineNo = 1;
         for (String line : lines) {
@@ -35,6 +39,15 @@ public class PatternFileLoader {
             }
         }
         return patterns;
+    }
+
+    public static void savePatternFile(Collection<Pattern> patterns) throws Pattern.InvalidPatternArguments, IOException {
+        try (FileWriter fileWriter = new FileWriter(FILE)) {
+            for (Pattern pattern : patterns) {
+                fileWriter.write(convertPatternToLine(pattern));
+                fileWriter.write('\n');
+            }
+        }
     }
 
     private static Pattern convertLineToPattern(String line) throws NumberFormatException, Pattern.InvalidPatternArguments {
