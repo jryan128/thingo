@@ -19,6 +19,7 @@ public class PatternCreatorApplication {
     private BoardPanel boardPanel;
 
     public static void main(String[] args) {
+        setSystemLookAndFeel();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -36,6 +37,15 @@ public class PatternCreatorApplication {
                 frame.setVisible(true);
             }
         });
+    }
+
+    private static void setSystemLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
