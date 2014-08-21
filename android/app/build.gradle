@@ -23,3 +23,10 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:19.1.0'
     compile 'com.android.support:appcompat-v7:19.+'
 }
+
+// creates a link to the phrases directory in the top level
+preBuild.dependsOn {
+    task createLink << {
+        ant.symlink(resource: "../../../../../phrases", link: file('src/main/assets/phrases'), overwrite: true)
+    }
+}
