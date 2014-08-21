@@ -226,6 +226,7 @@ public class PatternCreatorApplication {
                     int result = JOptionPane.showOptionDialog(null, "Save before exiting?", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
                     if (JOptionPane.YES_OPTION == result) {
                         saveAction.invoke();
+                        frame.dispose();
                     } else if (JOptionPane.NO_OPTION == result) {
                         frame.dispose();
                     }
