@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryActivity extends ActionBarActivity {
 
@@ -20,7 +22,7 @@ public class CategoryActivity extends ActionBarActivity {
         setContentView(R.layout.activity_category_page);
 
         try {
-            String[] phrases = getStringArray();
+            List<String> phrases = getPhrasesList();
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, phrases);
 
             EditText editText = (EditText) findViewById(R.id.search_genres);
@@ -63,8 +65,23 @@ public class CategoryActivity extends ActionBarActivity {
 
     // getting the array adapter this way since the phrases are all in .tsv files in our repository so
     // it will be easier for now to just copy those files and parse them here as opposed to making separate .xml files
-    String[] getStringArray() throws IOException {
-        return getAssets().list("phrases");
+    List<String> getPhrasesList() throws IOException {
+
+        // FIXME: move this phrase getting logic into own class
+        // create an intg test that tests if the phrases have good file names
+        String[] categoryTsvFiles = getAssets().list("phrases");
+
+        // FIXME: make a set?
+        List<String> categoryList = new ArrayList<String>();
+        for (String fileName : categoryTsvFiles) {
+            try {
+                categoryList.add(fileName.substring(0, fileName.lastIndexOf('.')));
+            } catch (IndexOutOfBoundsException ex) {
+                // log bad file properly
+                ex.printStackTrace();
+            }
+        }
+        return categoryList;
     }
 
     @Override

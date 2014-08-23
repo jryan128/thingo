@@ -12,7 +12,8 @@ public class Board {
 
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
         // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-        BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category)));
+        // FIXME: create a class that will hold the category name and file name do not use string
+        BufferedReader reader = new BufferedReader(new InputStreamReader(activity.getAssets().open("phrases/" + category + ".tsv")));
 
         // ignore the first line
         reader.readLine();
