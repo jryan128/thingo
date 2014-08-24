@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import com.joysignalgames.bazingo.Genres;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class CategoryActivity extends ActionBarActivity {
         setContentView(R.layout.activity_category_page);
 
         try {
-            List<String> phrases = getPhrasesList();
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, phrases);
+            List<String> genres = new ArrayList<String>(Genres.INSTANCE.getGenreNames(getAssets()));
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, genres);
 
             EditText editText = (EditText) findViewById(R.id.search_genres);
             editText.addTextChangedListener(new TextWatcher() {
@@ -61,27 +62,6 @@ public class CategoryActivity extends ActionBarActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // getting the array adapter this way since the phrases are all in .tsv files in our repository so
-    // it will be easier for now to just copy those files and parse them here as opposed to making separate .xml files
-    List<String> getPhrasesList() throws IOException {
-
-        // FIXME: move this phrase getting logic into own class
-        // create an intg test that tests if the phrases have good file names
-        String[] categoryTsvFiles = getAssets().list("genres");
-
-        // FIXME: make a set?
-        List<String> categoryList = new ArrayList<String>();
-        for (String fileName : categoryTsvFiles) {
-            try {
-                categoryList.add(fileName.substring(0, fileName.lastIndexOf('.')));
-            } catch (IndexOutOfBoundsException ex) {
-                // log bad file properly
-                ex.printStackTrace();
-            }
-        }
-        return categoryList;
     }
 
     @Override

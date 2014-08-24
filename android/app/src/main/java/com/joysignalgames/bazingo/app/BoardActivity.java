@@ -1,9 +1,15 @@
 package com.joysignalgames.bazingo.app;
 
-import android.graphics.Color;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
+import android.widget.TextView;
 import com.joysignalgames.bazingo.views.BoardView;
 
 import java.io.IOException;
@@ -25,16 +31,18 @@ public class BoardActivity extends ActionBarActivity {
     }
 
     private void initializeBoardSquares(BoardView boardView) {
+        String genre = getIntent().getStringExtra("genre");
         try {
-            String genre = getIntent().getStringExtra("genre");
             Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
             for (int i = 0; i < 25; i++) {
                 BoardSquareButton square = (BoardSquareButton) boardView.getChildAt(i);
                 square.setText(board.getPhrase(i));
             }
         } catch (IOException e) {
-            // TODO: better error handling
-            e.printStackTrace();
+            Log.e("BoardActivity", "Could not load the genre (" + genre + ").", e);
+            // FIXME: popup an error before going back
+            Intent intent = new Intent(getBaseContext(), CategoryActivity.class);
+            startActivity(intent);
         }
     }
 
