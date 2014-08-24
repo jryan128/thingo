@@ -11,11 +11,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A singleton to access genre data (.tsv) files.
+ * <p>A singleton to access genre data (.tsv) files</p>
  *
- * Genres are static across the entire application. I can't imagine a
- * case in which the app would want different genre lists in different parts of the app.
- * Since it's hard to move objects between <code>Activity</code>'s, it's a singleton (gasp).
+ * <p>Why a singleton?
+ * <ol>
+ *  <li>Genre data is static across the entire application and I can't imagine a
+ *      case in which the app would want different genre lists in different parts of the app.</li>
+ *  <li>It's also hard to move objects between Android <code>Activity</code> objects.</li>
+ * </ol>
  */
 public enum Genres {
     INSTANCE; // singleton instance
