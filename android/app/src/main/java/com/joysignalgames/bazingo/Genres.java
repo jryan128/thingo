@@ -15,7 +15,7 @@ import java.util.Set;
  *
  * Genres are static across the entire application. I can't imagine a
  * case in which the app would want different genre lists in different parts of the app.
- * So, I'm making this an evil singleton (gasp).
+ * Since it's hard to move objects between <code>Activity</code>'s, I'm making this an evil singleton (gasp).
  */
 public enum Genres {
     INSTANCE; // singleton instance
