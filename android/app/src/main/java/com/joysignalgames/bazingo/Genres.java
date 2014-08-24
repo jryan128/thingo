@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <p>A singleton to access genre data (.tsv) files</p>
+ * <p>A singleton to access genre data (.tsv) files.</p>
  *
  * <p>Why a singleton?
  * <ol>
