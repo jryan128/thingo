@@ -16,7 +16,6 @@ public class Board {
 
     public static Board loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
         // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-        // FIXME: create a class that will hold the category name and file name do not use string
         BufferedReader reader = Genres.INSTANCE.getGenrePhrasesFile(activity.getAssets(), category);
 
         // ignore the first line
