@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,51 +18,60 @@ import java.util.List;
 
 public class CategoryActivity extends ActionBarActivity {
 
+    public static final String CATEGORY_ACTIVITY_LOG_TAG = "CategoryActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_page);
 
         try {
-            List<String> genres = new ArrayList<String>(Genres.INSTANCE.getGenreNames(getAssets()));
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, genres);
-
-            EditText editText = (EditText) findViewById(R.id.search_genres);
-            editText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                    adapter.getFilter().filter(arg0);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                              int arg3) {
-                    // empty
-                }
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    // empty
-                }
-            });
-
-            ListView listView = (ListView) findViewById(R.id.genres);
-            listView.setAdapter(adapter);
-            listView.setTextFilterEnabled(true);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-
-                    Intent intent = new Intent(getBaseContext(), BoardActivity.class);
-                    intent.putExtra("genre", ((TextView) view).getText().toString());
-                    startActivity(intent);
-                }
-            });
+            setupWidgets();
         } catch (IOException e) {
-            e.printStackTrace();
+            // FIXME: pop up error message
+            String msg = "Could not load the genre list.";
+            Log.e(CATEGORY_ACTIVITY_LOG_TAG, msg + ". Quitting application.", e);
+            throw new RuntimeException(msg, e);
         }
+    }
+
+    private void setupWidgets() throws IOException {
+        List<String> genres = new ArrayList<String>(Genres.INSTANCE.getGenreNames(getAssets()));
+        final ArrayAdapter<String> genreList = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, genres);
+
+        EditText editText = (EditText) findViewById(R.id.search_genres);
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                genreList.getFilter().filter(arg0);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // empty
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // empty
+            }
+        });
+
+        ListView listView = (ListView) findViewById(R.id.genres);
+        listView.setAdapter(genreList);
+        listView.setTextFilterEnabled(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                Intent intent = new Intent(getBaseContext(), BoardActivity.class);
+                intent.putExtra("genre", ((TextView) view).getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
