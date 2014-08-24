@@ -1,7 +1,5 @@
 package com.joysignalgames.bazingo.app;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.TextView;
 import com.joysignalgames.bazingo.views.BoardView;
 
 import java.io.IOException;
@@ -21,6 +18,10 @@ public class BoardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        setupWidgets(savedInstanceState);
+    }
+
+    private void setupWidgets(Bundle savedInstanceState) {
         BoardView boardView = new BoardView(this);
         setContentView(boardView);
 

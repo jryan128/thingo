@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Access genres and genre files.
+ * Access genre data (.tsv) files.
  *
  * Since it's static across the entire application, and I can't imagine a
  * case where the app would want different genre lists in different parts of the app; I'm making this

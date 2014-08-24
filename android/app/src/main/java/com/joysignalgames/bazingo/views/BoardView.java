@@ -1,9 +1,7 @@
 package com.joysignalgames.bazingo.views;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import com.joysignalgames.bazingo.app.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
