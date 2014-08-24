@@ -69,7 +69,7 @@ public class CategoryActivity extends ActionBarActivity {
 
         // FIXME: move this phrase getting logic into own class
         // create an intg test that tests if the phrases have good file names
-        String[] categoryTsvFiles = getAssets().list("phrases");
+        String[] categoryTsvFiles = getAssets().list("genres");
 
         // FIXME: make a set?
         List<String> categoryList = new ArrayList<String>();
