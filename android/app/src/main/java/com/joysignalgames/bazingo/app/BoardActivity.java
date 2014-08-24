@@ -42,7 +42,7 @@ public class BoardActivity extends ActionBarActivity {
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not load the genre (" + genre + ").", e);
             // FIXME: popup an error before going back
-            Intent intent = new Intent(getBaseContext(), CategoryActivity.class);
+            Intent intent = new Intent(getBaseContext(), GenreSelectionActivity.class);
             startActivity(intent);
         }
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryActivity extends ActionBarActivity {
+public class GenreSelectionActivity extends ActionBarActivity {
 
     public static final String CATEGORY_ACTIVITY_LOG_TAG = "CategoryActivity";
 
