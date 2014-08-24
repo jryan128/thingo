@@ -11,11 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Access genre data (.tsv) files.
+ * A singleton to access genre data (.tsv) files.
  *
- * Since it's static across the entire application, and I can't imagine a
- * case where the app would want different genre lists in different parts of the app; I'm making this
- * an evil singleton (gasp).
+ * Genres are static across the entire application. I can't imagine a
+ * case in which the app would want different genre lists in different parts of the app.
+ * So, I'm making this an evil singleton (gasp).
  */
 public enum Genres {
     INSTANCE; // singleton instance
