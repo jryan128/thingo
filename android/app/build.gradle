@@ -27,6 +27,6 @@ dependencies {
 // creates a link to the phrases directory in the top level
 preBuild.dependsOn {
     task createLink << {
-        ant.symlink(resource: "../../../../../phrases", link: file('src/main/assets/phrases'), overwrite: true)
+        ant.symlink(resource: "../../../../../genres", link: file('src/main/assets/genres'), overwrite: true)
     }
 }
