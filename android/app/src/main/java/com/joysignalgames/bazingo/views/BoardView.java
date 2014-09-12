@@ -30,13 +30,8 @@ public class BoardView extends ViewGroup {
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
-            int id;
-            if (i % 2 == 0) {
-                id = R.attr.boardSquareEvenStyle;
-            } else {
-                id = R.attr.boardSquareOddStyle;
-            }
-            BoardSquareButton square = new BoardSquareButton(getContext(), null, id);
+            BoardSquareButton square = new BoardSquareButton(getContext(), null,
+                    R.attr.boardSquareStyle);
             square.setId(i);
             addView(square);
         }
@@ -52,7 +47,7 @@ public class BoardView extends ViewGroup {
         if (n > 0) {
             int w = width / n;
             int h = height / n;
-            for (int i=0; i < childCount; ++i) {
+            for (int i = 0; i < childCount; ++i) {
                 // tell the child exactly what size it needs to be, screw you
                 getChildAt(i).measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
                         MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
@@ -68,8 +63,8 @@ public class BoardView extends ViewGroup {
         if (n > 0) {
             int w = getMeasuredWidth() / n;
             int h = getMeasuredHeight() / n;
-            for (int row=0; row < n; ++row) {
-                for (int col=0; col < n; ++col) {
+            for (int row = 0; row < n; ++row) {
+                for (int col = 0; col < n; ++col) {
                     // TODO: should use values from onMeasure, but who cares, we know what they are
                     // TODO: some calcs probably could be made more efficient with addition?
                     getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
