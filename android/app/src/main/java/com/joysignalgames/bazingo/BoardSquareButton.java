@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.app;
+package com.joysignalgames.bazingo;
 
 import android.content.Context;
 import android.util.AttributeSet;

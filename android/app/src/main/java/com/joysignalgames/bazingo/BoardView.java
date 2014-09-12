@@ -1,9 +1,9 @@
-package com.joysignalgames.bazingo.views;
+package com.joysignalgames.bazingo;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import com.joysignalgames.bazingo.app.BoardSquareButton;
+import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
 
 public class BoardView extends ViewGroup {

@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.app;
+package com.joysignalgames.bazingo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import com.joysignalgames.bazingo.BoardActivity;
 import com.joysignalgames.bazingo.Genres;
+import com.joysignalgames.bazingo.app.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

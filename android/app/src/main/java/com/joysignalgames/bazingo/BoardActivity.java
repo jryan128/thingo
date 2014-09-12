@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.app;
+package com.joysignalgames.bazingo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import com.joysignalgames.bazingo.views.BoardView;
+import com.joysignalgames.bazingo.app.R;
 
 import java.io.IOException;
 

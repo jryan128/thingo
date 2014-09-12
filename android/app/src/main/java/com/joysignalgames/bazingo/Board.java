@@ -1,7 +1,6 @@
-package com.joysignalgames.bazingo.app;
+package com.joysignalgames.bazingo;
 
 import android.app.Activity;
-import com.joysignalgames.bazingo.Genres;
 
 import java.io.BufferedReader;
 import java.io.IOException;
