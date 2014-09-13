@@ -11,7 +11,7 @@ public class BoardSquareButton extends CompoundButton {
 
     public BoardSquareButton(Context context) {
         super(context, null, R.attr.boardSquareStyle);
-        setTextColor(Color.parseColor("#D2D2D2"));
+        setTextColor(getResources().getColor(R.color.board_text));
     }
 
     @Override
