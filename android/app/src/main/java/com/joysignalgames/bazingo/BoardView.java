@@ -30,8 +30,7 @@ public class BoardView extends ViewGroup {
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = new BoardSquareButton(getContext(), null,
-                    R.attr.boardSquareStyle);
+            BoardSquareButton square = new BoardSquareButton(getContext());
             square.setId(i);
             addView(square);
         }
@@ -67,7 +66,11 @@ public class BoardView extends ViewGroup {
                 for (int col = 0; col < n; ++col) {
                     // TODO: should use values from onMeasure, but who cares, we know what they are
                     // TODO: some calcs probably could be made more efficient with addition?
-                    getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
+                    if (row == (n - 1)) {
+                        getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), b);
+                    } else {
+                        getChildAt((row * n) + col).layout(w * col, h * row, w * (col + 1), h * (row + 1));
+                    }
                 }
             }
         }
