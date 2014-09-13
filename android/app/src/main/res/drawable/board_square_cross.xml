@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#ff2b2b2b"/>-->
+            <!--&lt;!&ndash;<solid android:color="#000000"/>&ndash;&gt;-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--&lt;!&ndash;<item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<rotate&ndash;&gt;-->
+            <!--&lt;!&ndash;android:fromDegrees="45"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:toDegrees="45">&ndash;&gt;-->
+            <!--&lt;!&ndash;<shape&ndash;&gt;-->
+                <!--&lt;!&ndash;android:shape="line">&ndash;&gt;-->
+                <!--&lt;!&ndash;<stroke&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:width="20dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:color="#ff13a323"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</shape>&ndash;&gt;-->
+        <!--&lt;!&ndash;</rotate>&ndash;&gt;-->
+    <!--&lt;!&ndash;</item>&ndash;&gt;-->
+
+    <!--<item>-->
+        <!--&lt;!&ndash;<rotate&ndash;&gt;-->
+            <!--&lt;!&ndash;android:fromDegrees="135"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:toDegrees="135">&ndash;&gt;-->
+            <!--<shape-->
+                <!--android:shape="line">-->
+                <!--<stroke-->
+                    <!--android:width="20dp"-->
+                    <!--android:color="#ff13a323"/>-->
+            <!--</shape>-->
+        <!--&lt;!&ndash;</rotate>&ndash;&gt;-->
+    <!--</item>-->
+
+<!--</layer-list>-->
+<shape  xmlns:android="http://schemas.android.com/apk/res/android"
+android:shape="line">
+<stroke
+    android:width="20dp"
+    android:color="#ff13a323"/>
+</shape>

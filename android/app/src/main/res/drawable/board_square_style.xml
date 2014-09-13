@@ -2,5 +2,5 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="false" android:drawable="@android:color/black" />
-    <item android:state_checked="true" android:drawable="@android:color/holo_green_dark" />
+    <item android:state_checked="true" android:drawable="@drawable/board_square_cross" />
 </selector>
