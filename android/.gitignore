@@ -2,4 +2,5 @@
 /local.properties
 /.idea/workspace.xml
 .DS_Store
-app/src/main/assets/genres
+/app/src/main/assets/genres
+/app/src/main/assets/patterns.tsv

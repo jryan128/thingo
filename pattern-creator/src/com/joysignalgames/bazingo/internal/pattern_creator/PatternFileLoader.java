@@ -51,13 +51,22 @@ public class PatternFileLoader {
     }
 
     private static Pattern convertLineToPattern(String line) throws NumberFormatException, Pattern.InvalidPatternArguments {
-        String[] split = line.split("\\t");
+        final String[] split = line.split("\\t");
+
+        // name
+        final String name = split[0];
+
+        // squares
         String[] squares = split[1].split(" ");
         Set<Integer> squaresSet = new HashSet<>();
         for (String square : squares) {
             squaresSet.add(Integer.parseInt(square));
         }
-        return new Pattern(split[0], squaresSet, Integer.parseInt(split[2]));
+
+        // points
+        final int points = Integer.parseInt(split[2]);
+
+        return new Pattern(name, squaresSet, points);
     }
 
     private static String convertPatternToLine(Pattern pattern) throws Pattern.InvalidPatternArguments {

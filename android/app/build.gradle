@@ -28,5 +28,6 @@ dependencies {
 preBuild.dependsOn {
     task createLink << {
         ant.symlink(resource: '../../../../../genres', link: file('src/main/assets/genres'), overwrite: true)
+        ant.symlink(resource: '../../../../../pattern-creator/patterns.tsv', link: file('src/main/assets/patterns.tsv'), overwrite: true)
     }
 }
