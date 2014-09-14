@@ -9,11 +9,8 @@ import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
 
 public class BoardView extends ViewGroup {
-    private final Patterns patterns;
-
-    public BoardView(Context context, Patterns patterns) {
+    public BoardView(Context context) {
         super(context);
-        this.patterns = patterns;
         init();
     }
 
@@ -22,7 +19,7 @@ public class BoardView extends ViewGroup {
         createBoardSquares();
     }
 
-    private void createBoardSquares() {
+    public void setupControllers(final Patterns patterns) {
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -39,8 +36,13 @@ public class BoardView extends ViewGroup {
         };
 
         for (int i = 0; i < 25; i++) {
+            ((BoardSquareButton) getChildAt(i)).setOnCheckedChangeListener(listener);
+        }
+    }
+
+    private void createBoardSquares() {
+        for (int i = 0; i < 25; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
-            square.setOnCheckedChangeListener(listener);
             // FIXME: find out if setting the id to a number like this is really okay
             // the only thing I can imagine going wrong is if the ids conflict with
             // something else and the saved state reloading goes wrong

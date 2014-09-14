@@ -12,6 +12,8 @@ import com.joysignalgames.bazingo.app.R;
 import java.io.IOException;
 
 public class BoardActivity extends ActionBarActivity {
+    private BoardView boardView;
+    private Patterns patterns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,24 +21,48 @@ public class BoardActivity extends ActionBarActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         try {
-            setupWidgets(savedInstanceState);
+            setupWidgets();
+            if (savedInstanceState == null) {
+                populateBoardViewWithRandomPhrases();
+            }
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not setup board activity.", e);
+            // FIXME: fail some how?
         }
     }
 
-    private void setupWidgets(Bundle savedInstanceState) throws IOException {
-        Patterns patterns = new Patterns(getAssets());
-        BoardView boardView = new BoardView(this, patterns);
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        // Setup the controllers/listeners after onRestoreInstanceState so the BoardSquareButtons don't
+        // fire off listeners as they are being reloaded.
+        // ASSERT: All button listeners have gone off after a possible re-load
+        // during onRestoreInstanceState AND the user cannot interact with the board yet.
+        // NOTE: It probably would be more clear and explicit to just turn off saveEnabled on BoardView and
+        // handle all of the saving/loading manually. But I'm lazy.
+        boardView.setupControllers(patterns);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("patterns", patterns);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        patterns = savedInstanceState.getParcelable("patterns");
+    }
+
+    private void setupWidgets() throws IOException {
+        patterns = new Patterns(getAssets());
+        boardView = new BoardView(this);
         setContentView(boardView);
-
-        // if we don't have a saved state, load the phrases into the grid
-        if (savedInstanceState == null) {
-            initializeBoardSquares(boardView);
-        }
     }
 
-    private void initializeBoardSquares(BoardView boardView) {
+    private void populateBoardViewWithRandomPhrases() {
         String genre = getIntent().getStringExtra("genre");
         try {
             Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
@@ -67,5 +93,4 @@ public class BoardActivity extends ActionBarActivity {
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
-
 }

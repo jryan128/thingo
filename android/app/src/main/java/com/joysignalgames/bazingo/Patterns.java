@@ -1,6 +1,8 @@
 package com.joysignalgames.bazingo;
 
 import android.content.res.AssetManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Patterns {
-    public static class Pattern {
+public class Patterns implements Parcelable {
+    public static class Pattern implements Parcelable {
         public final String name;
         public final int points;
         private int count = 0;
@@ -18,6 +20,24 @@ public class Patterns {
         private Pattern(String name, int points) {
             this.name = name;
             this.points = points;
+        }
+
+        private Pattern(Parcel parcel) {
+            this.name = parcel.readString();
+            this.points = parcel.readInt();
+            this.count = parcel.readInt();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(points);
+            dest.writeInt(count);
         }
 
         @Override
@@ -28,6 +48,17 @@ public class Patterns {
                     ", count=" + count +
                     '}';
         }
+
+        public static final Parcelable.Creator<Pattern> CREATOR
+                = new Parcelable.Creator<Pattern>() {
+            public Pattern createFromParcel(Parcel in) {
+                return new Pattern(in);
+            }
+
+            public Pattern[] newArray(int size) {
+                return new Pattern[size];
+            }
+        };
     }
 
     private static final int TOTAL_SQUARES = 24;
@@ -111,4 +142,36 @@ public class Patterns {
                 "patternBuckets=" + patternBuckets +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        for (Set<Pattern> patternBucket : patternBuckets) {
+            dest.writeTypedList(new ArrayList<Pattern>(patternBucket));
+        }
+    }
+
+    private Patterns(Parcel in) {
+        this.patternBuckets = new ArrayList<Set<Pattern>>(TOTAL_SQUARES);
+        for (int i = 0; i < TOTAL_SQUARES; i++) {
+            ArrayList<Pattern> list = new ArrayList<Pattern>();
+            in.readTypedList(list, Pattern.CREATOR);
+            patternBuckets.get(i).addAll(list);
+        }
+    }
+
+    public static final Parcelable.Creator<Patterns> CREATOR
+            = new Parcelable.Creator<Patterns>() {
+        public Patterns createFromParcel(Parcel in) {
+            return new Patterns(in);
+        }
+
+        public Patterns[] newArray(int size) {
+            return new Patterns[size];
+        }
+    };
 }
