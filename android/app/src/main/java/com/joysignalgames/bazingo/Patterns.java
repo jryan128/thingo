@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Patterns implements Parcelable {
@@ -16,6 +17,7 @@ public class Patterns implements Parcelable {
         public final String name;
         public final int points;
         private int count = 0;
+        public final List<Integer> squares = new ArrayList<Integer>();
 
         private Pattern(String name, int points) {
             this.name = name;
@@ -26,6 +28,7 @@ public class Patterns implements Parcelable {
             this.name = parcel.readString();
             this.points = parcel.readInt();
             this.count = parcel.readInt();
+            parcel.readList(squares, null);
         }
 
         @Override
@@ -38,6 +41,7 @@ public class Patterns implements Parcelable {
             dest.writeString(name);
             dest.writeInt(points);
             dest.writeInt(count);
+            dest.writeList(squares);
         }
 
         @Override
@@ -46,6 +50,7 @@ public class Patterns implements Parcelable {
                     "name='" + name + '\'' +
                     ", points=" + points +
                     ", count=" + count +
+                    ", squares=" + squares +
                     '}';
         }
 
@@ -122,16 +127,20 @@ public class Patterns implements Parcelable {
     }
 
     private static void parsePatternFile(ArrayList<Set<Pattern>> patternBuckets, BufferedReader br) throws IOException {
+        // FIXME: Every time this is re-created (via BoardActivity) we reload from the tsv file.
+        // Instead, we should cache this information
         String line;
         while ((line = br.readLine()) != null) {
-            // ASSERT: file is assumed to be well formed
-            // TODO: is this a safe assumption?
+            // ASSERT: File is assumed to be well formed.
+            // TODO: Is this a safe assumption?
             final String[] split = line.split("\\t");
             Pattern pattern = new Pattern(split[0], Integer.parseInt(split[2]));
             String[] squaresArray = split[1].split(" ");
             for (String squareStr : squaresArray) {
                 pattern.count += 1;
-                patternBuckets.get(Integer.parseInt(squareStr)).add(pattern);
+                int squareId = Integer.parseInt(squareStr);
+                patternBuckets.get(squareId).add(pattern);
+                pattern.squares.add(squareId);
             }
         }
     }
