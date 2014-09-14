@@ -36,13 +36,13 @@ public class BoardActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Setup the controllers/listeners after onRestoreInstanceState so the BoardSquareButtons don't
+        // Setup the listeners after onRestoreInstanceState so the BoardSquareButtons don't
         // fire off listeners as they are being reloaded.
         // ASSERT: All button listeners have gone off after a possible re-load
         // during onRestoreInstanceState AND the user cannot interact with the board yet.
         // NOTE: It probably would be more clear and explicit to just turn off saveEnabled on BoardView and
         // handle all of the saving/loading manually. But I'm lazy.
-        boardView.setupControllers(patterns);
+        BoardView.BoardController.setupBoardSquareButtonListeners(boardView, patterns);
     }
 
     @Override

@@ -19,27 +19,6 @@ public class BoardView extends ViewGroup {
         createBoardSquares();
     }
 
-    public void setupControllers(final Patterns patterns) {
-        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    for (Patterns.Pattern pattern : patterns.squareSelected(buttonView.getId())) {
-                        Log.i("PATTERN", pattern.name);
-                    }
-                } else {
-                    for (Patterns.Pattern pattern : patterns.squareUnselected(buttonView.getId())) {
-                        Log.i("PATTERN UNDONE", pattern.name);
-                    }
-                }
-            }
-        };
-
-        for (int i = 0; i < 25; i++) {
-            ((BoardSquareButton) getChildAt(i)).setOnCheckedChangeListener(listener);
-        }
-    }
-
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
@@ -95,5 +74,28 @@ public class BoardView extends ViewGroup {
 
     private int getNumberOfRowsAndCols(int totalChildCount) {
         return (int) Math.floor(Math.sqrt(totalChildCount));
+    }
+
+    public static class BoardController {
+        public static void setupBoardSquareButtonListeners(BoardView boardView, final Patterns patterns) {
+            CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (Patterns.Pattern pattern : patterns.squareSelected(buttonView.getId())) {
+                            Log.i("PATTERN", pattern.name);
+                        }
+                    } else {
+                        for (Patterns.Pattern pattern : patterns.squareUnselected(buttonView.getId())) {
+                            Log.i("PATTERN UNDONE", pattern.name);
+                        }
+                    }
+                }
+            };
+
+            for (int i = 0; i < 25; i++) {
+                ((BoardSquareButton) boardView.getChildAt(i)).setOnCheckedChangeListener(listener);
+            }
+        }
     }
 }
