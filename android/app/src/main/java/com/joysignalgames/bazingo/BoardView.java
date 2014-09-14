@@ -77,17 +77,21 @@ public class BoardView extends ViewGroup {
     }
 
     public static class BoardController {
-        public static void setupBoardSquareButtonListeners(BoardView boardView, final Patterns patterns) {
+        public static void setupBoardSquareButtonListeners(BoardView boardView, final Patterns patterns, final BoardActivity.PointsKeeper pointsKeeper) {
             CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (Patterns.Pattern pattern : patterns.squareSelected(buttonView.getId())) {
                             Log.i("PATTERN", pattern.name);
+                            pointsKeeper.points += pattern.points;
+                            Log.i("ADD-POINTS", Integer.toString(pointsKeeper.points));
                         }
                     } else {
                         for (Patterns.Pattern pattern : patterns.squareUnselected(buttonView.getId())) {
                             Log.i("PATTERN UNDONE", pattern.name);
+                            pointsKeeper.points -= pattern.points;
+                            Log.i("MIN-POINTS", Integer.toString(pointsKeeper.points));
                         }
                     }
                 }

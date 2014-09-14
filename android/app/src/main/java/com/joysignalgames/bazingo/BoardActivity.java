@@ -14,6 +14,11 @@ import java.io.IOException;
 public class BoardActivity extends ActionBarActivity {
     private BoardView boardView;
     private Patterns patterns;
+    private PointsKeeper pointsKeeper = new PointsKeeper();
+
+    public static class PointsKeeper {
+        public int points = 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +47,21 @@ public class BoardActivity extends ActionBarActivity {
         // during onRestoreInstanceState AND the user cannot interact with the board yet.
         // NOTE: It probably would be more clear and explicit to just turn off saveEnabled on BoardView and
         // handle all of the saving/loading manually. But I'm lazy.
-        BoardView.BoardController.setupBoardSquareButtonListeners(boardView, patterns);
+        BoardView.BoardController.setupBoardSquareButtonListeners(boardView, patterns, pointsKeeper);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable("patterns", patterns);
+        outState.putInt("points", pointsKeeper.points);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         patterns = savedInstanceState.getParcelable("patterns");
+        pointsKeeper.points = savedInstanceState.getInt("points");
     }
 
     private void setupWidgets() throws IOException {
