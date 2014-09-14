@@ -25,6 +25,7 @@ public class BoardActivity extends ActionBarActivity {
             if (savedInstanceState == null) {
                 populateBoardViewWithRandomPhrases();
             }
+            // NOTE: see onPostCreate to see how and why controllers for BoardView are setup
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not setup board activity.", e);
             // FIXME: fail some how?
