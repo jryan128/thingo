@@ -24,13 +24,16 @@ public class BoardView extends ViewGroup {
     }
 
     private void init() {
-        setId(100); // we have to set an id, or we won't get saving
+        setId(R.id.boardView); // have to set an id, or we won't get saving
         createBoardSquares();
     }
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
+            // FIXME: find out if setting the id to a number like this is really okay
+            // the only thing I can imagine going wrong is if the ids conflict with
+            // something else and the saved state reloading goes wrong
             square.setId(i);
             addView(square);
         }
