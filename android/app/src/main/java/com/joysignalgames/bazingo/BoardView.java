@@ -2,24 +2,18 @@ package com.joysignalgames.bazingo;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
 
 public class BoardView extends ViewGroup {
+    private final Patterns patterns;
 
-    public BoardView(Context context) {
+    public BoardView(Context context, Patterns patterns) {
         super(context);
-        init();
-    }
-
-    public BoardView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public BoardView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this.patterns = patterns;
         init();
     }
 
@@ -29,8 +23,24 @@ public class BoardView extends ViewGroup {
     }
 
     private void createBoardSquares() {
+        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (Patterns.Pattern pattern : patterns.squareSelected(buttonView.getId())) {
+                        Log.i("PATTERN", pattern.name);
+                    }
+                } else {
+                    for (Patterns.Pattern pattern : patterns.squareUnselected(buttonView.getId())) {
+                        Log.i("PATTERN UNDONE", pattern.name);
+                    }
+                }
+            }
+        };
+
         for (int i = 0; i < 25; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
+            square.setOnCheckedChangeListener(listener);
             // FIXME: find out if setting the id to a number like this is really okay
             // the only thing I can imagine going wrong is if the ids conflict with
             // something else and the saved state reloading goes wrong

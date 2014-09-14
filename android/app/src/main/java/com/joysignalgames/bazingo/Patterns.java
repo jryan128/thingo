@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Patterns {
-    private static class Pattern {
-        private final String name;
-        private final int points;
+    public static class Pattern {
+        public final String name;
+        public final int points;
         private int count = 0;
 
         private Pattern(String name, int points) {
@@ -56,9 +56,13 @@ public class Patterns {
     }
 
     public Set<Pattern> squareUnselected(int i) {
-        Set<Pattern> nowUncompletedPatterns = patternBuckets.get(i);
-        for (Pattern pattern : nowUncompletedPatterns) {
+        Set<Pattern> patterns = patternBuckets.get(i);
+        Set<Pattern> nowUncompletedPatterns = new HashSet<Pattern>();
+        for (Pattern pattern : patterns) {
             // FIXME: should we make sure we're not going over the max somehow?
+            if (pattern.count == 0) {
+                nowUncompletedPatterns.add(pattern);
+            }
             pattern.count += 1;
         }
         return nowUncompletedPatterns;

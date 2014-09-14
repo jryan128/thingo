@@ -18,11 +18,16 @@ public class BoardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setupWidgets(savedInstanceState);
+        try {
+            setupWidgets(savedInstanceState);
+        } catch (IOException e) {
+            Log.e("BoardActivity", "Could not setup board activity.", e);
+        }
     }
 
-    private void setupWidgets(Bundle savedInstanceState) {
-        BoardView boardView = new BoardView(this);
+    private void setupWidgets(Bundle savedInstanceState) throws IOException {
+        Patterns patterns = new Patterns(getAssets());
+        BoardView boardView = new BoardView(this, patterns);
         setContentView(boardView);
 
         // if we don't have a saved state, load the phrases into the grid
