@@ -66,7 +66,7 @@ public class Patterns implements Parcelable {
         };
     }
 
-    private static final int TOTAL_SQUARES = 24;
+    private static final int TOTAL_SQUARES = 25;
     private ArrayList<Set<Pattern>> patternBuckets = new ArrayList<Set<Pattern>>(TOTAL_SQUARES);
 
     public Patterns(AssetManager assets) throws IOException {
