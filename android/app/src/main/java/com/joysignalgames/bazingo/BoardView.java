@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
 
+import java.util.Iterator;
 import java.util.Set;
 
 public class BoardView extends ViewGroup {
@@ -110,18 +111,20 @@ public class BoardView extends ViewGroup {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         Set<Patterns.Pattern> selectedPatterns = patterns.squareSelected(buttonView.getId());
+                        StringBuilder patternNames = new StringBuilder();
+                        String delim = "";
                         for (Patterns.Pattern pattern : selectedPatterns) {
-                            Log.i("PATTERN", pattern.name);
                             pointsKeeper.points += pattern.points;
-                            Log.i("ADD-POINTS", Integer.toString(pointsKeeper.points));
-                            showPoints(pattern.name);
+                            patternNames.append(delim).append(pattern.name);
+                            delim = ", ";
+                        }
+                        if (!selectedPatterns.isEmpty()) {
+                            showPoints(patternNames.toString());
                         }
                     } else {
                         Set<Patterns.Pattern> unselectedPatterns = patterns.squareUnselected(buttonView.getId());
                         for (Patterns.Pattern pattern : unselectedPatterns) {
-                            Log.i("PATTERN UNDONE", pattern.name);
                             pointsKeeper.points -= pattern.points;
-                            Log.i("MIN-POINTS", Integer.toString(pointsKeeper.points));
                         }
                         if (unselectedPatterns.size() > 0) {
                             subtractPoints();
