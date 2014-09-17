@@ -49,7 +49,7 @@ public class BoardActivity extends ActionBarActivity {
         // during onRestoreInstanceState AND the user cannot interact with the board yet.
         // NOTE: It probably would be more clear and explicit to just turn off saveEnabled on BoardView and
         // handle all of the saving/loading manually. But I'm lazy.
-        BoardView.BoardController.setupBoardSquareButtonListeners(boardView, patterns, pointsKeeper);
+        BoardView.BoardController.setupBoardSquareButtonListeners(this, boardView, patterns, pointsKeeper);
     }
 
     @Override

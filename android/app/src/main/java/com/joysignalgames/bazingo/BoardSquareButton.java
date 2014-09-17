@@ -1,7 +1,6 @@
 package com.joysignalgames.bazingo;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;

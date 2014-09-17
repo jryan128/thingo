@@ -1,12 +1,17 @@
 package com.joysignalgames.bazingo;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
+
+import java.util.Set;
 
 public class BoardView extends ViewGroup {
     public BoardView(Context context) {
@@ -77,21 +82,49 @@ public class BoardView extends ViewGroup {
     }
 
     public static class BoardController {
-        public static void setupBoardSquareButtonListeners(BoardView boardView, final Patterns patterns, final BoardActivity.PointsKeeper pointsKeeper) {
+        public static void setupBoardSquareButtonListeners(final Context context, BoardView boardView, final Patterns patterns, final BoardActivity.PointsKeeper pointsKeeper) {
             CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+                Toast previousToast = null;
+
+                private void showPoints(String patternName) {
+                    CharSequence text = String.format("Pattern: %s\nPoints: %s", patternName,
+                            Integer.toString(pointsKeeper.points));
+                    showToast(text);
+                }
+
+                private void subtractPoints() {
+                    CharSequence text = String.format("Points: %s", Integer.toString(pointsKeeper.points));
+                    showToast(text);
+                }
+
+                private void showToast(CharSequence text) {
+                    if (previousToast != null) {
+                        previousToast.cancel();
+                    }
+
+                    Toast toast = previousToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        for (Patterns.Pattern pattern : patterns.squareSelected(buttonView.getId())) {
+                        Set<Patterns.Pattern> selectedPatterns = patterns.squareSelected(buttonView.getId());
+                        for (Patterns.Pattern pattern : selectedPatterns) {
                             Log.i("PATTERN", pattern.name);
                             pointsKeeper.points += pattern.points;
                             Log.i("ADD-POINTS", Integer.toString(pointsKeeper.points));
+                            showPoints(pattern.name);
                         }
                     } else {
-                        for (Patterns.Pattern pattern : patterns.squareUnselected(buttonView.getId())) {
+                        Set<Patterns.Pattern> unselectedPatterns = patterns.squareUnselected(buttonView.getId());
+                        for (Patterns.Pattern pattern : unselectedPatterns) {
                             Log.i("PATTERN UNDONE", pattern.name);
                             pointsKeeper.points -= pattern.points;
                             Log.i("MIN-POINTS", Integer.toString(pointsKeeper.points));
+                        }
+                        if (unselectedPatterns.size() > 0) {
+                            subtractPoints();
                         }
                     }
                 }
