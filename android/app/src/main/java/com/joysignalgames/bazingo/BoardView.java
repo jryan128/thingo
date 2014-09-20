@@ -1,17 +1,11 @@
 package com.joysignalgames.bazingo;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.drawable.TransitionDrawable;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-import com.joysignalgames.bazingo.BoardSquareButton;
 import com.joysignalgames.bazingo.app.R;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class BoardView extends ViewGroup {
