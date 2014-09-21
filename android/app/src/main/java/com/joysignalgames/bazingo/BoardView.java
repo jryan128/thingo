@@ -11,10 +11,6 @@ import java.util.Set;
 public class BoardView extends ViewGroup {
     public BoardView(Context context) {
         super(context);
-        init();
-    }
-
-    private void init() {
         setId(R.id.boardView); // have to set an id, or we won't get saving
         createBoardSquares();
     }
