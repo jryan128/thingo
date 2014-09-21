@@ -1,4 +1,7 @@
 #+STARTUP: indent
+* TODO Genre Names
+- Make genre names pulled from the file itself.
+- The file names are restrictive with what chars we can use.
 * TODO New Name
 * TODO Figure out art style
 ** X Style
