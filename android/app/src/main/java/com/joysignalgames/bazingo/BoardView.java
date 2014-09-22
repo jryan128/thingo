@@ -79,13 +79,13 @@ public class BoardView extends ViewGroup {
                 Toast previousToast = null;
 
                 private void showPoints(String patternName) {
-                    CharSequence text = String.format("Pattern: %s\nPoints: %s", patternName,
+                    CharSequence text = String.format("%s!\nYou have %s points.", patternName,
                             Integer.toString(pointsKeeper.points));
                     showToast(text);
                 }
 
                 private void subtractPoints() {
-                    CharSequence text = String.format("Points: %s", Integer.toString(pointsKeeper.points));
+                    CharSequence text = String.format("You have %s points.", Integer.toString(pointsKeeper.points));
                     showToast(text);
                 }
 
