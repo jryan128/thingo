@@ -7,13 +7,18 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class BoardView extends ViewGroup {
+
+    public final Handler handler = new Handler();
+
     public BoardView(Context context) {
         super(context);
         setId(R.id.boardView); // have to set an id, or we won't get saving
@@ -99,45 +104,58 @@ public class BoardView extends ViewGroup {
                         previousToast.cancel();
                     }
 
-                    Toast toast = previousToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                    Toast toast = previousToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                     toast.show();
                 }
 
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        Set<Patterns.Pattern> selectedPatterns = patterns.squareSelected(buttonView.getId());
-                        StringBuilder patternNames = new StringBuilder();
-                        String delim = "";
-                        for (Patterns.Pattern pattern : selectedPatterns) {
-                            pointsKeeper.points += pattern.points;
-                            patternNames.append(delim).append(pattern.name);
-                            delim = ", ";
-
-                            final List<BoardSquareButton> buttons = new ArrayList<BoardSquareButton>();
-                            for (Integer squareNumber : pattern.squares) {
-                                BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(squareNumber);
-                                buttons.add(button);
-                                button.setPatternSelected(true);
-                            }
-
-                            Timer myTimer = new Timer();
+                        final List<Patterns.Pattern> selectedPatterns = new ArrayList<Patterns.Pattern>(patterns.squareSelected(buttonView.getId()));
+                        if (!selectedPatterns.isEmpty()) {
+                            final Timer myTimer = new Timer();
                             myTimer.schedule(new TimerTask() {
+                                final Deque<Patterns.Pattern> patternQueue = new ArrayDeque<Patterns.Pattern>(selectedPatterns);
+                                List<BoardSquareButton> previousPatternButtons = null;
                                 @Override
                                 public void run() {
-                                    for (final BoardSquareButton button : buttons) {
-                                        button.handler.post(new Runnable() {
+                                    if (previousPatternButtons != null) {
+                                        for (final BoardSquareButton previousPatternButton : previousPatternButtons) {
+                                            previousPatternButton.handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    previousPatternButton.setPatternSelected(false);
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    final Patterns.Pattern pattern = patternQueue.pollFirst();
+                                    if (pattern != null) {
+                                        pointsKeeper.points += pattern.points;
+                                        List<BoardSquareButton> newButtons = new ArrayList<BoardSquareButton>();
+                                        for (Integer squareNumber : pattern.squares) {
+                                            final BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(squareNumber);
+                                            button.handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    button.setPatternSelected(true);
+                                                }
+                                            });
+                                            newButtons.add(button);
+                                        }
+                                        boardView.handler.post(new Runnable() {
                                             @Override
                                             public void run() {
-                                                button.setPatternSelected(false);
+                                                showPoints(pattern.name);
                                             }
                                         });
+                                        previousPatternButtons = newButtons;
+                                    } else {
+                                        myTimer.cancel();
                                     }
                                 }
-                            }, 3500); // 3500 pulled from Toast file defaults
-                        }
-                        if (!selectedPatterns.isEmpty()) {
-                            showPoints(patternNames.toString());
+                            }, 0, 2000); // 2000 pulled from Toast file defaults
                         }
                     } else {
                         Set<Patterns.Pattern> unselectedPatterns = patterns.squareUnselected(buttonView.getId());
