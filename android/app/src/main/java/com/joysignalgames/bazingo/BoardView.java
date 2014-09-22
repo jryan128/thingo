@@ -107,9 +107,12 @@ public class BoardView extends ViewGroup {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         Set<Patterns.Pattern> selectedPatterns = patterns.squareSelected(buttonView.getId());
+                        StringBuilder patternNames = new StringBuilder();
                         String delim = "";
                         for (Patterns.Pattern pattern : selectedPatterns) {
                             pointsKeeper.points += pattern.points;
+                            patternNames.append(delim).append(pattern.name);
+                            delim = ", ";
 
                             final List<BoardSquareButton> buttons = new ArrayList<BoardSquareButton>();
                             for (Integer squareNumber : pattern.squares) {
