@@ -10,7 +10,7 @@ import com.joysignalgames.bazingo.app.R;
 
 public class BoardSquareButton extends CompoundButton {
 
-    private String description = "";
+    private String description = "No description.";
 
     public BoardSquareButton(Context context) {
         super(context, null, R.attr.boardSquareStyle);
