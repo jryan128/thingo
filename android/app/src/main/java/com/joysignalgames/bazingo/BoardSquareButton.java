@@ -1,19 +1,28 @@
 package com.joysignalgames.bazingo;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
-import com.joysignalgames.bazingo.app.R;
+import com.joysignalgames.bazingo.R;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class BoardSquareButton extends CompoundButton {
 
+    public final Handler handler = new Handler();
     private String description = "No description.";
+    private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
+    private int isPatternSelected = 0;
 
-    public BoardSquareButton(Context context) {
-        super(context, null, R.attr.boardSquareStyle);
+    public BoardSquareButton(Context context, AttributeSet attrs) {
+        super(context, attrs, R.attr.boardSquareStyle);
         setTextColor(getResources().getColor(R.color.board_text));
     }
 
@@ -75,11 +84,29 @@ public class BoardSquareButton extends CompoundButton {
         };
     }
 
+    @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
+        if (isPatternSelected > 0) {
+            mergeDrawableStates(drawableState, STATE_PATTERN_SELECTED);
+        }
+        return drawableState;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setPatternSelected(boolean isPatternSelected) {
+        if (isPatternSelected) {
+            this.isPatternSelected += 1;
+        } else {
+            this.isPatternSelected -= 1;
+        }
+        refreshDrawableState();
     }
 }

@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BoardSquareButton">
         <attr name="boardSquareStyle" format="reference" />
+        <attr name="state_pattern_selected" format="boolean"/>
     </declare-styleable>
 </resources>

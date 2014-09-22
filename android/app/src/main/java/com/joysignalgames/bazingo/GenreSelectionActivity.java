@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.*;
 import com.joysignalgames.bazingo.BoardActivity;
 import com.joysignalgames.bazingo.Genres;
-import com.joysignalgames.bazingo.app.R;
+import com.joysignalgames.bazingo.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,13 +1,17 @@
 package com.joysignalgames.bazingo;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-import com.joysignalgames.bazingo.app.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BoardView extends ViewGroup {
     public BoardView(Context context) {
@@ -18,7 +22,7 @@ public class BoardView extends ViewGroup {
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = new BoardSquareButton(getContext());
+            BoardSquareButton square = new BoardSquareButton(getContext(), null);
             // FIXME: find out if setting the id to a number like this is really okay
             // the only thing I can imagine going wrong is if the ids conflict with
             // something else and the saved state reloading goes wrong
@@ -73,8 +77,9 @@ public class BoardView extends ViewGroup {
         return (int) Math.floor(Math.sqrt(totalChildCount));
     }
 
+    // FIXME: this is a fucking mess
     public static class BoardController {
-        public static void setupBoardSquareButtonListeners(final Context context, BoardView boardView, final Patterns patterns, final BoardActivity.PointsKeeper pointsKeeper) {
+        public static void setupBoardSquareButtonListeners(final Context context, final BoardView boardView, final Patterns patterns, final BoardActivity.PointsKeeper pointsKeeper) {
             CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
                 Toast previousToast = null;
 
@@ -94,7 +99,7 @@ public class BoardView extends ViewGroup {
                         previousToast.cancel();
                     }
 
-                    Toast toast = previousToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                    Toast toast = previousToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                     toast.show();
                 }
 
@@ -102,12 +107,31 @@ public class BoardView extends ViewGroup {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         Set<Patterns.Pattern> selectedPatterns = patterns.squareSelected(buttonView.getId());
-                        StringBuilder patternNames = new StringBuilder();
                         String delim = "";
                         for (Patterns.Pattern pattern : selectedPatterns) {
                             pointsKeeper.points += pattern.points;
-                            patternNames.append(delim).append(pattern.name);
-                            delim = ", ";
+
+                            final List<BoardSquareButton> buttons = new ArrayList<BoardSquareButton>();
+                            for (Integer squareNumber : pattern.squares) {
+                                BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(squareNumber);
+                                buttons.add(button);
+                                button.setPatternSelected(true);
+                            }
+
+                            Timer myTimer = new Timer();
+                            myTimer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    for (final BoardSquareButton button : buttons) {
+                                        button.handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                button.setPatternSelected(false);
+                                            }
+                                        });
+                                    }
+                                }
+                            }, 3500); // 3500 pulled from Toast file defaults
                         }
                         if (!selectedPatterns.isEmpty()) {
                             showPoints(patternNames.toString());

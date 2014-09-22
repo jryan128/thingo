@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import com.joysignalgames.bazingo.app.R;
+import com.joysignalgames.bazingo.R;
 
 import java.io.IOException;
 
