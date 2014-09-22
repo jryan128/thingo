@@ -47,4 +47,13 @@ public class Board {
     public String getPhrase(int position) {
         return phraseData.get(position)[0];
     }
+
+    public String getDescription(int position) {
+        String[] data = phraseData.get(position);
+        if (data.length >= 2) {
+            return data[1];
+        } else {
+            return "No description.";
+        }
+    }
 }

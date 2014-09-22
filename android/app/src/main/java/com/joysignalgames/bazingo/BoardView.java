@@ -1,6 +1,7 @@
 package com.joysignalgames.bazingo;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -123,8 +124,20 @@ public class BoardView extends ViewGroup {
                 }
             };
 
+            final OnLongClickListener descriptionListener = new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    BoardSquareButton button = (BoardSquareButton) v;
+                    Toast toast = Toast.makeText(context, button.getDescription(), Toast.LENGTH_LONG);
+                    toast.show();
+                    return true;
+                }
+            };
+
             for (int i = 0; i < 25; i++) {
-                ((BoardSquareButton) boardView.getChildAt(i)).setOnCheckedChangeListener(listener);
+                BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(i);
+                button.setOnCheckedChangeListener(listener);
+                button.setOnLongClickListener(descriptionListener);
             }
         }
     }

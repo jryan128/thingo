@@ -79,6 +79,7 @@ public class BoardActivity extends ActionBarActivity {
             for (int i = 0; i < 25; i++) {
                 BoardSquareButton square = (BoardSquareButton) boardView.getChildAt(i);
                 square.setText(board.getPhrase(i));
+                square.setDescription(board.getDescription(i));
             }
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not load the genre (" + genre + ").", e);
