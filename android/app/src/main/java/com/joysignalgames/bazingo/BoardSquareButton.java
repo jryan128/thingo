@@ -49,8 +49,7 @@ public class BoardSquareButton extends CompoundButton {
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        SavedState ss = new SavedState(superState, description);
-        return ss;
+        return new SavedState(superState, description);
     }
 
     static class SavedState extends BaseSavedState {
