@@ -47,7 +47,7 @@ public class BoardController {
     }
 
     /**
-     * Handles all board interaction, pattern recognition,
+     * Handles all board square checking, pattern recognition,
      * and the reactions the GUI makes to newly made (or unmade) patterns.
      */
     private class OnBoardSquareCheckListener implements CompoundButton.OnCheckedChangeListener {
