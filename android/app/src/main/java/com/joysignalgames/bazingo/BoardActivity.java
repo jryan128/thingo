@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import com.joysignalgames.bazingo.R;
 
 import java.io.IOException;
 
@@ -49,7 +48,7 @@ public class BoardActivity extends ActionBarActivity {
         // during onRestoreInstanceState AND the user cannot interact with the board yet.
         // NOTE: It probably would be more clear and explicit to just turn off saveEnabled on BoardView and
         // handle all of the saving/loading manually. But I'm lazy.
-        BoardView.BoardController.setupBoardSquareButtonListeners(this, boardView, patterns, pointsKeeper);
+        new BoardController(this, boardView, patterns, pointsKeeper).setupBoardSquareButtonListeners();
     }
 
     @Override
