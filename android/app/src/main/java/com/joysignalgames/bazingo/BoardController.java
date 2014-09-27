@@ -75,6 +75,9 @@ public class BoardController {
 
                 Timer timer = new Timer();
                 ShowMadePatternsTask showPatternsTask = new ShowMadePatternsTask(timer, newlyMadePatterns);
+
+                // Run the ShowMadePatternsTask every 2 seconds, until it runs out of patterns
+                // and cancels itself.
                 timer.schedule(showPatternsTask, 0, 2000); // 2000 (LENGTH_SHORT) pulled from Toast file defaults
             }
         }
