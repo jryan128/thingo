@@ -68,6 +68,7 @@ public class BoardView extends ViewGroup {
     }
 
     private int getNumberOfRowsAndCols(int totalChildCount) {
+        // TODO: sqrt?! really inefficient, should just save or set the row/col size
         return (int) Math.floor(Math.sqrt(totalChildCount));
     }
 }
