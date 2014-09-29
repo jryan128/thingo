@@ -1,32 +1,28 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.ssl.SSLContextConfigurator;
+import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/myapp/";
+    public static final String BASE_URI = "https://localhost:8080/myapp/";
 
-    /**
-     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
-     *
-     * @return Grizzly HTTP server.
-     */
     public static HttpServer startServer() {
-        // create a resource config that scans for JAX-RS resources and providers
-        // in com.example package
-        final ResourceConfig rc = new ResourceConfig().packages("com.joysignalgames.bazingo.internal.server.genre");
-
-        // create and start a new instance of grizzly http server
-        // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        ResourceConfig rc = new ResourceConfig().packages("com.joysignalgames.bazingo.internal.server.genre");
+        SSLContextConfigurator sslCon = SSLContextConfigurator.DEFAULT_CONFIG;
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc, true,
+                new SSLEngineConfigurator(sslCon, false, false, false));
     }
 
     public static void main(String[] args) throws IOException {
+        PropertyChecker.validateSystemPropertiesOrDie();
         final HttpServer server = startServer();
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
@@ -41,6 +37,25 @@ public class Main {
             e.printStackTrace();
         } finally {
             server.shutdown();
+        }
+    }
+
+    private static class PropertyChecker {
+        private static void validateSystemPropertiesOrDie() {
+            List<String> propertiesNotSet = new ArrayList<>();
+            checkProperty("javax.net.ssl.keyStore", propertiesNotSet);
+            checkProperty("javax.net.ssl.keyStorePassword", propertiesNotSet);
+            if (!propertiesNotSet.isEmpty()) {
+                throw new RuntimeException(String.format(
+                        "The needed keystore system properties were not set. The properties %s are needed.",
+                        propertiesNotSet));
+            }
+        }
+
+        private static void checkProperty(String propertyKey, List<String> propertiesNotSet) {
+            if (!System.getProperties().containsKey(propertyKey)) {
+                propertiesNotSet.add(propertyKey);
+            }
         }
     }
 }
