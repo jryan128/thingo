@@ -39,6 +39,8 @@ public class GenreSelectionActivity extends ActionBarActivity {
 
     private void setupWidgets() throws IOException {
         List<String> genres = new ArrayList<String>(Genres.INSTANCE.getGenreNames(getAssets()));
+        genres.add("Custom Boards");
+        int customBoardsPos = genres.size() - 1;
         final ArrayAdapter<String> genreList = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, genres);
 
         EditText editText = (EditText) findViewById(R.id.search_genres);
@@ -64,14 +66,19 @@ public class GenreSelectionActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.genres);
         listView.setAdapter(genreList);
         listView.setTextFilterEnabled(true);
+        final long customBoardId = listView.getAdapter().getItemId(customBoardsPos);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-
-                Intent intent = new Intent(getBaseContext(), BoardActivity.class);
-                intent.putExtra("genre", ((TextView) view).getText().toString());
-                startActivity(intent);
+                if (id == customBoardId) {
+                    Intent intent = new Intent(getBaseContext(), CustomBoardActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getBaseContext(), BoardActivity.class);
+                    intent.putExtra("genre", ((TextView) view).getText().toString());
+                    startActivity(intent);
+                }
             }
         });
     }
