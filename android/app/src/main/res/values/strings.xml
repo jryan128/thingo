@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Bazingo</string>
-    <string name="category_page_step_1"><b>Step 1: </b> What\'s the genre of the movie you\'re watching?</string>
+    <string name="category_page_step_1">What\'s the genre of the movie you\'re watching?</string>
     <string name="category_page_hint">Search Genres…</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_category_page">categoryPage</string>
