@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -59,7 +60,7 @@ public class BoardActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         patterns = savedInstanceState.getParcelable("patterns");
         pointsKeeper.points = savedInstanceState.getInt("points");

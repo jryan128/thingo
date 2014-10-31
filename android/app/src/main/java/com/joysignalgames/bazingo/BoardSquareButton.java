@@ -8,6 +8,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 import com.joysignalgames.bazingo.R;
+import org.jetbrains.annotations.NotNull;
 
 public class BoardSquareButton extends CompoundButton {
 
@@ -22,13 +23,13 @@ public class BoardSquareButton extends CompoundButton {
     }
 
     @Override
-    public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
+    public void onInitializeAccessibilityEvent(@NotNull AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(BoardSquareButton.class.getName());
     }
 
     @Override
-    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+    public void onInitializeAccessibilityNodeInfo(@NotNull AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(BoardSquareButton.class.getName());
     }
@@ -41,6 +42,7 @@ public class BoardSquareButton extends CompoundButton {
         description = ss.description;
     }
 
+    @NotNull
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -61,9 +63,9 @@ public class BoardSquareButton extends CompoundButton {
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeString(description);
+        public void writeToParcel(@NotNull Parcel destination, int flags) {
+            super.writeToParcel(destination, flags);
+            destination.writeString(description);
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR
