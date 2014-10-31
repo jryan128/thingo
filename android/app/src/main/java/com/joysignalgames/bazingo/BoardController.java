@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class BoardController {
+class BoardController {
     private final Context context;
     private final BoardView boardView;
     private final Patterns patterns;
@@ -51,7 +51,7 @@ public class BoardController {
      * and the reactions the GUI makes to newly made (or unmade) patterns.
      */
     private class OnBoardSquareCheckListener implements CompoundButton.OnCheckedChangeListener {
-        private Toaster toaster = new Toaster(); // Teehee.
+        private final Toaster toaster = new Toaster(); // Teehee.
         private boolean isBoardEnabled = true; // The board is disabled when newly made patterns are being shown to the user.
 
         @Override

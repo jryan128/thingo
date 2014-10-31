@@ -4,15 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 import com.joysignalgames.bazingo.R;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 public class BoardSquareButton extends CompoundButton {
 
@@ -21,8 +16,8 @@ public class BoardSquareButton extends CompoundButton {
     private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
     private int isPatternSelected = 0;
 
-    public BoardSquareButton(Context context, AttributeSet attrs) {
-        super(context, attrs, R.attr.boardSquareStyle);
+    public BoardSquareButton(Context context) {
+        super(context, null, R.attr.boardSquareStyle);
         setTextColor(getResources().getColor(R.color.board_text));
     }
 

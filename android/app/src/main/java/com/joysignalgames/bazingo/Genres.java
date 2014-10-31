@@ -23,7 +23,7 @@ import java.util.Set;
 public enum Genres {
     INSTANCE; // singleton instance
 
-    public static final String GENRES_DIR = "genres";
+    private static final String GENRES_DIR = "genres";
     private static final String GENRES_LOG_TAG = "Genres";
 
     public Set<String> getGenreNames(AssetManager assets) throws IOException {

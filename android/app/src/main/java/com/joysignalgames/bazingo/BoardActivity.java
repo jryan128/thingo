@@ -14,7 +14,7 @@ import java.io.IOException;
 public class BoardActivity extends ActionBarActivity {
     private BoardView boardView;
     private Patterns patterns;
-    private PointsKeeper pointsKeeper = new PointsKeeper();
+    private final PointsKeeper pointsKeeper = new PointsKeeper();
 
     public static class PointsKeeper {
         public int points = 0;
@@ -23,7 +23,7 @@ public class BoardActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         try {

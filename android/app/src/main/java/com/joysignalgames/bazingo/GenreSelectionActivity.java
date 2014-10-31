@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GenreSelectionActivity extends ActionBarActivity {
 
-    public static final String CATEGORY_ACTIVITY_LOG_TAG = "CategoryActivity";
+    private static final String CATEGORY_ACTIVITY_LOG_TAG = "CategoryActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.ViewGroup;
 
-public class BoardView extends ViewGroup {
+class BoardView extends ViewGroup {
 
     public final Handler handler = new Handler();
 
@@ -16,7 +16,7 @@ public class BoardView extends ViewGroup {
 
     private void createBoardSquares() {
         for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = new BoardSquareButton(getContext(), null);
+            BoardSquareButton square = new BoardSquareButton(getContext());
             // FIXME: find out if setting the id to a number like this is really okay
             // the only thing I can imagine going wrong is if the ids conflict with
             // something else and the saved state reloading goes wrong

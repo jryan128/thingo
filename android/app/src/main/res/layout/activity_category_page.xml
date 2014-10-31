@@ -17,6 +17,7 @@
 
     <EditText
         android:drawableLeft="@drawable/abc_ic_search"
+        android:drawableStart="@drawable/abc_ic_search"
         android:hint="@string/category_page_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
