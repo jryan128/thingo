@@ -14,6 +14,28 @@ import java.util.List;
 public class Main {
     public static final String BASE_URI = "https://localhost:8080/myapp/";
 
+    public static void main(String[] args) throws IOException {
+        final HttpServer server = startServer();
+
+        // Let OS signals (like CTRL-C) clean up the application properly.
+        // Mostly so we can easily make it a daemon or a service.
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                server.shutdown();
+            }
+        });
+
+        // Start the server.
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            server.shutdown();
+        }
+    }
+
     public static HttpServer startServer() {
         ResourceConfig rc = new ResourceConfig().packages("com.joysignalgames.bazingo.internal.server.genre");
         SSLContextConfigurator sslCon = setupSslContextConfigurator();
@@ -31,25 +53,9 @@ public class Main {
         return sslCon;
     }
 
-    public static void main(String[] args) throws IOException {
-        final HttpServer server = startServer();
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                server.shutdown();
-            }
-        });
-
-        try {
-            Thread.currentThread().join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            server.shutdown();
-        }
-    }
-
+    /**
+     * Checks if the needed system properties were set.
+     */
     private static class PropertyChecker {
         private static void validateSystemPropertiesOrDie() {
             List<String> propertiesNotSet = new ArrayList<>();
