@@ -7,13 +7,32 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomBoardActivity extends ActionBarActivity {
+    // TODO: Break out into own class that can get and add new boards via web service
+    private final List<String> customBoards = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_board_page);
+        setupListView();
+    }
+
+    private void setupListView() {
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(createListAdapter());
+    }
+
+    private ArrayAdapter<String> createListAdapter() {
+        // TODO: Load from web service, or local...
+        return new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, customBoards);
     }
 
     @Override
@@ -40,7 +59,8 @@ public class CustomBoardActivity extends ActionBarActivity {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-//                    m_Text = input.getText().toString();
+                    String newBoardName = input.getText().toString();
+                    customBoards.add(newBoardName);
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
