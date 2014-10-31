@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomBoardActivity extends ActionBarActivity {
+public class CustomBoardListActivity extends ActionBarActivity {
     // TODO: Break out into own class that can get and add new boards via web service
     private final List<String> customBoards = new ArrayList<String>();
 

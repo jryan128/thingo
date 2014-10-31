@@ -10,9 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.joysignalgames.bazingo.BoardActivity;
-import com.joysignalgames.bazingo.Genres;
-import com.joysignalgames.bazingo.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +69,7 @@ public class GenreSelectionActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 if (id == customBoardId) {
-                    Intent intent = new Intent(getBaseContext(), CustomBoardActivity.class);
+                    Intent intent = new Intent(getBaseContext(), CustomBoardListActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getBaseContext(), BoardActivity.class);
