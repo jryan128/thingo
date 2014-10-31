@@ -1,6 +1,7 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -16,14 +17,24 @@ public class Main {
 
     public static HttpServer startServer() {
         ResourceConfig rc = new ResourceConfig().packages("com.joysignalgames.bazingo.internal.server.genre");
-        SSLContextConfigurator sslCon = SSLContextConfigurator.DEFAULT_CONFIG;
+        SSLContextConfigurator sslCon = setupSslContextConfigurator();
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc, true,
                 new SSLEngineConfigurator(sslCon, false, false, false));
     }
 
-    public static void main(String[] args) throws IOException {
+    private static SSLContextConfigurator setupSslContextConfigurator() {
         PropertyChecker.validateSystemPropertiesOrDie();
+        SSLContextConfigurator sslCon = SSLContextConfigurator.DEFAULT_CONFIG;
+        if (!sslCon.validateConfiguration(true)) {
+            throw new RuntimeException("SSL configuration is invalid. Check your provided " +
+                    "system properties (-Djavax.net.ssl...) for a bad keystore location and/or password.");
+        }
+        return sslCon;
+    }
+
+    public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
