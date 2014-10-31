@@ -25,7 +25,7 @@ public class Main {
         PropertyChecker.validateSystemPropertiesOrDie();
         SSLContextConfigurator sslCon = SSLContextConfigurator.DEFAULT_CONFIG;
         if (!sslCon.validateConfiguration(true)) {
-            throw new RuntimeException("SSL configuration is invalid. Check your provided " +
+            throw new RuntimeException("The SSL keystore configuration is invalid. Check your provided " +
                     "system properties (-Djavax.net.ssl...) for a bad keystore location and/or password.");
         }
         return sslCon;
