@@ -26,7 +26,7 @@ public class CustomBoardListActivity extends ActionBarActivity {
     }
 
     private void setupListView() {
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.customBoardList);
         listView.setAdapter(createListAdapter());
     }
 
