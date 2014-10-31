@@ -44,7 +44,7 @@ public class Main {
     }
 
     private static SSLContextConfigurator setupSslContextConfigurator() {
-        PropertyChecker.validateSystemPropertiesOrDie();
+        validateSSLSystemPropertiesOrDie();
         SSLContextConfigurator sslCon = SSLContextConfigurator.DEFAULT_CONFIG;
         if (!sslCon.validateConfiguration(true)) {
             throw new RuntimeException("The SSL keystore configuration is invalid. Check your provided " +
@@ -53,25 +53,20 @@ public class Main {
         return sslCon;
     }
 
-    /**
-     * Checks if the needed system properties were set.
-     */
-    private static class PropertyChecker {
-        private static void validateSystemPropertiesOrDie() {
-            List<String> propertiesNotSet = new ArrayList<>();
-            checkProperty("javax.net.ssl.keyStore", propertiesNotSet);
-            checkProperty("javax.net.ssl.keyStorePassword", propertiesNotSet);
-            if (!propertiesNotSet.isEmpty()) {
-                throw new RuntimeException(String.format(
-                        "The needed keystore system properties were not set. The properties %s are needed.",
-                        propertiesNotSet));
-            }
+    private static void validateSSLSystemPropertiesOrDie() {
+        List<String> propertiesNotSet = new ArrayList<>();
+        checkProperty("javax.net.ssl.keyStore", propertiesNotSet);
+        checkProperty("javax.net.ssl.keyStorePassword", propertiesNotSet);
+        if (!propertiesNotSet.isEmpty()) {
+            throw new RuntimeException(String.format(
+                    "The needed keystore system properties were not set. The properties %s are needed.",
+                    propertiesNotSet));
         }
+    }
 
-        private static void checkProperty(String propertyKey, List<String> propertiesNotSet) {
-            if (!System.getProperties().containsKey(propertyKey)) {
-                propertiesNotSet.add(propertyKey);
-            }
+    private static void checkProperty(String propertyKey, List<String> propertiesNotSet) {
+        if (!System.getProperties().containsKey(propertyKey)) {
+            propertiesNotSet.add(propertyKey);
         }
     }
 }
