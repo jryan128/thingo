@@ -11,7 +11,7 @@ Running
 * Made and run with Intellij. 
 * When running you must provide the system properties 
 `javax.net.ssl.keyStore` and `javax.net.ssl.keyStorePassword`.
-* Cleans up properly to OS kill signals.
+* Cleans up properly to OS kill signals (SIGHUP, etc).
 
 An example, running the server with an example keystore in the current path:
 
