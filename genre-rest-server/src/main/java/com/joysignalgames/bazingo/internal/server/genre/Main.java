@@ -16,24 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
-
-        // Let OS signals (like CTRL-C) clean up the application properly.
-        // Mostly so we can easily make it a daemon or a service.
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                server.shutdown();
-            }
-        });
-
-        // Start the server.
-        try {
-            Thread.currentThread().join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            server.shutdown();
-        }
+        daemonize(server);
     }
 
     public static HttpServer startServer() {
@@ -68,6 +51,34 @@ public class Main {
         if (!System.getProperties().containsKey(propertyKey)) {
             propertiesNotSet.add(propertyKey);
         }
+    }
+
+    private static void daemonize(HttpServer server) {
+        addShutdownHookForProperCleanup(server);
+        waitUntilServerOrProcessStops(server);
+    }
+
+    private static void waitUntilServerOrProcessStops(HttpServer server) {
+        // Joins the current thread to just wait until the process
+        // is interrupted, has an error, or is shutdown via a signal.
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            server.shutdown();
+        }
+    }
+
+    private static void addShutdownHookForProperCleanup(final HttpServer server) {
+        // Let OS signals (like CTRL-C) clean up the application properly.
+        // So we can kind of use it as daemon or a service.
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                server.shutdown();
+            }
+        });
     }
 }
 
