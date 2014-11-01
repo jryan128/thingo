@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static final String BASE_URI = "https://localhost:8080/myapp/";
+    public static final String BASE_URI = "https://localhost:8080/";
 
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
