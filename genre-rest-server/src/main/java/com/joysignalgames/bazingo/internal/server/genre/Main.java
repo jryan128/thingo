@@ -14,6 +14,16 @@ import java.util.List;
 public class Main {
     public static final String BASE_URI = "https://localhost:8080/";
 
+    /**
+     * Must be run with a Java keystore, via the following system properties:
+     * <ul>
+     *     <li><tt>javax.net.ssl.keyStore</tt>: the location of the created keystore</li>
+     *     <li><tt>javax.net.ssl.keyStorePassword</tt>: its password</li>
+     * </ul>
+     * Keystores can be created with Java command-line tool <tt>keytool</tt>.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         daemonize(server);

@@ -1,16 +1,11 @@
 genre-rest-server
 =================
 
-Setup
------
-You need a Java keystore for the SSL cert. Look at the program `keytool` included
-with the JDK for more info on how to create a keystore.
-
-Running
--------
 * Made and run with Intellij. 
-* When running you must provide the system properties 
+* Main class is called `Main`.
+* Must be run with a Java keystore, via the system properties
 `javax.net.ssl.keyStore` and `javax.net.ssl.keyStorePassword`.
+* Keystores can be created with Java command-line tool <tt>keytool</tt>.
 * Cleans up properly to OS kill signals (SIGHUP, etc).
 
 An example, running the server with an example keystore in the current path:
