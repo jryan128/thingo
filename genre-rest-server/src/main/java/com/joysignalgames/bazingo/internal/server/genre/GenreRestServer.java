@@ -1,5 +1,6 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
+import com.joysignalgames.bazingo.internal.server.genre.services.GenreService;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
@@ -53,7 +54,7 @@ class GenreRestServer {
         rc.register(new AbstractBinder() {
             @Override
             protected void configure() {
-    //            bind(GenreStore.class).to(GenreStore.class);
+                bind(GenreService.class).to(GenreService.class);
             }
         });
         return rc;
