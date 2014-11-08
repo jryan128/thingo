@@ -3,6 +3,7 @@ package com.joysignalgames.bazingo.internal.server.genre;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -10,9 +11,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class Main {
-    public static final String BASE_URI = "https://localhost:8080/";
+class Main {
+    static final String BASE_URI = "https://localhost:8080/";
 
     /**
      * Must be run with a Java keystore, via the following system properties:
@@ -29,11 +31,23 @@ public class Main {
         daemonize(server);
     }
 
-    public static HttpServer startServer() {
-        ResourceConfig rc = new ResourceConfig().packages("com.joysignalgames.bazingo.internal.server.genre");
-        SSLContextConfigurator sslCon = setupSslContextConfigurator();
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc, true,
-                new SSLEngineConfigurator(sslCon, false, false, false));
+    static HttpServer startServer() {
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
+                createResourceConfig(), true,
+                new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
+        );
+    }
+
+    private static ResourceConfig createResourceConfig() {
+        ResourceConfig rc = new ResourceConfig();
+        rc.packages("com.joysignalgames.bazingo.internal.server.genre.resources");
+        rc.register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+    //            bind(GenreStore.class).to(GenreStore.class);
+            }
+        });
+        return rc;
     }
 
     private static SSLContextConfigurator setupSslContextConfigurator() {
@@ -86,6 +100,7 @@ public class Main {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
+                Logger.getLogger(Main.class.getName()).info("Shutting down...");
                 server.shutdown();
             }
         });
