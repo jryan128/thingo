@@ -36,8 +36,8 @@ public class GenreResourceTest {
     }
 
     private static void setupClientSslSystemProperties() {
-        System.getProperties().setProperty("javax.net.ssl.trustStorePassword", "password");
         System.getProperties().setProperty("javax.net.ssl.trustStore", "src/test/keystore/test.jks");
+        System.getProperties().setProperty("javax.net.ssl.trustStorePassword", "password");
     }
 
     private static void setupServerSslSystemProperties() {
