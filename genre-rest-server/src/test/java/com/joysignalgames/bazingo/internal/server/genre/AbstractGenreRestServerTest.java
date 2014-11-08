@@ -9,6 +9,9 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
+/**
+ * Makes it easy to create a test.
+ */
 @Ignore
 public class AbstractGenreRestServerTest {
 
