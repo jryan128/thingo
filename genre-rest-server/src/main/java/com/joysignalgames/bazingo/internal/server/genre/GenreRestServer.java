@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @see com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester
  */
-public class GenreRestServer {
+class GenreRestServer {
     static final String BASE_URI = "https://localhost:8080/";
 
     /**
@@ -40,7 +40,7 @@ public class GenreRestServer {
         daemonize(server);
     }
 
-    public static HttpServer startServer() {
+    static HttpServer startServer() {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
                 createResourceConfig(), true,
                 new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
