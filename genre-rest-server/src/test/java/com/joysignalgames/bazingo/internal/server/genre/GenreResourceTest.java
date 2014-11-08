@@ -1,11 +1,15 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Configuration;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 
+import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +25,7 @@ public class GenreResourceTest {
         // start the server
         server = Main.startServer();
         // create the client
-        Client c = ClientBuilder.newClient();
+        Client c = ClientBuilder.newBuilder().hostnameVerifier((hostname, session) -> true).build();
 
         // uncomment the following line if you want to enable
         // support for JSON in the client (you also have to uncomment
