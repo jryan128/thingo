@@ -31,7 +31,7 @@ class Main {
         daemonize(server);
     }
 
-    static HttpServer startServer() {
+    public static HttpServer startServer() {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
                 createResourceConfig(), true,
                 new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)

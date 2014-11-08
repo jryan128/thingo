@@ -3,18 +3,17 @@ package com.joysignalgames.bazingo.internal.server.genre;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Ignore;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import static org.junit.Assert.assertEquals;
+@Ignore
+public class AbstractResourceTest {
 
-public class GenreResourceTest {
-
-    private HttpServer server;
-    private WebTarget target;
+    protected HttpServer server;
+    protected WebTarget target;
 
     @Before
     public void setUp() throws Exception {
@@ -48,11 +47,5 @@ public class GenreResourceTest {
     @After
     public void tearDown() throws Exception {
         server.shutdown();
-    }
-
-    @Test
-    public void testGet() {
-        String responseMsg = target.path("/").request().get(String.class);
-        assertEquals("asdf", responseMsg);
     }
 }
