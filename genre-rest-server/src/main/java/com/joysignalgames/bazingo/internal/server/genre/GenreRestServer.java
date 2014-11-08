@@ -13,7 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-class GenreRestServer {
+/**
+ * <p>Main class for the rest server that serves up user genre info.
+ * See {@link #main(String[])} for required system properties.</p>
+ *
+ * <p>For easy testing and running (NOT IN PRODUCTION) see
+ * {@link com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester}</p>
+ *
+ * @see com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester
+ */
+public class GenreRestServer {
     static final String BASE_URI = "https://localhost:8080/";
 
     /**
