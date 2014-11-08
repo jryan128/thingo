@@ -4,7 +4,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import com.joysignalgames.bazingo.internal.server.genre.Main;
 import org.glassfish.grizzly.http.server.HttpServer;
 
 import org.junit.After;
