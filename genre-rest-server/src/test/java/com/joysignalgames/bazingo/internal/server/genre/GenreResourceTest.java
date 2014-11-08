@@ -18,7 +18,10 @@ public class GenreResourceTest {
 
     @Before
     public void setUp() throws Exception {
+        setupServerSslSystemProperties();
         server = Main.startServer();
+
+        setupClientSslSystemProperties();
 
         // Build a client that has hostname verification for SSL disabled.
         // Without this the tests fail due to SSL certification for localhost.
@@ -32,13 +35,23 @@ public class GenreResourceTest {
         target = c.target(Main.BASE_URI);
     }
 
+    private static void setupClientSslSystemProperties() {
+        System.getProperties().setProperty("javax.net.ssl.trustStorePassword", "password");
+        System.getProperties().setProperty("javax.net.ssl.trustStore", "src/test/keystore/test.jks");
+    }
+
+    private static void setupServerSslSystemProperties() {
+        System.getProperties().setProperty("javax.net.ssl.keyStore", "src/test/keystore/test.jks");
+        System.getProperties().setProperty("javax.net.ssl.keyStorePassword", "password");
+    }
+
     @After
     public void tearDown() throws Exception {
         server.shutdown();
     }
 
     @Test
-    public void testGET() {
+    public void testGet() {
         String responseMsg = target.path("/").request().get(String.class);
         assertEquals("asdf", responseMsg);
     }
