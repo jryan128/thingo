@@ -1,18 +1,14 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Configuration;
-
 import org.glassfish.grizzly.http.server.HttpServer;
-
-import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
 import static org.junit.Assert.assertEquals;
 
 public class GenreResourceTest {
@@ -22,9 +18,10 @@ public class GenreResourceTest {
 
     @Before
     public void setUp() throws Exception {
-        // start the server
         server = Main.startServer();
-        // create the client
+
+        // Build a client that has hostname verification for SSL disabled.
+        // Without this the tests fail due to SSL certification for localhost.
         Client c = ClientBuilder.newBuilder().hostnameVerifier((hostname, session) -> true).build();
 
         // uncomment the following line if you want to enable
@@ -32,7 +29,6 @@ public class GenreResourceTest {
         // dependency on jersey-media-json module in pom.xml and Main.startServer())
         // --
         // c.configuration().enable(new org.glassfish.jersey.media.json.JsonJaxbFeature());
-
         target = c.target(Main.BASE_URI);
     }
 
@@ -41,11 +37,8 @@ public class GenreResourceTest {
         server.shutdown();
     }
 
-    /**
-     * Test to see that the message "Got it!" is sent in the response.
-     */
     @Test
-    public void testGetIt() {
+    public void testGET() {
         String responseMsg = target.path("/").request().get(String.class);
         assertEquals("asdf", responseMsg);
     }
