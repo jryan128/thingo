@@ -1,11 +1,11 @@
 package com.joysignalgames.bazingo.internal.server.genre.resources;
 
-import com.joysignalgames.bazingo.internal.server.genre.AbstractResourceTest;
+import com.joysignalgames.bazingo.internal.server.genre.AbstractGenreRestServerTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class GenreResourceTest extends AbstractResourceTest {
+public class GenreResourceTest extends AbstractGenreRestServerTest {
 
     @Test
     public void testGet() {

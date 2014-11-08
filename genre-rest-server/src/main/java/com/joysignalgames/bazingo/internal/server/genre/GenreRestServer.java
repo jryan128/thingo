@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-class Main {
+class GenreRestServer {
     static final String BASE_URI = "https://localhost:8080/";
 
     /**
@@ -100,7 +100,7 @@ class Main {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                Logger.getLogger(Main.class.getName()).info("Shutting down...");
+                Logger.getLogger(GenreRestServer.class.getName()).info("Shutting down...");
                 server.shutdown();
             }
         });
