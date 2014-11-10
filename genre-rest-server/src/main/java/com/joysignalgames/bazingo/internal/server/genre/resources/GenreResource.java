@@ -51,7 +51,7 @@ public class GenreResource {
 
     @DELETE
     public Response deleteGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
-        if (user == null | genreId == null) {
+        if (user == null || genreId == null) {
             return makeBadRequestResponse();
         }
         genreService.removeGenre(user, genreId);

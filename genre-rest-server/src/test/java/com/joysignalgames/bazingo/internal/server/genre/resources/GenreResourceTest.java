@@ -40,8 +40,24 @@ public class GenreResourceTest extends AbstractGenreRestServerTest {
     @Test
     public void testCreateGenre() {
         createNewGenreForUser1();
+    }
+
+    @Test
+    public void testDeleteGenre() {
+        URI whereNewGenreIs = createNewGenreForUser1();
+        client.target(whereNewGenreIs).queryParam("u", "user1").request().delete();
         String actual = newBaseTarget().queryParam("u", "user1").request().get(String.class);
-        assertEquals("[1, 2, bf]", actual);
+        assertEquals("[1, 2]", actual);
+    }
+
+    @Test
+    public void testUpdateGenre() {
+        URI whereNewGenreIs = createNewGenreForUser1();
+        String dataExpected = "New DATA IS BETTER DATA RWAR.";
+        Entity<String> entity = Entity.entity(dataExpected, MediaType.TEXT_PLAIN);
+        client.target(whereNewGenreIs).queryParam("u", "user1").request().put(entity);
+        String dataActual = client.target(whereNewGenreIs).request().get(String.class);
+        assertEquals(dataExpected, dataActual);
     }
 
     private URI createNewGenreForUser1() {
@@ -51,6 +67,8 @@ public class GenreResourceTest extends AbstractGenreRestServerTest {
         URI whereNewGenreIs = postResponse.getLocation();
         String dataActual = client.target(whereNewGenreIs).request().get(String.class);
         assertEquals(dataExpected, dataActual);
+        String actual = newBaseTarget().queryParam("u", "user1").request().get(String.class);
+        assertEquals("[1, 2, bf]", actual);
         return whereNewGenreIs;
     }
 }
