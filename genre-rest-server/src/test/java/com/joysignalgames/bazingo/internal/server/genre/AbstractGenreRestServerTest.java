@@ -16,7 +16,7 @@ import javax.ws.rs.client.WebTarget;
 public class AbstractGenreRestServerTest {
 
     protected HttpServer server;
-    protected WebTarget target;
+    protected Client client;
 
     @Before
     public void setUp() throws Exception {
@@ -24,17 +24,23 @@ public class AbstractGenreRestServerTest {
         server = GenreRestServer.startServer();
 
         setupClientSslSystemProperties();
-
         // Build a client that has hostname verification for SSL disabled.
         // Without this the tests fail due to SSL certification for localhost.
-        Client c = ClientBuilder.newBuilder().hostnameVerifier((hostname, session) -> true).build();
+        client = ClientBuilder.newBuilder().hostnameVerifier((hostname, session) -> true).build();
+    }
 
+    @After
+    public void tearDown() throws Exception {
+        server.shutdown();
+    }
+
+    protected WebTarget newBaseTarget() {
         // uncomment the following line if you want to enable
         // support for JSON in the client (you also have to uncomment
         // dependency on jersey-media-json module in pom.xml and GenreRestServer.startServer())
         // --
         // c.configuration().enable(new org.glassfish.jersey.media.json.JsonJaxbFeature());
-        target = c.target(GenreRestServer.BASE_URI);
+        return client.target(GenreRestServer.BASE_URI);
     }
 
     private static void setupClientSslSystemProperties() {
@@ -45,10 +51,5 @@ public class AbstractGenreRestServerTest {
     private static void setupServerSslSystemProperties() {
         System.getProperties().setProperty("javax.net.ssl.keyStore", "src/test/keystore/test.jks");
         System.getProperties().setProperty("javax.net.ssl.keyStorePassword", "password");
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        server.shutdown();
     }
 }

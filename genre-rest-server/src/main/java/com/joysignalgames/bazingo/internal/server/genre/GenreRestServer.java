@@ -8,6 +8,7 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ class GenreRestServer {
         rc.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(GenreService.class).to(GenreService.class);
+                bind(GenreService.class).to(GenreService.class).in(Singleton.class);
             }
         });
         return rc;
