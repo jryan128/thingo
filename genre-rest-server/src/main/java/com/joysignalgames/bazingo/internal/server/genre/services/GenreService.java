@@ -36,6 +36,7 @@ public class GenreService {
 
     public String createGenre(String user, String data) {
         int i = nextId.getAndIncrement();
+        // WARNING: Keep in mind order of puts matter here.
         genres.put(i, data);
         usersToGenreIds.putIfAbsent(user, Collections.synchronizedList(new ArrayList<>()));
         usersToGenreIds.get(user).add(i);
