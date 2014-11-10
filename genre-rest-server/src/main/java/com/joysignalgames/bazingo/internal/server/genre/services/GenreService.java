@@ -36,9 +36,9 @@ public class GenreService {
 
     public String createGenre(String user, String data) {
         int i = nextId.getAndIncrement();
+        genres.put(i, data);
         usersToGenreIds.putIfAbsent(user, Collections.synchronizedList(new ArrayList<>()));
         usersToGenreIds.get(user).add(i);
-        genres.put(i, data);
         return convertIntToBase36String(i);
     }
 
