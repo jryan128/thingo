@@ -49,7 +49,7 @@ public class GenreService {
 
     public void removeGenre(String user, String id) {
         Integer i = convertToBase36Integer(id);
-        // WARNING: Keep in mind order of puts matter here.
+        // WARNING: Keep in mind order of remove matter here.
         usersToGenreIds.get(user).remove(i);
         genres.remove(i);
     }
