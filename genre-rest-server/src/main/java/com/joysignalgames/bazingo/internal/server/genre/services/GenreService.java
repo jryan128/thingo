@@ -67,6 +67,7 @@ public class GenreService {
     }
 
     public GenreService() {
+        // FIXME: exception handling, Files.list is not in try-with-resources.
         Path genreStore = Paths.get("src/test/genrestore");
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(genreStore)) {
             int largest = -1;
