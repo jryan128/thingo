@@ -41,11 +41,11 @@ public class GenreResource {
     }
 
     @PUT
-    public Response updateGenre(@QueryParam("i") String genreId, String data) {
+    public Response updateGenre(@QueryParam("u") String user, @QueryParam("i") String genreId, String data) {
         if (genreId == null || data == null) {
             return makeBadRequestResponse();
         }
-        genreService.updateGenre(genreId, data);
+        genreService.updateGenre(user, genreId, data);
         return Response.accepted().build();
     }
 
