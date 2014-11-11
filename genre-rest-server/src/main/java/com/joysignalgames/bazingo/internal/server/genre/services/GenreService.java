@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableSet;
 
-// TODO: Could probably be more performant. Should do some tests using synch instead of ConcurrentHashMap
-// or tweak ConcurrentHashMap params.
 @Singleton
 public class GenreService {
 
