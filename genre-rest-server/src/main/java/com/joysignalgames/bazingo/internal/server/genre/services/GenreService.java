@@ -58,10 +58,23 @@ public class GenreService {
     }
 
     public String createGenre(String user, String data) {
-        long id = nextId.getAndIncrement();
-        genres.put(id, new Genre(user, data));
-        db.commit();
-        return convertLongTo36BaseString(id);
+        int genreCountForUser = getGenreCountForUser(user);
+        if (genreCountForUser < MAX_GENRES) {
+            long id = nextId.getAndIncrement();
+            genres.put(id, new Genre(user, data));
+            db.commit();
+            return convertLongTo36BaseString(id);
+        } else {
+            throw new RuntimeException(String.format("User %s has exceeded max genres (%s).", user, genreCountForUser));
+        }
+    }
+
+    private int getGenreCountForUser(String user) {
+        int count = 0;
+        for (Long ignored : Fun.filter(userToGenreIdTuples, user)) {
+            count += 1;
+        }
+        return count;
     }
 
     private String convertLongTo36BaseString(Long i) {
