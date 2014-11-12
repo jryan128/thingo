@@ -33,7 +33,7 @@ public class GenreResource {
 
     @POST
     public Response createGenre(@QueryParam("u") String user, String data) throws URISyntaxException {
-        if (user == null || data == null) {
+        if (isAnythingNull(user, data)) {
             return makeBadRequestResponse();
         }
         String newId = genreService.createGenre(user, data);
@@ -42,7 +42,7 @@ public class GenreResource {
 
     @PUT
     public Response updateGenre(@QueryParam("u") String user, @QueryParam("i") String genreId, String data) {
-        if (genreId == null || data == null) {
+        if (isAnythingNull(user, genreId, data)) {
             return makeBadRequestResponse();
         }
         genreService.updateGenre(user, genreId, data);
@@ -51,11 +51,20 @@ public class GenreResource {
 
     @DELETE
     public Response deleteGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
-        if (user == null || genreId == null) {
+        if (isAnythingNull(user, genreId)) {
             return makeBadRequestResponse();
         }
         genreService.removeGenre(user, genreId);
         return Response.accepted().build();
+    }
+
+    private static boolean isAnythingNull(Object... objects) {
+        for (Object object : objects) {
+            if (object == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static Response makeBadRequestResponse() {
