@@ -2,6 +2,7 @@ package com.joysignalgames.bazingo.internal.server.genre;
 
 import com.joysignalgames.bazingo.internal.server.genre.services.GenreService;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.ServerConfiguration;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -43,10 +44,15 @@ class GenreRestServer {
     }
 
     static HttpServer startServer() {
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
+        HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
                 createResourceConfig(), true,
                 new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
         );
+        ServerConfiguration serverConfiguration = httpServer.getServerConfiguration();
+        serverConfiguration.setMaxPostSize(2048);
+        serverConfiguration.setMaxFormPostSize(2048);
+        serverConfiguration.setMaxRequestParameters(20);
+        return httpServer;
     }
 
     private static ResourceConfig createResourceConfig() {

@@ -21,12 +21,11 @@ import java.util.NavigableSet;
 @Singleton
 public class GenreService {
 
-    private static final Long MAX_GENRES = 100L;
     private final DB db;
     private final HTreeMap<Long, Genre> genres;
     private final NavigableSet<Fun.Tuple2<String, Long>> userToGenreIdTuples;
     private final Atomic.Long nextId;
-    
+
     public GenreService() {
         db = DBMaker.newFileDB(new File("db"))
                 .closeOnJvmShutdown()
@@ -58,21 +57,34 @@ public class GenreService {
     }
 
     public String createGenre(String user, String data) {
-        int genreCountForUser = getGenreCountForUser(user);
-        if (genreCountForUser < MAX_GENRES) {
-            long id = nextId.getAndIncrement();
-            genres.put(id, new Genre(user, data));
-            db.commit();
-            return convertLongTo36BaseString(id);
-        } else {
-            throw new RuntimeException(String.format("User %s has exceeded max genres (%s).", user, genreCountForUser));
+        checkIfDataSizeTooBig(data);
+        checkIfGenreCountTooBig(user);
+
+        long id = nextId.getAndIncrement();
+        genres.put(id, new Genre(user, data));
+        db.commit();
+        return convertLongTo36BaseString(id);
+    }
+
+    // NOTE: Should have the HTTP server itself also limit sizes.
+    private void checkIfDataSizeTooBig(String data) {
+        int maxBytes = 1024;
+        if (data.getBytes().length > maxBytes) {
+            throw new RuntimeException(String.format("Genre goes over the max size %s bytes", maxBytes));
         }
     }
 
-    private int getGenreCountForUser(String user) {
+    // TODO: Not the best for performance probably. We should be able to keep a number as we go along
+    // instead of having to count them over and over. It's not much of a problem since creating genre
+    // won't happen too much.
+    private int checkIfGenreCountTooBig(String user) {
         int count = 0;
         for (Long ignored : Fun.filter(userToGenreIdTuples, user)) {
             count += 1;
+        }
+        int maxGenres = 100;
+        if (count > maxGenres) {
+            throw new RuntimeException(String.format("User %s has exceeded max genres (%s).", user, count));
         }
         return count;
     }
