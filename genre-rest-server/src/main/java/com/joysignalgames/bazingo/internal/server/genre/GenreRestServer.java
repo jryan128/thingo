@@ -8,6 +8,7 @@ import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.mapdb.DBMaker;
 
 import javax.inject.Singleton;
 import java.io.IOException;
@@ -25,16 +26,21 @@ import java.util.logging.Logger;
  *
  * @see com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester
  */
-class GenreRestServer {
+public class GenreRestServer {
     static final String BASE_URI = "https://localhost:8080/";
+    public static final String DB_LOCATION_PROPERTY = "db.location";
 
     /**
-     * Must be run with a Java keystore, via the following system properties:
+     * <p>Must be run with a Java keystore, via the following system properties:
      * <ul>
      *     <li><tt>javax.net.ssl.keyStore</tt>: the location of the created keystore</li>
      *     <li><tt>javax.net.ssl.keyStorePassword</tt>: its password</li>
      * </ul>
      * Keystores can be created with Java command-line tool <tt>keytool</tt>.
+     * </p>
+     *
+     * <p>Can set the mapdb's location with <tt>db.location</tt> (default is current directory).</p>
+     *
      * @param args
      * @throws IOException
      */
@@ -44,15 +50,23 @@ class GenreRestServer {
     }
 
     static HttpServer startServer() {
+        validateDbFileProperty();
         HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
                 createResourceConfig(), true,
                 new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
         );
         ServerConfiguration serverConfiguration = httpServer.getServerConfiguration();
-        serverConfiguration.setMaxPostSize(2048);
-        serverConfiguration.setMaxFormPostSize(2048);
+//        serverConfiguration.setMaxPostSize(2048);
+//        serverConfiguration.setMaxFormPostSize(2048);
         serverConfiguration.setMaxRequestParameters(20);
         return httpServer;
+    }
+
+    private static void validateDbFileProperty() {
+        String location = System.getProperty(DB_LOCATION_PROPERTY);
+        if (location == null) {
+            System.setProperty(DB_LOCATION_PROPERTY, "genre-rest-server-mapdb");
+        }
     }
 
     private static ResourceConfig createResourceConfig() {
