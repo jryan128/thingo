@@ -48,6 +48,7 @@ public class GenreService {
     }
 
     public List<String> getListOfGenresForUser(String user) {
+        checkIfAnythingNull(user);
         // TODO: Convert to streams.
         List<String> ids = new ArrayList<>();
         for (Long id : Fun.filter(userToGenreIdTuples, user)) {
@@ -56,7 +57,18 @@ public class GenreService {
         return ids;
     }
 
+    private static void checkIfAnythingNull(Object object) {
+        if (object == null) {
+            throw new NullPointerException();
+        }
+    }
+
+    private static String convertLongTo36BaseString(Long i) {
+        return Long.toString(i, 36);
+    }
+
     public String createGenre(String user, String data) {
+        checkIfAnythingNull(user, data);
         checkIfDataSizeTooBig(data);
         checkIfGenreCountTooBig(user);
 
@@ -66,8 +78,15 @@ public class GenreService {
         return convertLongTo36BaseString(id);
     }
 
+    private static void checkIfAnythingNull(Object... objects) {
+        for (Object object : objects) {
+            checkIfAnythingNull(object);
+        }
+    }
+
     // NOTE: Should have the HTTP server itself also limit sizes.
-    private void checkIfDataSizeTooBig(String data) {
+    // TODO: Unit test.
+    private static void checkIfDataSizeTooBig(String data) {
         int maxBytes = 1024;
         if (data.getBytes().length > maxBytes) {
             throw new RuntimeException(String.format("Genre goes over the max size %s bytes", maxBytes));
@@ -77,6 +96,7 @@ public class GenreService {
     // TODO: Not the best for performance probably. We should be able to keep a number as we go along
     // instead of having to count them over and over. It's not much of a problem since creating genre
     // won't happen too much.
+    // TODO: Unit test.
     private int checkIfGenreCountTooBig(String user) {
         int count = 0;
         for (Long ignored : Fun.filter(userToGenreIdTuples, user)) {
@@ -89,14 +109,14 @@ public class GenreService {
         return count;
     }
 
-    private String convertLongTo36BaseString(Long i) {
-        return Long.toString(i, 36);
-    }
-
     public void removeGenre(String user, String id) {
         Long i = convertToBase36Long(id);
         genres.remove(i);
         db.commit();
+    }
+
+    private static long convertToBase36Long(String id) {
+        return Long.parseLong(id, 36);
     }
 
     public String getGenre(String id) {
@@ -110,15 +130,12 @@ public class GenreService {
         db.commit();
     }
 
-    private long convertToBase36Long(String id) {
-        return Long.parseLong(id, 36);
-    }
-
     private static class Genre implements Serializable {
         public final String user;
         public final String tsv;
 
         public Genre(String user, String tsv) {
+            checkIfAnythingNull(user, tsv);
             this.user = user;
             this.tsv = tsv;
         }
