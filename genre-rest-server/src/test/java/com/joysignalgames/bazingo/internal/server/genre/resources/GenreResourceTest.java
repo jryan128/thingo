@@ -21,6 +21,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Simple tests that ensure everything probably works.
+ */
 public class GenreResourceTest extends AbstractGenreRestServerTest {
 
     public static String ROM_COM = loadTsv("../genres/Romantic Comedy.tsv");
