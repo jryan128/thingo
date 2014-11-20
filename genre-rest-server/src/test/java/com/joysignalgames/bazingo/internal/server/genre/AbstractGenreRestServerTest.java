@@ -17,7 +17,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.stream.Collectors;
 
 /**
- * Makes it easy to create a test.
+ * Makes it easy to create a server test.
  */
 @Ignore
 public class AbstractGenreRestServerTest {
