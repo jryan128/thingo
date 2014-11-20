@@ -46,7 +46,7 @@ public class GenreResource {
             return makeBadRequestResponse();
         }
         genreService.updateGenre(user, genreId, data);
-        return Response.accepted().build();
+        return Response.noContent().build();
     }
 
     @DELETE
@@ -55,7 +55,7 @@ public class GenreResource {
             return makeBadRequestResponse();
         }
         genreService.removeGenre(user, genreId);
-        return Response.accepted().build();
+        return Response.noContent().build();
     }
 
     private static boolean isAnythingNull(Object... objects) {
