@@ -1,6 +1,7 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -51,7 +52,10 @@ public class AbstractGenreRestServerTest {
 
         // Build a client that has hostname verification for SSL disabled.
         // Without this the tests fail due to SSL certification for localhost.
-        client = ClientBuilder.newBuilder().hostnameVerifier((hostname, session) -> true).build();
+        client = ClientBuilder.newBuilder()
+                .hostnameVerifier((hostname, session) -> true)
+                .register(JacksonFeature.class)
+                .build();
     }
 
     @After

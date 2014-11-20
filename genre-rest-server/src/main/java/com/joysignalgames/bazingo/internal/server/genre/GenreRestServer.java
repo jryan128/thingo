@@ -7,6 +7,7 @@ import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.mapdb.DBMaker;
 
@@ -78,6 +79,7 @@ public class GenreRestServer {
                 bind(GenreService.class).to(GenreService.class).in(Singleton.class);
             }
         });
+        rc.register(JacksonFeature.class);
         return rc;
     }
 
