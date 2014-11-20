@@ -23,17 +23,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 @Ignore
 public class AbstractGenreRestServerTest {
 
+    public static final File TEST_DB_DIR = new File("test-db");
     protected HttpServer server;
     protected Client client;
-    public static final File TEST_DB_DIR = new File("test-db");
-
-    @Before
-    public void setUp() throws Exception {
-        setupDbLocationSystemProperty();
-        setupServerSslSystemProperties();
-        setupClientSslSystemProperties();
-        setupServerAndClient();
-    }
 
     private static void setupDbLocationSystemProperty() {
         if (!TEST_DB_DIR.mkdir()) {
@@ -53,6 +45,14 @@ public class AbstractGenreRestServerTest {
         System.setProperty("javax.net.ssl.trustStorePassword", "password");
     }
 
+    @Before
+    public void setUp() throws Exception {
+        setupDbLocationSystemProperty();
+        setupServerSslSystemProperties();
+        setupClientSslSystemProperties();
+        setupServerAndClient();
+    }
+
     private void setupServerAndClient() {
         server = GenreRestServer.startServer();
 
@@ -65,7 +65,7 @@ public class AbstractGenreRestServerTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         deleteTestDbDir();
         stopServer();
     }

@@ -17,6 +17,19 @@ public class GenreResource {
     @Inject
     private GenreService genreService;
 
+    private static boolean isAnythingNull(Object... objects) {
+        for (Object object : objects) {
+            if (object == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Response makeBadRequestResponse() {
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response listGenresOrGetGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
@@ -57,18 +70,5 @@ public class GenreResource {
         }
         genreService.removeGenre(user, genreId);
         return Response.noContent().build();
-    }
-
-    private static boolean isAnythingNull(Object... objects) {
-        for (Object object : objects) {
-            if (object == null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static Response makeBadRequestResponse() {
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

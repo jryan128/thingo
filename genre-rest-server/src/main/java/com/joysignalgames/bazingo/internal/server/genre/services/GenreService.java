@@ -48,16 +48,6 @@ public class GenreService {
 //        gs.db.commit();
     }
 
-    public List<String> getListOfGenresForUser(String user) {
-        checkIfAnythingNull(user);
-        // TODO: Convert to streams instead of for loop?
-        List<String> ids = new ArrayList<>();
-        for (Long id : Fun.filter(userToGenreIdTuples, user)) {
-            ids.add(convertLongTo36BaseString(id));
-        }
-        return ids;
-    }
-
     private static void checkIfAnythingNull(Object object) {
         if (object == null) {
             throw new NullPointerException();
@@ -66,17 +56,6 @@ public class GenreService {
 
     private static String convertLongTo36BaseString(Long i) {
         return Long.toString(i, 36);
-    }
-
-    public String createGenre(String user, String data) {
-        checkIfAnythingNull(user, data);
-        checkIfDataSizeTooBig(data);
-        checkIfGenreCountTooBig(user);
-
-        long id = nextId.getAndIncrement();
-        genres.put(id, new Genre(user, data));
-        db.commit();
-        return convertLongTo36BaseString(id);
     }
 
     private static void checkIfAnythingNull(Object... objects) {
@@ -92,6 +71,31 @@ public class GenreService {
         if (data.getBytes().length > maxBytes) {
             throw new RuntimeException(String.format("Genre goes over the max size %s bytes", maxBytes));
         }
+    }
+
+    private static long convertToBase36Long(String id) {
+        return Long.parseLong(id, 36);
+    }
+
+    public List<String> getListOfGenresForUser(String user) {
+        checkIfAnythingNull(user);
+        // TODO: Convert to streams instead of for loop?
+        List<String> ids = new ArrayList<>();
+        for (Long id : Fun.filter(userToGenreIdTuples, user)) {
+            ids.add(convertLongTo36BaseString(id));
+        }
+        return ids;
+    }
+
+    public String createGenre(String user, String data) {
+        checkIfAnythingNull(user, data);
+        checkIfDataSizeTooBig(data);
+        checkIfGenreCountTooBig(user);
+
+        long id = nextId.getAndIncrement();
+        genres.put(id, new Genre(user, data));
+        db.commit();
+        return convertLongTo36BaseString(id);
     }
 
     // TODO: Not the best for performance probably. We should be able to keep a number as we go along
@@ -114,10 +118,6 @@ public class GenreService {
         Long i = convertToBase36Long(id);
         genres.remove(i);
         db.commit();
-    }
-
-    private static long convertToBase36Long(String id) {
-        return Long.parseLong(id, 36);
     }
 
     public String getGenre(String id) {
