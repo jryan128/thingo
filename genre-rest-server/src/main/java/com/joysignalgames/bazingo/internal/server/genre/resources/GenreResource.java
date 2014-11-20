@@ -18,9 +18,10 @@ public class GenreResource {
     private GenreService genreService;
 
     @GET
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response listGenresOrGetGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
         if (user != null && genreId == null) {
-            return Response.ok(genreService.getListOfGenresForUser(user).toString()).build();
+            return Response.ok(genreService.getListOfGenresForUser(user)).build();
         } else if (genreId != null && user == null) {
             try {
                 return Response.ok(genreService.getGenre(genreId)).build();
