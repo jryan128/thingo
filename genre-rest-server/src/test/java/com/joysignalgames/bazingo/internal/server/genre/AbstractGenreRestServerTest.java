@@ -3,6 +3,7 @@ package com.joysignalgames.bazingo.internal.server.genre;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -10,6 +11,10 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.stream.Collectors;
 
 /**
  * Makes it easy to create a test.
@@ -59,11 +64,30 @@ public class AbstractGenreRestServerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
-        if (TEST_DB_DIR.delete()) {
-            System.out.println("Could not delete test db directory " + TEST_DB_DIR.getAbsolutePath());
-        }
+    public void tearDown(){
+        deleteTestDbDir();
         stopServer();
+    }
+
+    private void deleteTestDbDir() {
+        try {
+            final SimpleFileVisitor<Path> deleteVisitor = new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            };
+            Files.walkFileTree(TEST_DB_DIR.toPath(), deleteVisitor);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not delete test db directory " + TEST_DB_DIR.getAbsolutePath(), e);
+        }
     }
 
     private void stopServer() {
