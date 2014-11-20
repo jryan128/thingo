@@ -1,15 +1,8 @@
 package com.joysignalgames.bazingo.internal.server.genre.services;
 
 import com.joysignalgames.bazingo.internal.server.genre.GenreRestServer;
-import org.mapdb.Atomic;
-import org.mapdb.Bind;
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-import org.mapdb.Fun;
-import org.mapdb.HTreeMap;
+import org.mapdb.*;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
