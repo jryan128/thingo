@@ -1,7 +1,8 @@
 genre-rest-server
 =================
 
-* Made and run with Intellij. 
+* Made and run with Intellij.
+* Artifact (jar that is the server) is made with Intellij NOT maven.
 * A example or test server class that uses the test keystore is called `GenreRestServerTester`
 * Main class is called `GenreRestServer`.
 * `GenreRestServer` must be run with a java keystore, via the system properties
@@ -12,4 +13,4 @@ genre-rest-server
 
 An example, running the server with an example keystore in the current path:
 
-`java -jar target/*.jar -Djavax.net.ssl.keyStore=./aRealKeystore  -Djavax.net.ssl.keyStorePassword=AGoodPassword`
+`java -jar out/*.jar -Djavax.net.ssl.keyStore=./aRealKeystore  -Djavax.net.ssl.keyStorePassword=AGoodPassword`
