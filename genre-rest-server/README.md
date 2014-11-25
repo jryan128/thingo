@@ -2,6 +2,7 @@ genre-rest-server
 =================
 
 * Made and run with Intellij.
+* Import Project -> pom.xml
 * Artifact (jar that is the server) is made with Intellij NOT maven.
 * A example or test server class that uses the test keystore is called `GenreRestServerTester`
 * Main class is called `GenreRestServer`.
