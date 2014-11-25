@@ -7,10 +7,13 @@ Folder Structure
 ----------------
  - genres: holds TSV files which hold all the category and board information
  - genre-rest-server: a RESTful server that serves genre information to the apps
- - pattern-creator: holds the pattern.tsv file, and a Java swing app to edit it
+ - pattern-creator: holds the pattern.tsv file, which the app versions use for pattern matching, and a Java swing app to edit it
  - android: the android app version of Bazingo
  - web: the jquery mobile and node.js version of Bazingo
  - ios: the ios app version of bazingo
+
+Check each project for its own README file.
+
 
 New Category Workflow
 ---------------------
