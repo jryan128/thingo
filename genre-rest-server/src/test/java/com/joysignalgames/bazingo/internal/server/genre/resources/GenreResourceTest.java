@@ -54,24 +54,20 @@ public class GenreResourceTest extends AbstractGenreRestServerTest {
         // Create ROM_COM genre for user 1.
         postNewGenreReturnId("user1", Entity.entity(ROM_COM, MediaType.TEXT_PLAIN_TYPE));
 
-        // Get list of created genres.
-        List<String> list = getListOfGenresForUser("user1");
+        List<String> genresForUser1 = getListOfGenresForUser("user1");
 
-        // Should only be one in the list, get it.
-        String data = getGenreData(list.get(0));
+        assertEquals("There should be only one genre for user1", 1, genresForUser1.size());
+        String storedRomComData = getGenreData(genresForUser1.get(0));
 
-        // Compare the data that was stored on the server with the data we have.
-        // They should be exactly the same.
-        assertEquals(ROM_COM, data);
+        // The storedRomComData that was stored on the server should be exactly
+        // the same as the data we sent.
+        assertEquals(ROM_COM, storedRomComData);
 
-        // Restart server. This is to see if the changes stay.
-        restartServer();
+        restartServer(); // This is to see if the changes stay after a reset.
 
         // Check if the genre is still there under the same ID.
-        data = getGenreData(list.get(0));
-
-        // Assert that the data is good again.
-        assertEquals(ROM_COM, data);
+        storedRomComData = getGenreData(genresForUser1.get(0));
+        assertEquals(ROM_COM, storedRomComData);
     }
 
     private String getGenreData(String id) {
