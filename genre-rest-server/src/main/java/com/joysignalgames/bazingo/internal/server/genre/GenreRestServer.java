@@ -75,7 +75,7 @@ public class GenreRestServer {
         rc.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(GenreService.class).to(GenreService.class).in(Singleton.class);
+                bind(GenreService.class).in(Singleton.class);
             }
         });
         rc.register(JacksonFeature.class);
