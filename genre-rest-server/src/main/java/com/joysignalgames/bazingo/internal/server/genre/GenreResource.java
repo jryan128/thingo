@@ -1,6 +1,6 @@
-package com.joysignalgames.bazingo.internal.server.genre.resources;
+package com.joysignalgames.bazingo.internal.server.genre;
 
-import com.joysignalgames.bazingo.internal.server.genre.services.GenreService;
+import com.joysignalgames.bazingo.internal.server.genre.GenreService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

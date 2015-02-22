@@ -1,6 +1,5 @@
-package com.joysignalgames.bazingo.internal.server.genre.services;
+package com.joysignalgames.bazingo.internal.server.genre;
 
-import com.joysignalgames.bazingo.internal.server.genre.GenreRestServer;
 import org.mapdb.*;
 
 import java.io.File;

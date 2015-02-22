@@ -1,6 +1,5 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
-import com.joysignalgames.bazingo.internal.server.genre.services.GenreService;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.ServerConfiguration;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;

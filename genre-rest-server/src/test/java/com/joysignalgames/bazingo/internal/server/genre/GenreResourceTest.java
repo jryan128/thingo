@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.internal.server.genre.resources;
+package com.joysignalgames.bazingo.internal.server.genre;
 
 import com.joysignalgames.bazingo.internal.server.genre.AbstractGenreRestServerTest;
 import org.junit.Test;
