@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 /**
  * <p>Main class for the rest server that serves up user genre info.
  * See {@link #main(String[])} for required system properties.</p>
- * <p>
  * <p>For easy testing and running (NOT IN PRODUCTION) see
  * {@link com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester}</p>
  *
@@ -32,12 +31,11 @@ public class GenreRestServer {
     /**
      * <p>Must be run with a Java keystore, via the following system properties:
      * <ul>
-     * <li><tt>javax.net.ssl.keyStore</tt>: the location of the created keystore</li>
-     * <li><tt>javax.net.ssl.keyStorePassword</tt>: its password</li>
+     * <li>{@code javax.net.ssl.keyStore}: the location of the created keystore</li>
+     * <li>{@code javax.net.ssl.keyStorePassword}: its password</li>
      * </ul>
      * Keystores can be created with Java command-line tool <tt>keytool</tt>.
      * </p>
-     * <p>
      * <p>Can set the mapdb's location with <tt>db.location</tt> (default is current directory).</p>
      *
      * @param args

@@ -1,7 +1,5 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
-import com.joysignalgames.bazingo.internal.server.genre.GenreService;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

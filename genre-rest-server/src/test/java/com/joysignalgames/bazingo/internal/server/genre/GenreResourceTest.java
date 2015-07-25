@@ -1,6 +1,5 @@
 package com.joysignalgames.bazingo.internal.server.genre;
 
-import com.joysignalgames.bazingo.internal.server.genre.AbstractGenreRestServerTest;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
