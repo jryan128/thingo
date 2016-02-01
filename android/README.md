@@ -1,10 +1,7 @@
-bazingo android
-===============
+# bazingo android
 
-
-Requirements
-------------
-- Intellij 14
+## Requirements
+- Intellij 15.0.3
 - Android SDK
   - Make sure you have the correct versions installed.
     - Check the .gradle, and .properties files.
@@ -19,7 +16,5 @@ Requirements
   - android-udev
 
 
-Intellij Setup
---------------
-
+## Intellij Setup
 - Import Project -> bazingo/android/build.gradle
