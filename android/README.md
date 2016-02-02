@@ -1,7 +1,7 @@
 # bazingo android
 
 ## Requirements
-- Intellij 15.0.3
+- Intellij 14
 - Android SDK
   - Make sure you have the correct versions installed.
     - Check the .gradle, and .properties files.
