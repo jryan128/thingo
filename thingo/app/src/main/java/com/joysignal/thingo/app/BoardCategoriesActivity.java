@@ -10,7 +10,7 @@ import android.view.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class BoardCategoriesActivity extends AppCompatActivity {
+class BoardCategoriesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;

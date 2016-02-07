@@ -2,4 +2,8 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <!-- Board Colors -->
+    <color name="board_background">#ff1e1e1e</color>
+    <color name="board_text">#ffececec</color>
+    <color name="board_pattern_selected">#ff0f69f4</color>
 </resources>

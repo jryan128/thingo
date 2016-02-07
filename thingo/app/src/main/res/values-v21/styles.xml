@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="android:Theme.Material">
+        <!-- FIXME: Copy boardSquareStyle to other versions as well? -->
+        <item name="boardSquareStyle">@style/BoardSquare</item>
     </style>
 </resources>
