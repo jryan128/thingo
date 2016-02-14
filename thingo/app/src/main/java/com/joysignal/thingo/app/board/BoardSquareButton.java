@@ -9,7 +9,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 import com.joysignal.thingo.app.R;
 
-class BoardSquareButton extends CompoundButton {
+public class BoardSquareButton extends CompoundButton {
 
     public final Handler handler = new Handler();
     private String description = "No description.";

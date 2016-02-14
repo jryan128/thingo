@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class BoardModel {
+public class BoardModel {
     private final List<String[]> phraseData;
 
     public static BoardModel loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
