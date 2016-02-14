@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
-import com.joysignal.thingo.app.board.BoardController;
-import com.joysignal.thingo.app.board.BoardView;
-import com.joysignal.thingo.app.board.PointsKeeper;
+import com.joysignal.thingo.app.board.*;
 
 import java.io.IOException;
 
@@ -35,7 +32,9 @@ public class BoardActivity extends Activity {
             // NOTE: see onPostCreate to see how and why controllers for BoardView are setup
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not setup board activity.", e);
-            // FIXME: fail some how?
+            // FIXME: popup an error before going back
+            Intent intent = new Intent(getBaseContext(), BoardCategoriesActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -75,7 +74,7 @@ public class BoardActivity extends Activity {
     private void populateBoardViewWithRandomPhrases() {
         String genre = getIntent().getStringExtra("genre");
         try {
-            Board board = Board.loadRandomBoardFromCategory(genre, BoardActivity.this);
+            BoardModel board = BoardModel.loadRandomBoardFromCategory(genre, BoardActivity.this);
             for (int i = 0; i < 25; i++) {
                 BoardSquareButton square = (BoardSquareButton) boardView.getChildAt(i);
                 square.setText(board.getPhrase(i));
@@ -84,7 +83,7 @@ public class BoardActivity extends Activity {
         } catch (IOException e) {
             Log.e("BoardActivity", "Could not load the genre (" + genre + ").", e);
             // FIXME: popup an error before going back
-            Intent intent = new Intent(getBaseContext(), GenreSelectionActivity.class);
+            Intent intent = new Intent(getBaseContext(), BoardCategoriesActivity.class);
             startActivity(intent);
         }
     }

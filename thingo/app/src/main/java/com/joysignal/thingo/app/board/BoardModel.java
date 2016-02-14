@@ -1,21 +1,23 @@
 package com.joysignal.thingo.app.board;
 
 import android.app.Activity;
+import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class BoardModel {
+    public static final String TAG = BoardModel.class.getSimpleName();
     private final List<String[]> phraseData;
 
     public static BoardModel loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
-        // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-        BufferedReader reader = null;
+        // TODO: Need to validate that there are at least 25 squares, possibly some other conditions
+        BufferedReader reader = new Categories(activity).makeReaderForCategory(category);
         try {
-            reader = Categories.INSTANCE.getCategoryPhraseFile(activity.getAssets(), category);
             // ignore the first line
             reader.readLine();
 
@@ -32,9 +34,7 @@ public class BoardModel {
             phraseData.add(12, freeSpaceData);
             return new BoardModel(phraseData);
         } finally {
-            if (reader != null) {
-                reader.close();
-            }
+            close(reader);
         }
     }
 
@@ -52,6 +52,16 @@ public class BoardModel {
             return data[1];
         } else {
             return "No description.";
+        }
+    }
+
+    private static void close(Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                Log.w(TAG, "Could not close closable " + closeable, e);
+            }
         }
     }
 }
