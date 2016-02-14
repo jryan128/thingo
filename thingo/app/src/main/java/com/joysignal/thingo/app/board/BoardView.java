@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.joysignal.thingo.app.R;
 
 public class BoardView extends ViewGroup {
-
+    private static final int NUMBER_OF_SQUARES = 25;
     public final Handler handler = new Handler();
 
     public BoardView(Context context) {
@@ -16,7 +16,7 @@ public class BoardView extends ViewGroup {
     }
 
     private void createBoardSquares() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
             // FIXME: find out if setting the id to a number like this is really okay
             // the only thing I can imagine going wrong is if the ids conflict with
@@ -28,7 +28,7 @@ public class BoardView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int childCount = getChildCount();
+        int childCount = getChildCount(); // TODO: maybe use NUMBER_OF_SQUARES, put an assert that it's equal to getChildCount?
         int n = getNumberOfRowsAndCols(childCount);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
@@ -69,7 +69,8 @@ public class BoardView extends ViewGroup {
     }
 
     private int getNumberOfRowsAndCols(int totalChildCount) {
-        // TODO: sqrt?! really inefficient, should just save or set the row/col size
+        // TODO: maybe use NUMBER_OF_SQUARES, put an assert that it's equal to getChildCount?
+        // TODO: sqrt?! really inefficient, should be cached with the value from NUMBER_OF_SQUARES
         return (int) Math.floor(Math.sqrt(totalChildCount));
     }
 }
