@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.joysignal.thingo.app.board.Categories;
+
+import java.util.Set;
 
 public class BoardCategoriesActivity extends AppCompatActivity {
     @Override
@@ -32,7 +35,9 @@ public class BoardCategoriesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter adapter = new MyAdapter(new String[]{"Romantic Comedy", "Horror", "Sci-Fi"});
+        Set<String> categoryNames = new Categories(this).getCategoryNames();
+        String[] strings = categoryNames.toArray(new String[categoryNames.size()]);
+        RecyclerView.Adapter adapter = new MyAdapter(strings);
         recyclerView.setAdapter(adapter);
     }
 
