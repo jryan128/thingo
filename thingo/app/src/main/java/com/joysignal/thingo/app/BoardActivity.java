@@ -88,7 +88,7 @@ public class BoardActivity extends Activity {
         }
     }
 
-    private void enterImmseriveMode() {
+    private void enterImmersiveMode() {
         // FIXME: Taken from Android samples, include proper license and whatever. (Apache 2.0)
         // BEGIN_INCLUDE (get_current_ui_flags)
         // The UI options currently enabled are represented by a bitfield.
