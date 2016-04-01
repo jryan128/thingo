@@ -22,7 +22,7 @@ public class BoardActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        enterImmseriveMode();
+        enterImmersiveMode();
 
         try {
             setupWidgets();
