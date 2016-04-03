@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class BoardModel {
-    public static final String TAG = BoardModel.class.getSimpleName();
+    private static final String TAG = BoardModel.class.getSimpleName();
     private final List<String[]> phraseData;
 
     public static BoardModel loadRandomBoardFromCategory(String category, Activity activity) throws IOException {
