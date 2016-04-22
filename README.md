@@ -8,10 +8,7 @@ Folder Structure
  - genres: holds TSV files which hold all the category and board information
  - genre-rest-server: a RESTful server that serves genre information to the apps
  - pattern-creator: holds the pattern.tsv file, which the app versions use for pattern matching, and a Java swing app to edit it
- - libgdx: the main version of the game that ports to all the platforms
  - android: the test android app version of bazingo before the libgdx version came along
- - web: the jquery mobile and node.js version of Bazingo, the first version of bazingo
- - ios: the test ios app version of bazingo, just playing around with objective-c
 
 Check each project for its own README file.
 
