@@ -5,6 +5,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
+import java.io.IOException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -18,7 +23,7 @@ public class BoardActivity extends Activity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
+    private RelativeLayout mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -51,16 +56,29 @@ public class BoardActivity extends Activity {
         setContentView(R.layout.activity_board);
 
         mVisible = true;
-        mContentView = findViewById(R.id.fullscreen_content);
+        mContentView = (RelativeLayout) findViewById(R.id.fullscreen_content);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        BoardView board = new BoardView(this);
+        try {
+            new BoardController(this, board, new Patterns(getAssets()), new PointsKeeper());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < 25; i++) {
+            BoardSquareButton square = (BoardSquareButton) board.getChildAt(i);
+            square.setText("Someone Falls In Love");
+            square.setDescription("Typical.");
+        }
+        mContentView.addView(board, params);
+//        setContentView(board);
 
-
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+//        // Set up the user interaction to manually show or hide the system UI.
+//        mContentView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                toggle();
+//            }
+//        });
     }
 
     @Override

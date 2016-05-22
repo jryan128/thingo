@@ -9,4 +9,9 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="BoardSquareButton">
+        <attr name="boardSquareStyle" format="reference" />
+        <attr name="state_pattern_selected" format="boolean"/>
+    </declare-styleable>
+
 </resources>
