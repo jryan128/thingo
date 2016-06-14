@@ -60,7 +60,7 @@ public class BoardActivity extends Activity {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         BoardView board = new BoardView(this);
         try {
-            new BoardController(this, board, new Patterns(getAssets()), new PointsKeeper());
+            new BoardController(this, board, new Patterns(getAssets()), new PointsKeeper()).setupBoardSquareButtonListeners();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

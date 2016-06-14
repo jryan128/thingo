@@ -22,11 +22,12 @@ public class BoardView extends ViewGroup {
     private void createBoardSquares() {
         for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                square.setId(View.generateViewId());
-            } else {
-                square.setId(i); // FIXME, possible collisions?
-            }
+            // FIXME, possible collisions?
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//                square.setId(View.generateViewId());
+//            } else {
+                square.setId(i);
+//            }
             addView(square);
         }
     }

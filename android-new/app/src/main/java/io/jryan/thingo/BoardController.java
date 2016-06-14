@@ -39,6 +39,7 @@ public class BoardController {
             }
         };
 
+        // FIXME: hardcoded 25
         for (int i = 0; i < 25; i++) {
             BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(i);
             button.setOnCheckedChangeListener(checkedChangeListener);
