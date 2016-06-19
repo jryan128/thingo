@@ -1,6 +1,8 @@
 package io.jryan.thingo;
 
 import android.content.res.AssetManager;
+import android.os.Build;
+import android.os.Debug;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -84,13 +86,12 @@ public class Patterns implements Parcelable {
         Set<Pattern> patterns = patternBuckets.get(i);
         Set<Pattern> completedPatterns = new HashSet<Pattern>();
         for (Pattern pattern : patterns) {
-            // FIXME: is this even helpful?
-            if (pattern.count <= 0) {
-                pattern.count = 0;
-            } else {
-                pattern.count -= 1;
+            if (BuildConfig.DEBUG && pattern.count <= 0) {
+                throw new AssertionError("Count is never expected to be less than zero. " +
+                        "Someone is selecting a square twice, or when they shouldn't.");
             }
 
+            pattern.count -= 1;
             if (pattern.count == 0) {
                 completedPatterns.add(pattern);
             }
@@ -102,20 +103,16 @@ public class Patterns implements Parcelable {
         Set<Pattern> patterns = patternBuckets.get(i);
         Set<Pattern> nowUncompletedPatterns = new HashSet<Pattern>();
         for (Pattern pattern : patterns) {
-            // FIXME: should we make sure we're not going over the max somehow?
             if (pattern.count == 0) {
                 nowUncompletedPatterns.add(pattern);
             }
             pattern.count += 1;
+            if (BuildConfig.DEBUG && pattern.count > pattern.neededCount) {
+                throw new AssertionError("pattern.count is never expected to go above neededCount." +
+                        " Someone unselected when they shouldn't have.");
+            }
         }
         return nowUncompletedPatterns;
-    }
-
-    @Override
-    public String toString() {
-        return "Patterns{" +
-                "patternBuckets=" + patternBuckets +
-                '}';
     }
 
     @Override
@@ -145,16 +142,19 @@ public class Patterns implements Parcelable {
         public final int points;
         public final List<Integer> squares = new ArrayList<Integer>();
         private int count = 0;
+        private final int neededCount;
 
         private Pattern(String name, int points) {
             this.name = name;
             this.points = points;
+            this.neededCount = points;
         }
 
         private Pattern(Parcel parcel) {
             this.name = parcel.readString();
             this.points = parcel.readInt();
             this.count = parcel.readInt();
+            this.neededCount = parcel.readInt();
             parcel.readList(squares, null);
         }
 
@@ -168,17 +168,8 @@ public class Patterns implements Parcelable {
             dest.writeString(name);
             dest.writeInt(points);
             dest.writeInt(count);
+            dest.writeInt(neededCount);
             dest.writeList(squares);
-        }
-
-        @Override
-        public String toString() {
-            return "Pattern{" +
-                    "name='" + name + '\'' +
-                    ", points=" + points +
-                    ", count=" + count +
-                    ", squares=" + squares +
-                    '}';
         }
     }
 }
