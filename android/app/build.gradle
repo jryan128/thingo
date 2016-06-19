@@ -1,34 +1,27 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '21.1.1'
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 19
+        applicationId "io.jryan.thingo"
+        minSdkVersion 15
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:gridlayout-v7:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.intellij:annotations:12.0'
-}
-
-// creates a link to the phrases directory in the top level
-preBuild.dependsOn {
-    task createLink << {
-        ant.symlink(resource: '../../../../../genres', link: file('src/main/assets/genres'), overwrite: true)
-        ant.symlink(resource: '../../../../../pattern-creator/patterns.tsv', link: file('src/main/assets/patterns.tsv'), overwrite: true)
-    }
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
 }

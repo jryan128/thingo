@@ -1,10 +1,8 @@
+*.iml
 .gradle
 /local.properties
-/.idea
-/android.iml
-/app/app.iml
+/.idea/workspace.xml
+/.idea/libraries
 .DS_Store
-/app/src/main/assets/genres
-/app/src/main/assets/patterns.tsv
 /build
-
+/captures
