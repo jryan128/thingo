@@ -1,16 +1,11 @@
 package io.jryan.thingo;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Handler;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class BoardView extends ViewGroup {
-    /** Must be greater than or equal to 0 */
-    private static final int NUMBER_OF_COLUMNS_AND_ROWS = 5;
-    private static final int NUMBER_OF_SQUARES = NUMBER_OF_COLUMNS_AND_ROWS * NUMBER_OF_COLUMNS_AND_ROWS;
     public final Handler handler = new Handler();
 
     public BoardView(Context context) {
@@ -20,13 +15,13 @@ public class BoardView extends ViewGroup {
     }
 
     private void createBoardSquares() {
-        for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
+        for (int i = 0; i < Board.NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
             // FIXME, possible collisions?
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 //                square.setId(View.generateViewId());
 //            } else {
-                square.setId(i);
+            square.setId(i);
 //            }
             addView(square);
         }
@@ -34,15 +29,15 @@ public class BoardView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (BuildConfig.DEBUG && getChildCount() != NUMBER_OF_SQUARES) {
+        if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
             throw new AssertionError("Expect the child count to be equal to the number of squares at all times.");
         }
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 //
-        int w = width / NUMBER_OF_COLUMNS_AND_ROWS;
-        int h = height / NUMBER_OF_COLUMNS_AND_ROWS;
-        for (int i = 0; i < NUMBER_OF_SQUARES; ++i) {
+        int w = width / Board.NUMBER_OF_COLUMNS_AND_ROWS;
+        int h = height / Board.NUMBER_OF_COLUMNS_AND_ROWS;
+        for (int i = 0; i < Board.NUMBER_OF_SQUARES; ++i) {
             // tell the child exactly what size it needs to be, screw you
             getChildAt(i).measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
@@ -53,10 +48,10 @@ public class BoardView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         // TODO: entire method could probably be more efficient
-        if (BuildConfig.DEBUG && getChildCount() != NUMBER_OF_SQUARES) {
+        if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
             throw new AssertionError("Expected the child count to be equal to the number of squares at all times.");
         }
-        int n = NUMBER_OF_COLUMNS_AND_ROWS;
+        int n = Board.NUMBER_OF_COLUMNS_AND_ROWS;
         int w = getMeasuredWidth() / n;
         int h = getMeasuredHeight() / n;
         for (int row = 0; row < n; ++row) {

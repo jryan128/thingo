@@ -58,18 +58,8 @@ public class BoardActivity extends Activity {
         mVisible = true;
         mContentView = (RelativeLayout) findViewById(R.id.fullscreen_content);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        BoardView board = new BoardView(this);
-        try {
-            new BoardController(this, board, new Patterns(getAssets()), new PointsKeeper()).setupBoardSquareButtonListeners();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        for (int i = 0; i < 25; i++) {
-            BoardSquareButton square = (BoardSquareButton) board.getChildAt(i);
-            square.setText("Someone Falls In Love");
-            square.setDescription("Typical.");
-        }
-        mContentView.addView(board, params);
+
+        mContentView.addView(new Board(this).getView(), params);
 //        setContentView(board);
 
 //        // Set up the user interaction to manually show or hide the system UI.
