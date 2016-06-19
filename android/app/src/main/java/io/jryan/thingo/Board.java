@@ -19,10 +19,8 @@ public class Board {
     }
 
     private final BoardView view;
-    private final Context context;
 
     public Board(Context context) {
-        this.context = context;
         view = new BoardView(context);
         try {
             new BoardController(context, view, new Patterns(context.getAssets()), new PointsKeeper()).setupBoardSquareButtonListeners();
