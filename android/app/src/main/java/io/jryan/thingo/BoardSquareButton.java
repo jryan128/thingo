@@ -4,17 +4,15 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 
 public class BoardSquareButton extends CompoundButton {
 
+    private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
     public final Handler handler = new Handler();
     private String description = "No description.";
-    private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
     private int isPatternSelected = 0;
 
     public BoardSquareButton(Context context) {
@@ -47,37 +45,6 @@ public class BoardSquareButton extends CompoundButton {
         return new SavedState(superState, description);
     }
 
-    static class SavedState extends BaseSavedState {
-        private final String description;
-
-        SavedState(Parcel source) {
-            super(source);
-            this.description = source.readString();
-        }
-
-        SavedState(Parcelable superState, String description) {
-            super(superState);
-            this.description = description;
-        }
-
-        @Override
-        public void writeToParcel(Parcel destination, int flags) {
-            super.writeToParcel(destination, flags);
-            destination.writeString(description);
-        }
-
-        public static final Parcelable.Creator<SavedState> CREATOR
-                = new Parcelable.Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
-    }
-
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
@@ -102,5 +69,35 @@ public class BoardSquareButton extends CompoundButton {
             this.isPatternSelected -= 1;
         }
         refreshDrawableState();
+    }
+
+    static class SavedState extends BaseSavedState {
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+        private final String description;
+
+        SavedState(Parcel source) {
+            super(source);
+            this.description = source.readString();
+        }
+
+        SavedState(Parcelable superState, String description) {
+            super(superState);
+            this.description = description;
+        }
+
+        @Override
+        public void writeToParcel(Parcel destination, int flags) {
+            super.writeToParcel(destination, flags);
+            destination.writeString(description);
+        }
     }
 }

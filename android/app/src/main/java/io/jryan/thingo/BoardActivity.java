@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-
-import java.io.IOException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

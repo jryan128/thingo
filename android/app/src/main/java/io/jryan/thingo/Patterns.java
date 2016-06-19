@@ -13,59 +13,16 @@ import java.util.List;
 import java.util.Set;
 
 public class Patterns implements Parcelable {
-    public static class Pattern implements Parcelable {
-        public final String name;
-        public final int points;
-        private int count = 0;
-        public final List<Integer> squares = new ArrayList<Integer>();
-
-        private Pattern(String name, int points) {
-            this.name = name;
-            this.points = points;
+    public static final Parcelable.Creator<Patterns> CREATOR
+            = new Parcelable.Creator<Patterns>() {
+        public Patterns createFromParcel(Parcel in) {
+            return new Patterns(in);
         }
 
-        private Pattern(Parcel parcel) {
-            this.name = parcel.readString();
-            this.points = parcel.readInt();
-            this.count = parcel.readInt();
-            parcel.readList(squares, null);
+        public Patterns[] newArray(int size) {
+            return new Patterns[size];
         }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(name);
-            dest.writeInt(points);
-            dest.writeInt(count);
-            dest.writeList(squares);
-        }
-
-        @Override
-        public String toString() {
-            return "Pattern{" +
-                    "name='" + name + '\'' +
-                    ", points=" + points +
-                    ", count=" + count +
-                    ", squares=" + squares +
-                    '}';
-        }
-
-        public static final Parcelable.Creator<Pattern> CREATOR
-                = new Parcelable.Creator<Pattern>() {
-            public Pattern createFromParcel(Parcel in) {
-                return new Pattern(in);
-            }
-
-            public Pattern[] newArray(int size) {
-                return new Pattern[size];
-            }
-        };
-    }
-
+    };
     private static final int TOTAL_SQUARES = Board.NUMBER_OF_SQUARES;
     private ArrayList<Set<Pattern>> patternBuckets = new ArrayList<Set<Pattern>>(TOTAL_SQUARES);
 
@@ -73,35 +30,13 @@ public class Patterns implements Parcelable {
         this.patternBuckets = makePatternBuckets(assets);
     }
 
-    public Set<Pattern> squareSelected(int i) {
-        Set<Pattern> patterns = patternBuckets.get(i);
-        Set<Pattern> completedPatterns = new HashSet<Pattern>();
-        for (Pattern pattern : patterns) {
-            // FIXME: is this even helpful?
-            if (pattern.count <= 0) {
-                pattern.count = 0;
-            } else {
-                pattern.count -= 1;
-            }
-
-            if (pattern.count == 0) {
-                completedPatterns.add(pattern);
-            }
+    private Patterns(Parcel in) {
+        this.patternBuckets = new ArrayList<Set<Pattern>>(TOTAL_SQUARES);
+        for (int i = 0; i < TOTAL_SQUARES; i++) {
+            ArrayList<Pattern> list = new ArrayList<Pattern>();
+            in.readTypedList(list, Pattern.CREATOR);
+            patternBuckets.get(i).addAll(list);
         }
-        return completedPatterns;
-    }
-
-    public Set<Pattern> squareUnselected(int i) {
-        Set<Pattern> patterns = patternBuckets.get(i);
-        Set<Pattern> nowUncompletedPatterns = new HashSet<Pattern>();
-        for (Pattern pattern : patterns) {
-            // FIXME: should we make sure we're not going over the max somehow?
-            if (pattern.count == 0) {
-                nowUncompletedPatterns.add(pattern);
-            }
-            pattern.count += 1;
-        }
-        return nowUncompletedPatterns;
     }
 
     private static ArrayList<Set<Pattern>> makePatternBuckets(AssetManager assets) throws IOException {
@@ -145,6 +80,37 @@ public class Patterns implements Parcelable {
         }
     }
 
+    public Set<Pattern> squareSelected(int i) {
+        Set<Pattern> patterns = patternBuckets.get(i);
+        Set<Pattern> completedPatterns = new HashSet<Pattern>();
+        for (Pattern pattern : patterns) {
+            // FIXME: is this even helpful?
+            if (pattern.count <= 0) {
+                pattern.count = 0;
+            } else {
+                pattern.count -= 1;
+            }
+
+            if (pattern.count == 0) {
+                completedPatterns.add(pattern);
+            }
+        }
+        return completedPatterns;
+    }
+
+    public Set<Pattern> squareUnselected(int i) {
+        Set<Pattern> patterns = patternBuckets.get(i);
+        Set<Pattern> nowUncompletedPatterns = new HashSet<Pattern>();
+        for (Pattern pattern : patterns) {
+            // FIXME: should we make sure we're not going over the max somehow?
+            if (pattern.count == 0) {
+                nowUncompletedPatterns.add(pattern);
+            }
+            pattern.count += 1;
+        }
+        return nowUncompletedPatterns;
+    }
+
     @Override
     public String toString() {
         return "Patterns{" +
@@ -164,23 +130,55 @@ public class Patterns implements Parcelable {
         }
     }
 
-    private Patterns(Parcel in) {
-        this.patternBuckets = new ArrayList<Set<Pattern>>(TOTAL_SQUARES);
-        for (int i = 0; i < TOTAL_SQUARES; i++) {
-            ArrayList<Pattern> list = new ArrayList<Pattern>();
-            in.readTypedList(list, Pattern.CREATOR);
-            patternBuckets.get(i).addAll(list);
+    public static class Pattern implements Parcelable {
+        public static final Parcelable.Creator<Pattern> CREATOR
+                = new Parcelable.Creator<Pattern>() {
+            public Pattern createFromParcel(Parcel in) {
+                return new Pattern(in);
+            }
+
+            public Pattern[] newArray(int size) {
+                return new Pattern[size];
+            }
+        };
+        public final String name;
+        public final int points;
+        public final List<Integer> squares = new ArrayList<Integer>();
+        private int count = 0;
+
+        private Pattern(String name, int points) {
+            this.name = name;
+            this.points = points;
+        }
+
+        private Pattern(Parcel parcel) {
+            this.name = parcel.readString();
+            this.points = parcel.readInt();
+            this.count = parcel.readInt();
+            parcel.readList(squares, null);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(points);
+            dest.writeInt(count);
+            dest.writeList(squares);
+        }
+
+        @Override
+        public String toString() {
+            return "Pattern{" +
+                    "name='" + name + '\'' +
+                    ", points=" + points +
+                    ", count=" + count +
+                    ", squares=" + squares +
+                    '}';
         }
     }
-
-    public static final Parcelable.Creator<Patterns> CREATOR
-            = new Parcelable.Creator<Patterns>() {
-        public Patterns createFromParcel(Parcel in) {
-            return new Patterns(in);
-        }
-
-        public Patterns[] newArray(int size) {
-            return new Patterns[size];
-        }
-    };
 }
