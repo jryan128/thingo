@@ -13,7 +13,7 @@ public class BoardSquareButton extends CompoundButton {
     private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
     public final Handler handler = new Handler();
     private String description = "No description.";
-    private int isPatternSelected = 0;
+    private boolean isPatternSelected = false;
 
     public BoardSquareButton(Context context) {
         super(context, null, R.attr.boardSquareStyle);
@@ -48,7 +48,7 @@ public class BoardSquareButton extends CompoundButton {
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
-        if (isPatternSelected > 0) {
+        if (isPatternSelected) {
             mergeDrawableStates(drawableState, STATE_PATTERN_SELECTED);
         }
         return drawableState;
@@ -63,11 +63,7 @@ public class BoardSquareButton extends CompoundButton {
     }
 
     public void setPatternSelected(boolean isPatternSelected) {
-        if (isPatternSelected) {
-            this.isPatternSelected += 1;
-        } else {
-            this.isPatternSelected -= 1;
-        }
+        this.isPatternSelected = isPatternSelected;
         refreshDrawableState();
     }
 

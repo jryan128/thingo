@@ -64,7 +64,7 @@ public class Patterns implements Parcelable {
     }
 
     private static void parsePatternFile(ArrayList<Set<Pattern>> patternBuckets, BufferedReader br) throws IOException {
-        // FIXME: Every time this is re-created (via BoardActivity) we reload from the tsv file.
+        // TODO: Every time this is re-created (via BoardActivity) we reload from the tsv file.
         // Instead, we should cache this information
         String line;
         while ((line = br.readLine()) != null) {
