@@ -23,7 +23,7 @@ public class Board {
     public Board(Context context) {
         view = new BoardView(context);
         try {
-            new BoardController(context, view, new Patterns(context.getAssets()), new PointsKeeper()).setupBoardSquareButtonListeners();
+            new BoardController(context, view, new Patterns(context.getAssets()), new PointKeeper()).setupBoardSquareButtonListeners();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

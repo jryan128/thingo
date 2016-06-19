@@ -17,13 +17,13 @@ public class BoardController {
     private final Context context;
     private final BoardView boardView;
     private final Patterns patterns;
-    private final PointsKeeper pointsKeeper;
+    private final PointKeeper pointKeeper;
 
-    public BoardController(Context context, BoardView boardView, Patterns patterns, PointsKeeper pointsKeeper) {
+    public BoardController(Context context, BoardView boardView, Patterns patterns, PointKeeper pointKeeper) {
         this.context = context;
         this.boardView = boardView;
         this.patterns = patterns;
-        this.pointsKeeper = pointsKeeper;
+        this.pointKeeper = pointKeeper;
     }
 
     public void setupBoardSquareButtonListeners() {
@@ -85,7 +85,7 @@ public class BoardController {
         private void handleAllNewlyLostPatterns(CompoundButton buttonView) {
             Set<Patterns.Pattern> unmadePatterns = patterns.squareUnselected(buttonView.getId());
             for (Patterns.Pattern pattern : unmadePatterns) {
-                pointsKeeper.points -= pattern.points;
+                pointKeeper.points -= pattern.points;
             }
             if (unmadePatterns.size() > 0) {
                 toaster.toastUpdatedPoints();
@@ -133,7 +133,7 @@ public class BoardController {
             }
 
             private void handleNextPatternDisplay(final Patterns.Pattern pattern) {
-                pointsKeeper.points += pattern.points;
+                pointKeeper.points += pattern.points;
                 List<BoardSquareButton> newButtons = new ArrayList<BoardSquareButton>();
                 for (Integer squareNumber : pattern.squares) {
                     final BoardSquareButton button = (BoardSquareButton) boardView.getChildAt(squareNumber);
@@ -169,11 +169,11 @@ public class BoardController {
 
             private void toastPatternAndPoints(String patternName) {
                 displayToast(String.format("%s!\nYou have %s points.", patternName,
-                        Integer.toString(pointsKeeper.points)));
+                        Integer.toString(pointKeeper.points)));
             }
 
             private void toastUpdatedPoints() {
-                displayToast(String.format("You have %s points.", Integer.toString(pointsKeeper.points)));
+                displayToast(String.format("You have %s points.", Integer.toString(pointKeeper.points)));
             }
 
             private void displayToast(String text) {

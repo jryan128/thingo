@@ -1,5 +1,5 @@
 package io.jryan.thingo;
 
-public class PointsKeeper {
+public class PointKeeper {
     public int points = 0;
 }
