@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="120sp"
         android:textColor="#f2f2f2"
-        android:text="348"
+        android:text="0"
         android:id="@+id/textView"
         android:singleLine="true"
         android:layout_centerInParent="true"
