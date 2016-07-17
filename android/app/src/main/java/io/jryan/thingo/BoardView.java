@@ -34,7 +34,7 @@ public class BoardView extends ViewGroup {
         }
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-//
+
         int w = width / Board.NUMBER_OF_COLUMNS_AND_ROWS;
         int h = height / Board.NUMBER_OF_COLUMNS_AND_ROWS;
         for (int i = 0; i < Board.NUMBER_OF_SQUARES; ++i) {
