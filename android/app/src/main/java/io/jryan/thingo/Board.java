@@ -22,11 +22,6 @@ public class Board {
 
     public Board(Context context) {
         view = new BoardView(context);
-        try {
-            new BoardController(context, view, new Patterns(context.getAssets()), new PointKeeper()).setupBoardSquareButtonListeners();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = (BoardSquareButton) view.getChildAt(i);
             square.setText("Someone Falls In Love");

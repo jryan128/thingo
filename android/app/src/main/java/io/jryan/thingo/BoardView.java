@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class BoardView extends ViewGroup {
-    public final Handler handler = new Handler();
 
     public BoardView(Context context) {
         super(context);

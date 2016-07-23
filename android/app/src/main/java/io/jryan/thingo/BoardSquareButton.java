@@ -10,10 +10,7 @@ import android.widget.CompoundButton;
 
 public class BoardSquareButton extends CompoundButton {
 
-    private static final int[] STATE_PATTERN_SELECTED = {R.attr.state_pattern_selected};
-    public final Handler handler = new Handler();
     private String description = "No description.";
-    private boolean isPatternSelected = false;
 
     public BoardSquareButton(Context context) {
         super(context, null, R.attr.boardSquareStyle);
@@ -45,26 +42,8 @@ public class BoardSquareButton extends CompoundButton {
         return new SavedState(superState, description);
     }
 
-    @Override
-    protected int[] onCreateDrawableState(int extraSpace) {
-        final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
-        if (isPatternSelected) {
-            mergeDrawableStates(drawableState, STATE_PATTERN_SELECTED);
-        }
-        return drawableState;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setPatternSelected(boolean isPatternSelected) {
-        this.isPatternSelected = isPatternSelected;
-        refreshDrawableState();
     }
 
     static class SavedState extends BaseSavedState {
