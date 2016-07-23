@@ -56,7 +56,7 @@ public class BoardActivity extends Activity {
         mContentView = (RelativeLayout) findViewById(R.id.fullscreen_content);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        mContentView.addView(new Board(this).getView(), params);
+        mContentView.addView(new Board(this), params);
 //        setContentView(board);
 
 //        // Set up the user interaction to manually show or hide the system UI.
