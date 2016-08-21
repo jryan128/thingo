@@ -12,13 +12,6 @@ public class Board extends ViewGroup {
     static final int NUMBER_OF_COLUMNS_AND_ROWS = 5;
     static final int NUMBER_OF_SQUARES = NUMBER_OF_COLUMNS_AND_ROWS * NUMBER_OF_COLUMNS_AND_ROWS;
 
-    static {
-        //noinspection PointlessBooleanExpression
-        if (BuildConfig.DEBUG && NUMBER_OF_COLUMNS_AND_ROWS < 0) {
-            throw new AssertionError("NUMBER_OF_COLUMNS_AND_ROWS must be >= 0");
-        }
-    }
-
     public Board(Context context) {
         super(context);
         setId(R.id.boardView); // have to set an id, or we won't get saving
@@ -43,9 +36,7 @@ public class Board extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
-            throw new AssertionError("Expect the child count to be equal to the number of squares at all times.");
-        }
+        checkChildCount();
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -62,9 +53,7 @@ public class Board extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         // TODO: entire method could probably be more efficient
-        if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
-            throw new AssertionError("Expected the child count to be equal to the number of squares at all times.");
-        }
+        checkChildCount();
         int n = Board.NUMBER_OF_COLUMNS_AND_ROWS;
         int w = getMeasuredWidth() / n;
         int h = getMeasuredHeight() / n;
@@ -81,6 +70,12 @@ public class Board extends ViewGroup {
                     child.layout(w * col, h * row, w * (col + 1), h * (row + 1));
                 }
             }
+        }
+    }
+
+    private void checkChildCount() {
+        if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
+            throw new AssertionError("Expect the child count to be equal to the number of squares at all times.");
         }
     }
 }
