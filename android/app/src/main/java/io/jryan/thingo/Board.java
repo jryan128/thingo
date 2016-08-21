@@ -75,7 +75,7 @@ public class Board extends ViewGroup {
 
     private void checkChildCount() {
         if (BuildConfig.DEBUG && getChildCount() != Board.NUMBER_OF_SQUARES) {
-            throw new AssertionError("Expect the child count to be equal to the number of squares at all times.");
+            throw new AssertionError("Expected the child count to be equal to the number of squares at all times.");
         }
     }
 }
