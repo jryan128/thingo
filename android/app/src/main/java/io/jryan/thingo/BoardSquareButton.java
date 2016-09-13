@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 
 public class BoardSquareButton extends CompoundButton {
 
-    private String description = "No description.";
+    private String description = "No description."; // TODO: remove if unused
 
     public BoardSquareButton(Context context) {
         super(context, null, R.attr.boardSquareStyle);
