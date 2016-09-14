@@ -33,18 +33,18 @@ public class CategoryService {
     }
 
     public static void main(String[] args) throws IOException {
-        CategoryService gs = new CategoryService();
-        System.out.println(gs.categories);
-        System.out.println(gs.userToCategoryIdTuples);
-        System.out.println(gs.nextId);
+        CategoryService cs = new CategoryService();
+        System.out.println(cs.categories);
+        System.out.println(cs.userToCategoryIdTuples);
+        System.out.println(cs.nextId);
 
-//        gs.categories.put(1L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/Romantic Comedy.tsv")), StandardCharsets.UTF_8)));
-//        gs.categories.put(2L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/SciFi.tsv")), StandardCharsets.UTF_8)));
-//        gs.categories.put(3L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/SciFi.tsv")), StandardCharsets.UTF_8)));
+//        cs.categories.put(1L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/Romantic Comedy.tsv")), StandardCharsets.UTF_8)));
+//        cs.categories.put(2L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/SciFi.tsv")), StandardCharsets.UTF_8)));
+//        cs.categories.put(3L, new Category("user1", new String(Files.readAllBytes(Paths.get("../categories/SciFi.tsv")), StandardCharsets.UTF_8)));
 //
-//        gs.categories.put(Long.parseLong("B", 36), new Category("user2", new String(Files.readAllBytes(Paths.get("../categories/Horror.tsv")), StandardCharsets.UTF_8)));
-//        gs.categories.put(Long.parseLong("BE", 36), new Category("user2", new String(Files.readAllBytes(Paths.get("../categories/Star Trek - Voyager.tsv")), StandardCharsets.UTF_8)));
-//        gs.db.commit();
+//        cs.categories.put(Long.parseLong("B", 36), new Category("user2", new String(Files.readAllBytes(Paths.get("../categories/Horror.tsv")), StandardCharsets.UTF_8)));
+//        cs.categories.put(Long.parseLong("BE", 36), new Category("user2", new String(Files.readAllBytes(Paths.get("../categories/Star Trek - Voyager.tsv")), StandardCharsets.UTF_8)));
+//        cs.db.commit();
     }
 
     private static void checkIfAnythingNull(Object object) {

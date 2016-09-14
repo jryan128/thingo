@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Simple tests that ensure everything probably works.
  */
+// TODO: Maybe migrate over to JerseyTest?
 public class CategoryResourceTest extends AbstractCategoryRestServerTest {
 
     public static String ROM_COM = loadTsv("../categories/Romantic Comedy.tsv");

@@ -9,7 +9,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import javax.inject.Singleton;
+import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 public class CategoryRestServer {
     public static final String DB_LOCATION_PROPERTY = "db.location";
-    static final String BASE_URI = "https://localhost:8080/";
+    static final URI BASE_URI = UriBuilder.fromUri("http://localhost/").port(8080).build();
 
     /**
      * <p>Must be run with a Java keystore, via the following system properties:
@@ -48,8 +48,9 @@ public class CategoryRestServer {
 
     static HttpServer startServer() {
         validateDbFileProperty();
-        HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
-                createResourceConfig(), true,
+
+        HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI,
+                new MyResourceConfig(), true,
                 new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
         );
         ServerConfiguration serverConfiguration = httpServer.getServerConfiguration();
@@ -64,19 +65,6 @@ public class CategoryRestServer {
         if (location == null) {
             System.setProperty(DB_LOCATION_PROPERTY, "category-rest-server-mapdb");
         }
-    }
-
-    private static ResourceConfig createResourceConfig() {
-        ResourceConfig rc = new ResourceConfig();
-        rc.packages("com.joysignalgames.bazingo.internal.server.category.resources");
-        rc.register(new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bind(CategoryService.class).in(Singleton.class);
-            }
-        });
-        rc.register(JacksonFeature.class);
-        return rc;
     }
 
     private static SSLContextConfigurator setupSslContextConfigurator() {
@@ -134,5 +122,18 @@ public class CategoryRestServer {
             }
         });
     }
-}
 
+    private static class MyResourceConfig extends ResourceConfig {
+        private MyResourceConfig() {
+            register(CategoryResource.class);
+            register(new AbstractBinder() {
+                @Override
+                protected void configure() {
+                    // start CategoryService now as singleton
+                    bind(new CategoryService()).to(CategoryService.class);
+                }
+            });
+            register(JacksonFeature.class);
+        }
+    }
+}
