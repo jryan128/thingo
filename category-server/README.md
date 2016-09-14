@@ -1,12 +1,12 @@
-genre-rest-server
+category-server
 =================
 
 * Made and run with Intellij.
-* Import Project -> pom.xml
-* Artifact (jar that is the server) is made with Intellij NOT maven.
-* A example or test server class that uses the test keystore is called `GenreRestServerTester`
-* Main class is called `GenreRestServer`.
-* `GenreRestServer` must be run with a java keystore, via the system properties
+* Import Gradle Project
+* gradle jar will create a fat jar that can be run with java -jar
+* A example or test server class that uses the test keystore is called `CategoryRestServerTester`
+* Main class is called `CategoryRestServer`.
+* `CategoryRestServer` must be run with a java keystore, via the system properties
 `javax.net.ssl.keyStore` and `javax.net.ssl.keyStorePassword`.
 * Keystores can be created with Java command-line tool <tt>keytool</tt>.
 * Cleans up properly to OS kill signals (SIGHUP, etc).

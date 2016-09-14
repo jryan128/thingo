@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.internal.server.genre;
+package io.jryan.thingo.category_server;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -10,10 +10,10 @@ import java.net.URISyntaxException;
 @Path("/")
 @Produces(MediaType.TEXT_PLAIN)
 @Consumes(MediaType.TEXT_PLAIN)
-public class GenreResource {
+public class CategoryResource {
 
     @Inject
-    private GenreService genreService;
+    private CategoryService categoryService;
 
     private static boolean isAnythingNull(Object... objects) {
         for (Object object : objects) {
@@ -30,12 +30,12 @@ public class GenreResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    public Response listGenresOrGetGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
-        if (user != null && genreId == null) {
-            return Response.ok(genreService.getListOfGenresForUser(user)).build();
-        } else if (genreId != null && user == null) {
+    public Response listCategoriesOrGetCategory(@QueryParam("u") String user, @QueryParam("i") String categoryId) {
+        if (user != null && categoryId == null) {
+            return Response.ok(categoryService.getListOfCategoriesForUser(user)).build();
+        } else if (categoryId != null && user == null) {
             try {
-                return Response.ok(genreService.getGenre(genreId)).build();
+                return Response.ok(categoryService.getCategory(categoryId)).build();
             } catch (NumberFormatException e) {
                 return makeBadRequestResponse();
             }
@@ -44,29 +44,29 @@ public class GenreResource {
     }
 
     @POST
-    public Response createGenre(@QueryParam("u") String user, String data) throws URISyntaxException {
+    public Response createCategory(@QueryParam("u") String user, String data) throws URISyntaxException {
         if (isAnythingNull(user, data)) {
             return makeBadRequestResponse();
         }
-        String newId = genreService.createGenre(user, data);
+        String newId = categoryService.createCategory(user, data);
         return Response.created(new URI("/?i=" + newId)).build();
     }
 
     @PUT
-    public Response updateGenre(@QueryParam("u") String user, @QueryParam("i") String genreId, String data) {
-        if (isAnythingNull(user, genreId, data)) {
+    public Response updateCategory(@QueryParam("u") String user, @QueryParam("i") String categoryId, String data) {
+        if (isAnythingNull(user, categoryId, data)) {
             return makeBadRequestResponse();
         }
-        genreService.updateGenre(user, genreId, data);
+        categoryService.updateCategory(user, categoryId, data);
         return Response.noContent().build();
     }
 
     @DELETE
-    public Response deleteGenre(@QueryParam("u") String user, @QueryParam("i") String genreId) {
-        if (isAnythingNull(user, genreId)) {
+    public Response deleteCategory(@QueryParam("u") String user, @QueryParam("i") String categoryId) {
+        if (isAnythingNull(user, categoryId)) {
             return makeBadRequestResponse();
         }
-        genreService.removeGenre(user, genreId);
+        categoryService.removeCategory(user, categoryId);
         return Response.noContent().build();
     }
 }

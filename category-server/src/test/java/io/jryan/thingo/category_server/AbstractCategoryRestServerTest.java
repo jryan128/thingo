@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.internal.server.genre;
+package io.jryan.thingo.category_server;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -21,7 +21,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Makes it easy to create a server test.
  */
 @Ignore
-public class AbstractGenreRestServerTest {
+public class AbstractCategoryRestServerTest {
 
     public static final File TEST_DB_DIR = new File("test-db");
     protected HttpServer server;
@@ -31,7 +31,7 @@ public class AbstractGenreRestServerTest {
         if (!TEST_DB_DIR.mkdir()) {
             throw new RuntimeException("Could not create test-db directory for test database at " + TEST_DB_DIR.getAbsolutePath());
         }
-        System.setProperty(GenreRestServer.DB_LOCATION_PROPERTY, "test-db/test-mapdb");
+        System.setProperty(CategoryRestServer.DB_LOCATION_PROPERTY, "test-db/test-mapdb");
     }
 
     private static void setupServerSslSystemProperties() {
@@ -54,7 +54,7 @@ public class AbstractGenreRestServerTest {
     }
 
     private void setupServerAndClient() {
-        server = GenreRestServer.startServer();
+        server = CategoryRestServer.startServer();
 
         // Build a client that has hostname verification for SSL disabled.
         // Without this the tests fail due to SSL certification for localhost.
@@ -103,9 +103,9 @@ public class AbstractGenreRestServerTest {
     protected WebTarget newBaseTarget() {
         // uncomment the following line if you want to enable
         // support for JSON in the client (you also have to uncomment
-        // dependency on jersey-media-json module in pom.xml and GenreRestServer.startServer())
+        // dependency on jersey-media-json module in pom.xml and CategoryRestServer.startServer())
         // --
         // c.configuration().enable(new org.glassfish.jersey.media.json.JsonJaxbFeature());
-        return client.target(GenreRestServer.BASE_URI);
+        return client.target(CategoryRestServer.BASE_URI);
     }
 }

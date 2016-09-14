@@ -1,4 +1,4 @@
-package com.joysignalgames.bazingo.internal.server.genre;
+package io.jryan.thingo.category_server;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.ServerConfiguration;
@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * <p>Main class for the rest server that serves up user genre info.
+ * <p>Main class for the rest server that serves up user category info.
  * See {@link #main(String[])} for required system properties.</p>
  * <p>For easy testing and running (NOT IN PRODUCTION) see
- * {@link com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester}</p>
+ * {@link com.joysignalgames.bazingo.internal.server.category.CategoryRestServerTester}</p>
  *
- * @see com.joysignalgames.bazingo.internal.server.genre.GenreRestServerTester
+ * @see com.joysignalgames.bazingo.internal.server.category.CategoryRestServerTester
  */
-public class GenreRestServer {
+public class CategoryRestServer {
     public static final String DB_LOCATION_PROPERTY = "db.location";
     static final String BASE_URI = "https://localhost:8080/";
 
@@ -62,17 +62,17 @@ public class GenreRestServer {
     private static void validateDbFileProperty() {
         String location = System.getProperty(DB_LOCATION_PROPERTY);
         if (location == null) {
-            System.setProperty(DB_LOCATION_PROPERTY, "genre-rest-server-mapdb");
+            System.setProperty(DB_LOCATION_PROPERTY, "category-rest-server-mapdb");
         }
     }
 
     private static ResourceConfig createResourceConfig() {
         ResourceConfig rc = new ResourceConfig();
-        rc.packages("com.joysignalgames.bazingo.internal.server.genre.resources");
+        rc.packages("com.joysignalgames.bazingo.internal.server.category.resources");
         rc.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(GenreService.class).in(Singleton.class);
+                bind(CategoryService.class).in(Singleton.class);
             }
         });
         rc.register(JacksonFeature.class);
@@ -129,7 +129,7 @@ public class GenreRestServer {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                Logger.getLogger(GenreRestServer.class.getName()).info("Shutting down...");
+                Logger.getLogger(CategoryRestServer.class.getName()).info("Shutting down...");
                 server.shutdown();
             }
         });

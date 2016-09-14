@@ -4,8 +4,8 @@ Any new platforms should be add to sub folders.
 
 ## Folder Structure
 - android: the android version
-- genres: holds TSV files which hold all the category and board information
-- genre-rest-server: a RESTful server that serves genre information to the apps
+- categories: holds TSV files which hold all the category and board information
+- category-server: a RESTful server that serves category information to the apps
 - pattern-creator: holds the pattern.tsv file, which the app versions use for pattern matching, and a Java swing app to edit it
 
 Check each project for its own README file.
