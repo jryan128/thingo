@@ -1,6 +1,6 @@
 # Thingo (used to be called bazingo)
 The main repository for Thingo.
-Any new platforms should be add to sub folders.
+Any new platforms should be added to sub folders.
 
 ## Folder Structure
 - android: the android version
