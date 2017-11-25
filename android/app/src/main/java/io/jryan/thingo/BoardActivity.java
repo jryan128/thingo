@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import java.io.BufferedReader;
+
 public class BoardActivity extends Activity {
 
     @Override
@@ -15,7 +17,8 @@ public class BoardActivity extends Activity {
         RelativeLayout boardContainer = (RelativeLayout) findViewById(R.id.board);
         startImmersiveMode();
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        boardContainer.addView(new Board(this), params);
+        BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile(getAssets(), "Romantic Comedy");
+        boardContainer.addView(Board.createRandomBoardForCategory(this, romComTsv), params);
     }
 
     @Override

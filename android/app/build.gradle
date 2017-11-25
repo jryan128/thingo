@@ -18,6 +18,12 @@ android {
     }
 }
 
+task copyCategories(type: Copy) {
+    from '../../categories'
+    into 'src/main/assets/categories'
+}
+preBuild.dependsOn copyCategories
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'

@@ -5,20 +5,57 @@ import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Board extends ViewGroup {
     /**
-     * Must be greater than or equal to 0
+     * NUMBER_OF_COLUMNS_AND_ROWS must be greater than or equal to 0
      */
     static final int NUMBER_OF_COLUMNS_AND_ROWS = 5;
     static final int NUMBER_OF_SQUARES = NUMBER_OF_COLUMNS_AND_ROWS * NUMBER_OF_COLUMNS_AND_ROWS;
 
-    public Board(Context context) {
+    public Board(Context context, List<String[]> phraseData) {
         super(context);
         setId(R.id.boardView); // have to set an id, or we won't get saving
-        createBoardSquares();
+        createBoardSquares(phraseData);
     }
 
-    private void createBoardSquares() {
+    public static Board createRandomBoardForCategory(Context context, BufferedReader tsvReader) {
+        // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
+        try {
+            // ignore the first line
+            tsvReader.readLine();
+
+            List<String[]> phraseData = new ArrayList<>();
+            String line;
+            while ((line = tsvReader.readLine()) != null) {
+                String[] row = line.split("\t");
+                phraseData.add(row);
+            }
+
+            String[] freeSpaceData = phraseData.remove(0);
+            Collections.shuffle(phraseData);
+            phraseData = new ArrayList<>(phraseData.subList(0, 24));
+            phraseData.add(12, freeSpaceData);
+            return new Board(context, phraseData);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not make a board from category", e);
+        } finally {
+            if (tsvReader != null) {
+                try {
+                    tsvReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void createBoardSquares(List<String[]> allPhrases) {
         for (int i = 0; i < Board.NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = new BoardSquareButton(getContext());
             // FIXME, possible collisions?
@@ -28,9 +65,11 @@ public class Board extends ViewGroup {
             square.setId(i);
 //            }
             addView(square);
-            // FIXME: make dynamic
-            square.setText("Someone Falls In Love");
-            square.setDescription("Typical.");
+            String[] phrase = allPhrases.get(i);
+            square.setText(phrase[0]);
+            if (phrase.length > 1) {
+                square.setDescription(phrase[1]);
+            }
         }
     }
 
