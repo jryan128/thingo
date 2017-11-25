@@ -30,8 +30,9 @@ public class BoardActivity extends Activity {
     private Board makeBoard(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             // only populate phrases on initial onCreate
-            // TODO: don't hard code RomCom
-            try (BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile("Romantic Comedy")) {
+            LocalCategories categories = new LocalCategories(getAssets());
+            // FIXME: don't hard code RomCom
+            try (BufferedReader romComTsv = categories.makeReaderForCategoryFile("Romantic Comedy")) {
                 return Board.newBoardWithRandomPhrases(this, romComTsv);
             } catch (IOException e) {
                 throw new RuntimeException("Could not create board with random phrases", e);
