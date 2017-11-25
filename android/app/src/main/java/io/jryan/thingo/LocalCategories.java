@@ -43,7 +43,7 @@ public class LocalCategories {
 
             try {
                 String categoryName = fileName.substring(0, fileName.lastIndexOf('.'));
-                if(!categoryList.add(categoryName)) {
+                if (!categoryList.add(categoryName)) {
                     Log.w(TAG, "Duplicate category found: [name:" + categoryName + ", fileName: " + fileName + ". Ignoring this category, and keeping old one.");
                 }
             } catch (IndexOutOfBoundsException ex) {
@@ -54,13 +54,8 @@ public class LocalCategories {
     }
 
     // FIXME: write tests to load each tsv file and make sure there are no errors
-    public BufferedReader makeReaderForCategoryFile(String categoryName) {
-        final InputStream open;
-        try {
-            open = assets.open(CATEGORIES_FOLDER + File.separator + categoryName + ".tsv");
-        } catch (IOException e) {
-            throw new RuntimeException("Could not open categories folder", e);
-        }
-        return new BufferedReader(new InputStreamReader(open));
+    public BufferedReader makeReaderForCategoryFile(String categoryName) throws IOException {
+        InputStream tsv = assets.open(CATEGORIES_FOLDER + File.separator + categoryName + ".tsv");
+        return new BufferedReader(new InputStreamReader(tsv));
     }
 }
