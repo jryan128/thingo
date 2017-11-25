@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,11 +54,13 @@ public class LocalCategories {
     }
 
     // FIXME: write tests to load each tsv file and make sure there are no errors
-    public BufferedReader makeReaderForCategoryFile(AssetManager assets, String categoryName) {
+    public BufferedReader makeReaderForCategoryFile(String categoryName) {
+        final InputStream open;
         try {
-            return new BufferedReader(new InputStreamReader(assets.open(CATEGORIES_FOLDER + File.separator + categoryName + ".tsv")));
+            open = assets.open(CATEGORIES_FOLDER + File.separator + categoryName + ".tsv");
         } catch (IOException e) {
-            throw new RuntimeException("Could not load category " + categoryName, e);
+            throw new RuntimeException("Could not open categories folder", e);
         }
+        return new BufferedReader(new InputStreamReader(open));
     }
 }

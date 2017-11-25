@@ -27,47 +27,35 @@ public class Board extends ViewGroup {
         }
     }
 
-    public static Board newBoardWithRandomPhrases(Context context, BufferedReader tsvReader) {
+    public static Board newBoardWithRandomPhrases(Context context, BufferedReader tsvReader) throws IOException {
         Board board = new Board(context);
         board.populateWithRandomPhrases(tsvReader);
         return board;
     }
 
-    private void populateWithRandomPhrases(BufferedReader tsvReader) {
+    private void populateWithRandomPhrases(BufferedReader tsvReader) throws IOException {
         // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-        try {
-            // ignore the first line
-            tsvReader.readLine();
+        // ignore the first line
+        tsvReader.readLine();
 
-            List<String[]> phraseData = new ArrayList<>();
-            String line;
-            while ((line = tsvReader.readLine()) != null) {
-                String[] row = line.split("\t");
-                phraseData.add(row);
-            }
+        List<String[]> phraseData = new ArrayList<>();
+        String line;
+        while ((line = tsvReader.readLine()) != null) {
+            String[] row = line.split("\t");
+            phraseData.add(row);
+        }
 
-            String[] freeSpaceData = phraseData.remove(0);
-            Collections.shuffle(phraseData);
-            phraseData = new ArrayList<>(phraseData.subList(0, 24));
-            phraseData.add(12, freeSpaceData);
-            for (int i = 0; i < 25; i++) {
-                BoardSquareButton square = (BoardSquareButton) getChildAt(i);
-                String[] data = phraseData.get(i);
-                square.setText(data[0]);
+        String[] freeSpaceData = phraseData.remove(0);
+        Collections.shuffle(phraseData);
+        phraseData = new ArrayList<>(phraseData.subList(0, 24));
+        phraseData.add(12, freeSpaceData);
+        for (int i = 0; i < 25; i++) {
+            BoardSquareButton square = (BoardSquareButton) getChildAt(i);
+            String[] data = phraseData.get(i);
+            square.setText(data[0]);
 //                if (data.length > 1) {
 //                    square.setDescription(data[1]);
 //                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Could not make a board from category", e);
-        } finally {
-            if (tsvReader != null) {
-                try {
-                    tsvReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

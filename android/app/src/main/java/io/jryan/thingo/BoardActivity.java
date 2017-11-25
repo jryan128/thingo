@@ -31,8 +31,11 @@ public class BoardActivity extends Activity {
         if (savedInstanceState == null) {
             // only populate phrases on initial onCreate
             // TODO: don't hard code RomCom
-            BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile(getAssets(), "Romantic Comedy");
-            return Board.newBoardWithRandomPhrases(this, romComTsv);
+            try (BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile("Romantic Comedy")) {
+                return Board.newBoardWithRandomPhrases(this, romComTsv);
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create board with random phrases", e);
+            }
         } else {
             return new Board(this);
         }
