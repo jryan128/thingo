@@ -22,51 +22,19 @@ public class BoardActivity extends Activity {
         setContentView(R.layout.board);
         startImmersiveMode();
         RelativeLayout boardContainer = (RelativeLayout) findViewById(R.id.board);
-        Board board = new Board(this);
+        Board board = makeBoard(savedInstanceState);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         boardContainer.addView(board, params);
-
-        if (savedInstanceState == null) {
-            BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile(getAssets(), "Romantic Comedy");
-            populateWithRandomPhrases(romComTsv, board);
-        }
     }
 
-    public static void populateWithRandomPhrases(BufferedReader tsvReader, Board board) {
-        // TODO: we need to validate that there are at least 25 squares, possibly some other conditions
-        try {
-            // ignore the first line
-            tsvReader.readLine();
-
-            List<String[]> phraseData = new ArrayList<>();
-            String line;
-            while ((line = tsvReader.readLine()) != null) {
-                String[] row = line.split("\t");
-                phraseData.add(row);
-            }
-
-            String[] freeSpaceData = phraseData.remove(0);
-            Collections.shuffle(phraseData);
-            phraseData = new ArrayList<>(phraseData.subList(0, 24));
-            phraseData.add(12, freeSpaceData);
-            for (int i = 0; i < 25; i++) {
-                BoardSquareButton square = (BoardSquareButton) board.getChildAt(i);
-                String[] data = phraseData.get(i);
-                square.setText(data[0]);
-//                if (data.length > 1) {
-//                    square.setDescription(data[1]);
-//                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Could not make a board from category", e);
-        } finally {
-            if (tsvReader != null) {
-                try {
-                    tsvReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    private Board makeBoard(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            // only populate phrases on initial onCreate
+            // TODO: don't hard code RomCom
+            BufferedReader romComTsv = new LocalCategories(getAssets()).makeReaderForCategoryFile(getAssets(), "Romantic Comedy");
+            return Board.newBoardWithRandomPhrases(this, romComTsv);
+        } else {
+            return new Board(this);
         }
     }
 
