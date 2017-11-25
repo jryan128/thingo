@@ -38,23 +38,32 @@ public class Board extends ViewGroup {
         // ignore the first line
         tsvReader.readLine();
 
-        List<String[]> phraseData = new ArrayList<>();
+        // TODO: method for picking random lines from a file could be improved, instead of loading entire file into memory should be able to use a sampling method
+        List<String[]> rows = new ArrayList<>();
         String line;
         while ((line = tsvReader.readLine()) != null) {
             String[] row = line.split("\t");
-            phraseData.add(row);
+            rows.add(row);
+        }
+        checkCategoryCount(rows);
+
+        // first row in tsv is the free space row
+        String[] freeSpaceData = rows.remove(0);
+        Collections.shuffle(rows);
+        rows = new ArrayList<>(rows.subList(0, NUMBER_OF_SQUARES-1));
+
+        // if number of squares is odd, a center space exists
+        if ((NUMBER_OF_SQUARES) % 2 != 0) {
+            // add the free space row back in the center of the board
+            rows.add((NUMBER_OF_SQUARES-1)/2, freeSpaceData);
         }
 
-        String[] freeSpaceData = phraseData.remove(0);
-        Collections.shuffle(phraseData);
-        phraseData = new ArrayList<>(phraseData.subList(0, 24));
-        phraseData.add(12, freeSpaceData);
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < NUMBER_OF_SQUARES; i++) {
             BoardSquareButton square = (BoardSquareButton) getChildAt(i);
-            String[] data = phraseData.get(i);
-            square.setText(data[0]);
-//                if (data.length > 1) {
-//                    square.setDescription(data[1]);
+            String[] row = rows.get(i);
+            square.setText(row[0]);
+//                if (row.length > 1) {
+//                    square.setDescription(row[1]);
 //                }
         }
     }
@@ -73,7 +82,7 @@ public class Board extends ViewGroup {
         int w = width / Board.NUMBER_OF_COLUMNS_AND_ROWS;
         int h = height / Board.NUMBER_OF_COLUMNS_AND_ROWS;
         for (int i = 0; i < Board.NUMBER_OF_SQUARES; ++i) {
-            // tell the child exactly what size it needs to be, screw you
+            // tell the child exactly what size it needs to be
             getChildAt(i).measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
         }
@@ -100,6 +109,13 @@ public class Board extends ViewGroup {
                     child.layout(w * col, h * row, w * (col + 1), h * (row + 1));
                 }
             }
+        }
+    }
+
+    // TODO: add unit test to check local categories in assets for the right amount of lines
+    private void checkCategoryCount(List<?> rows) {
+        if (BuildConfig.DEBUG && rows.size() < Board.NUMBER_OF_SQUARES) {
+            throw new AssertionError("Expected category to have at least " + Board.NUMBER_OF_SQUARES + " squares");
         }
     }
 
