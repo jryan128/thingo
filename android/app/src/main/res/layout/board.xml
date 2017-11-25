@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffb4b4"
+    android:keepScreenOn="true"
     tools:context="io.jryan.thingo.BoardActivity"
     android:id="@+id/board">
 
