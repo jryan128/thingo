@@ -1,4 +1,4 @@
-# Thingo (used to be called bazingo)
+# Thingo
 The main repository for Thingo.
 Any new platforms should be added to sub folders.
 
