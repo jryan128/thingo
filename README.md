@@ -1,5 +1,5 @@
 # Thingo
-The main repository for Thingo.
+The code for for thingo.
 Any new platforms should be added to sub folders.
 
 ## Folder Structure
@@ -9,7 +9,6 @@ Any new platforms should be added to sub folders.
 - pattern-creator: holds the pattern.tsv file, which the app versions use for pattern matching, and a Java swing app to edit it
 
 Check each project for its own README file.
-
 
 ## New Category Workflow
 - Use the [Category Template](https://docs.google.com/spreadsheets/d/1u62Q9ueQddll7_lgGMFd6FxEpJd30frjH8mAV3CdY_4/edit#gid=0) to start a new category.
