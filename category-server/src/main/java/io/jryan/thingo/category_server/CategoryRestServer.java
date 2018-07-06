@@ -20,9 +20,10 @@ import java.util.logging.Logger;
  * <p>Main class for the rest server that serves up user category info.
  * See {@link #main(String[])} for required system properties.</p>
  * <p>For easy testing and running (NOT IN PRODUCTION) see
- * {@link com.joysignalgames.bazingo.internal.server.category.CategoryRestServerTester}</p>
+ * {@link io.jryan.thingo.category_server.CategoryRestServerTester} in
+ * {@code src/test}.</p>
  *
- * @see com.joysignalgames.bazingo.internal.server.category.CategoryRestServerTester
+ * @see io.jryan.thingo.category_server.CategoryRestServerTester
  */
 public class CategoryRestServer {
     public static final String DB_LOCATION_PROPERTY = "db.location";

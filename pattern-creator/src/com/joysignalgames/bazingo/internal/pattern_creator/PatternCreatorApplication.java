@@ -19,7 +19,7 @@ public class PatternCreatorApplication {
     private BoardPanel boardPanel;
 
     public static void main(String[] args) {
-//        setSystemLookAndFeel();
+        setSystemLookAndFeel();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

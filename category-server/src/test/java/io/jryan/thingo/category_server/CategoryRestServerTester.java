@@ -3,7 +3,7 @@ package io.jryan.thingo.category_server;
 import java.io.IOException;
 
 /**
- * <p>Runs {@link com.joysignalgames.bazingo.internal.server.category.CategoryRestServer}
+ * <p>Runs {@link io.jryan.thingo.category_server.CategoryRestServer}
  * with keystore system properties that point to the test keystore.</p>
  * <p>This class exists so it is easier to run/test the server during development.</p>
  */
