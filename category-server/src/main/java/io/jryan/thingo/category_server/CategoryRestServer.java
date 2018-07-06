@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class CategoryRestServer {
     public static final String DB_LOCATION_PROPERTY = "db.location";
     static final URI BASE_URI = UriBuilder.fromUri("http://localhost/").port(8080).build();
-    private final HttpServer server;
+    final HttpServer server;
 
     public CategoryRestServer() {
         validateDbFileProperty();

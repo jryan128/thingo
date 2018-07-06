@@ -54,7 +54,7 @@ public class AbstractCategoryRestServerTest {
     }
 
     private void setupServerAndClient() {
-        server = CategoryRestServer.startServer();
+        server = new CategoryRestServer().server;
 
         // Build a client that has hostname verification for SSL disabled.
         // Without this the tests fail due to SSL certification for localhost.
