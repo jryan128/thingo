@@ -10,7 +10,6 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.core.UriBuilder;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,18 @@ import java.util.logging.Logger;
 public class CategoryRestServer {
     public static final String DB_LOCATION_PROPERTY = "db.location";
     static final URI BASE_URI = UriBuilder.fromUri("http://localhost/").port(8080).build();
+    private final HttpServer server;
+
+    public CategoryRestServer() {
+        validateDbFileProperty();
+        server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI,
+                new MyResourceConfig(), true,
+                new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false));
+        ServerConfiguration serverConfiguration = server.getServerConfiguration();
+//        serverConfiguration.setMaxPostSize(2048);
+//        serverConfiguration.setMaxFormPostSize(2048);
+        serverConfiguration.setMaxRequestParameters(20);
+    }
 
     /**
      * <p>Must be run with a Java keystore, via the following system properties:
@@ -40,25 +51,14 @@ public class CategoryRestServer {
      * <p>Can set the mapdb's location with <tt>db.location</tt> (default is current directory).</p>
      *
      * @param args
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
-        final HttpServer server = startServer();
-        daemonize(server);
+    public static void main(String[] args) {
+        new CategoryRestServer().daemonize();
     }
 
-    static HttpServer startServer() {
-        validateDbFileProperty();
-
-        HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI,
-                new MyResourceConfig(), true,
-                new SSLEngineConfigurator(setupSslContextConfigurator(), false, false, false)
-        );
-        ServerConfiguration serverConfiguration = httpServer.getServerConfiguration();
-//        serverConfiguration.setMaxPostSize(2048);
-//        serverConfiguration.setMaxFormPostSize(2048);
-        serverConfiguration.setMaxRequestParameters(20);
-        return httpServer;
+    private void daemonize() {
+        addShutdownHookForProperCleanup();
+        waitUntilServerOrProcessStops();
     }
 
     private static void validateDbFileProperty() {
@@ -95,12 +95,7 @@ public class CategoryRestServer {
         }
     }
 
-    private static void daemonize(HttpServer server) {
-        addShutdownHookForProperCleanup(server);
-        waitUntilServerOrProcessStops(server);
-    }
-
-    private static void waitUntilServerOrProcessStops(HttpServer server) {
+    private void waitUntilServerOrProcessStops() {
         // Joins the current thread to just wait until the process
         // is interrupted, has an error, or is shutdown via a signal.
         try {
@@ -112,7 +107,7 @@ public class CategoryRestServer {
         }
     }
 
-    private static void addShutdownHookForProperCleanup(final HttpServer server) {
+    private void addShutdownHookForProperCleanup() {
         // Let OS signals (like CTRL-C) clean up the application properly.
         // So we can kind of use it as daemon or a service.
         Runtime.getRuntime().addShutdownHook(new Thread() {
