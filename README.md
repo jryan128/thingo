@@ -1,5 +1,5 @@
 # Thingo
-The code for for thingo.
+The code for thingo.
 Any new platforms should be added to sub folders.
 
 ## Folder Structure
